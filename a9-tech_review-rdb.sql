@@ -26,15 +26,6 @@ CREATE TABLE Components
         CONSTRAINT retailers_PK PRIMARY KEY(comp_id) 
 );
 
-CREATE TABLE Device_composition
-(
-	dev_id		INTEGER NOT NULL, -- FK from Devices
-	comp_id 	INTEGER NOT NULL, -- FK from Components
-	CONSTRAINT dc_PK PRIMARY KEY(dev_id, comp_id),
-	CONSTRAINT dc_devices_FK FOREIGN KEY(dev_id) REFERENCES Devices(dev_id),
-	CONSTRAINT dc_components_FK FOREIGN KEY(comp_id) REFERENCES Components(comp_id)
-	
-);
 
 CREATE TABLE Countries
 (
@@ -73,6 +64,16 @@ CREATE TABLE Devices
 	CONSTRAINT devices_mfctr_FK FOREIGN KEY(manufacturer) REFERENCES Manufacturers(name),
 	CONSTRAINT devices_carrier_FK FOREIGN KEY(carrier) REFERENCES Carriers(name),
 	CONSTRAINT devices_software_FK FOREIGN KEY(software, version) REFERENCES Software(name, version)
+);
+
+CREATE TABLE Device_composition
+(
+	dev_id		INTEGER NOT NULL, -- FK from Devices
+	comp_id 	INTEGER NOT NULL, -- FK from Components
+	CONSTRAINT dc_PK PRIMARY KEY(dev_id, comp_id),
+	CONSTRAINT dc_devices_FK FOREIGN KEY(dev_id) REFERENCES Devices(dev_id),
+	CONSTRAINT dc_components_FK FOREIGN KEY(comp_id) REFERENCES Components(comp_id)
+	
 );
 
 CREATE TABLE Supports
