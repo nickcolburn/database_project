@@ -12,7 +12,9 @@ CREATE TABLE Manufacturer
 
 CREATE TABLE Retailers
 (
-  name    VARCHAR(20),
+  	name    VARCHAR(20) NOT NULL,
+  	CONSTRAINT retailers_PK PRIMARY KEY(name) 
+);
   
 CREATE TABLE Devices
 (
