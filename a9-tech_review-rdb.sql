@@ -43,6 +43,19 @@ CREATE TABLE Countries
 	name		VARCHAR(20),
 	CONSTRAINT countries_PK PRIMARY KEY(country_code)
 );
+
+CREATE TABLE Carriers
+(
+	name    	VARCHAR(25) NOT NULL,
+	radio_spectrum	VARCHAR(10),
+	CONSTRAINT carriers_PK PRIMARY KEY(name)
+);
+
+CREATE TABLE Software
+(
+	name    VARCHAR(25),
+	version	DECIMAL(25)
+);
   
 CREATE TABLE Devices
 (
@@ -56,8 +69,4 @@ CREATE TABLE Devices
 	dimensions	CHAR(8), -- (xx-xx-xx) format, in millimeters
 );
 
-CREATE TABLE Software
-(
-	name    VARCHAR(25),
-	version	DECIMAL(25)
-)
+
