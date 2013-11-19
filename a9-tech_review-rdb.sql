@@ -16,14 +16,14 @@ CREATE TABLE Retailers
   
 CREATE TABLE Devices
 (
-	name 		      VARCHAR(30) NOT NULL,
+	name 		VARCHAR(30) NOT NULL,
 	model_number	VARCHAR(30) NOT NULL,
 	listed_price	DECIMAL(5,2),
 	manufacturer	VARCHAR(30),
-	carrier		    VARCHAR(30),
-	weight		    VARCHAR(3), -- assumption: weight given is in ounces
+	carrier		VARCHAR(30),
+	weight		VARCHAR(3), -- assumption: weight given is in ounces
 	release_date	DATE,
-	dimensions	  CHAR(8), -- (xx-xx-xx) format, in millimeters
+	dimensions	CHAR(8), -- (xx-xx-xx) format, in millimeters
 );
 
 CREATE TABLE Software
