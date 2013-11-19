@@ -19,19 +19,20 @@ CREATE TABLE Retailers
 
 CREATE TABLE Components
 (	
-        name    	VARCHAR(20) NOT NULL,
+        comp_id		INTEGER NOT NULL AUTO_INCREMENT,
+        name    	VARCHAR(20),
         comp_type	VARCHAR(20),	-- component type (type must be an SQL keyword)
         specification 	VARCHAR(20),
-        CONSTRAINT retailers_PK PRIMARY KEY(name) 
+        CONSTRAINT retailers_PK PRIMARY KEY(comp_id) 
 );
 
 CREATE TABLE Device_composition
 (
 	dev_id		INTEGER NOT NULL, -- FK from Devices
-	name 		VARCHAR(20) NOT NULL, -- FK from Components
-	CONSTRAINT dc_PK PRIMARY KEY(dev_id, name),
+	comp_id 	INTEGER NOT NULL, -- FK from Components
+	CONSTRAINT dc_PK PRIMARY KEY(dev_id, comp_id),
 	CONSTRAINT dc_devices_FK FOREIGN KEY(dev_id) REFERENCES Devices(dev_id),
-	CONSTRAINT dc_components_FK FOREIGN KEY(name) REFERENCES Components(name)
+	CONSTRAINT dc_components_FK FOREIGN KEY(comp_id) REFERENCES Components(comp_id)
 	
 );
 
