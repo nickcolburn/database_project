@@ -71,8 +71,8 @@ CREATE TABLE Devices
         width           DECIMAL(3,1),         -- assumption: values are in millimeters
         depth           DECIMAL(3,1),         -- assumption: values are in millimeters
         CONSTRAINT devices_PK PRIMARY KEY(dev_id),
-        CONSTRAINT devices_mfctr_FK FOREIGN KEY(manufacturer) REFERENCES Manufacturers(name),
-        CONSTRAINT devices_software_FK FOREIGN KEY(software, version) REFERENCES Software(name, version)
+        CONSTRAINT devices_mfctr_FK FOREIGN KEY(manufacturer) REFERENCES Manufacturers(name) ON UPDATE CASCADE ON DELETE CASCADE,
+        CONSTRAINT devices_software_FK FOREIGN KEY(software, version) REFERENCES Software(name, version) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE Device_composition
@@ -80,8 +80,8 @@ CREATE TABLE Device_composition
         dev_id                INTEGER NOT NULL, -- FK from Devices
         comp_id         INTEGER NOT NULL, -- FK from Components
         CONSTRAINT dc_PK PRIMARY KEY(dev_id, comp_id),
-        CONSTRAINT dc_devices_FK FOREIGN KEY(dev_id) REFERENCES Devices(dev_id),
-        CONSTRAINT dc_components_FK FOREIGN KEY(comp_id) REFERENCES Components(comp_id)
+        CONSTRAINT dc_devices_FK FOREIGN KEY(dev_id) REFERENCES Devices(dev_id) ON UPDATE CASCADE ON DELETE CASCADE,
+        CONSTRAINT dc_components_FK FOREIGN KEY(comp_id) REFERENCES Components(comp_id) ON UPDATE CASCADE ON DELETE CASCADE
         
 );
 
@@ -91,9 +91,9 @@ CREATE TABLE Supports
         carrier                VARCHAR(20) NOT NULL,        -- FK from Carriers
         country                CHAR(3)  NOT NULL,        -- FK from Countries
         CONSTRAINT supports_PK PRIMARY KEY(dev_id, carrier, country),
-        CONSTRAINT supports_device_FK FOREIGN KEY(dev_id) REFERENCES Devices(dev_id),
-        CONSTRAINT supports_carrier_FK FOREIGN KEY(carrier) REFERENCES Carriers(name),
-        CONSTRAINT supports_country_FK FOREIGN KEY(country) REFERENCES Countries(country_code)
+        CONSTRAINT supports_device_FK FOREIGN KEY(dev_id) REFERENCES Devices(dev_id) ON UPDATE CASCADE ON DELETE CASCADE,
+        CONSTRAINT supports_carrier_FK FOREIGN KEY(carrier) REFERENCES Carriers(name) ON UPDATE CASCADE ON DELETE CASCADE,
+        CONSTRAINT supports_country_FK FOREIGN KEY(country) REFERENCES Countries(country_code) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE Sales
@@ -102,8 +102,8 @@ CREATE TABLE Sales
         dev_id                 INTEGER NOT NULL, -- FK from Devices
         sale_price        DECIMAL(5,2) NOT NULL,
         CONSTRAINT sales_PK PRIMARY KEY(dev_id, retailer),
-        CONSTRAINT sales_device_FK FOREIGN KEY(dev_id) REFERENCES Devices(dev_id),
-        CONSTRAINT sales_retailer_FK FOREIGN KEY(retailer) REFERENCES Retailers(name)
+        CONSTRAINT sales_device_FK FOREIGN KEY(dev_id) REFERENCES Devices(dev_id) ON UPDATE CASCADE ON DELETE CASCADE,
+        CONSTRAINT sales_retailer_FK FOREIGN KEY(retailer) REFERENCES Retailers(name) ON UPDATE CASCADE ON DELETE CASCADE
         
 );
 
@@ -122,8 +122,8 @@ CREATE TABLE Reviews
         rating                DECIMAL(2,1),        -- users can give partial ratings
         review                VARCHAR(1000),        -- need to determine appropriate size for this
         CONSTRAINT reviews_PK PRIMARY KEY(username),
-        CONSTRAINT reviews_user_FM FOREIGN KEY(username) REFERENCES Users(username),
-        CONSTRAINT reviews_device_FK FOREIGN KEY(dev_id) REFERENCES Devices(dev_id)
+        CONSTRAINT reviews_user_FK FOREIGN KEY(username) REFERENCES Users(username) ON UPDATE CASCADE ON DELETE CASCADE,
+        CONSTRAINT reviews_device_FK FOREIGN KEY(dev_id) REFERENCES Devices(dev_id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 INSERT INTO Manufacturers(name) VALUES
