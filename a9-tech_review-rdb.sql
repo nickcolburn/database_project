@@ -58,16 +58,18 @@ CREATE TABLE Software
   
 CREATE TABLE Devices
 (
-        dev_id                 INTEGER NOT NULL,
-        name                 VARCHAR(20),
-        model_number        VARCHAR(20),
-        listed_price        DECIMAL(5,2),
-        manufacturer        VARCHAR(20),        -- FK from Manufacturers
+        dev_id          INTEGER NOT NULL AUTO_INCREMENT
+        name            VARCHAR(20),
+        model_number    VARCHAR(20),
+        listed_price    DECIMAL(5,2),
+        manufacturer    VARCHAR(20),        -- FK from Manufacturers
         software        VARCHAR(20),        -- FK from Software
-        version                DECIMAL(3,1),        -- FK software version from Software
-        weight                VARCHAR(3),         -- assumption: weight given is in ounces
-        release_date        DATE,        
-        dimensions        CHAR(8),         -- (xx-xx-xx) format, in millimeters
+        version         DECIMAL(3,1),        -- FK software version from Software
+        weight          DECIMAL(2,1),         -- assumption: weight given is in ounces
+        release_date    DATE,        
+        height          DECIMAL(3,1),         -- assumption: values are in millimeters
+        width           DECIMAL(3,1),         -- assumption: values are in millimeters
+        depth           DECIMAL(3,1),         -- assumption: values are in millimeters
         CONSTRAINT devices_PK PRIMARY KEY(dev_id),
         CONSTRAINT devices_mfctr_FK FOREIGN KEY(manufacturer) REFERENCES Manufacturers(name),
         CONSTRAINT devices_software_FK FOREIGN KEY(software, version) REFERENCES Software(name, version)
@@ -165,3 +167,22 @@ INSERT INTO Software(name, version) VALUES
         ('Ice Cream Sandwich', 4.0),
         ('iOS 7', 7.0),
         ('iOS 6', 6.0);
+
+INSERT INTO Devices(name, model_number, listed_price, manufacturer, software, version, release_date, weight
+        height, width, depth) VALUES
+        ('Galaxy S4', 'GT-I9505', 199.99, 'Samsung', 'Jelly Bean', 4.1, '2013-04-26', 4.6, 136.6, 69.8, 7.9),
+        ('iPhone 5S', 'A1533', 199.99, 'Apple', 'iOS7', 7.0, '2013-09-20', 3.95, 123.8, 58.6, 7.6);
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
