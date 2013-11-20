@@ -115,11 +115,53 @@ CREATE TABLE Users
 
 CREATE TABLE Reviews
 (
-         dev_id                 INTEGER NOT NULL, --FK from Devices
-          username        VARCHAR(20) NOT NULL,        -- CK & FK from Users
-          rating                DECIMAL(2,1),        -- users can give partial ratings
-          review                VARCHAR(1000),        -- need to determine appropriate size for this
-          CONSTRAINT reviews_PK PRIMARY KEY(username),
-          CONSTRAINT reviews_user_FM FOREIGN KEY(username) REFERENCES Users(username),
-          CONSTRAINT reviews_device_FK FOREIGN KEY(dev_id) REFERENCES Devices(dev_id)
+        dev_id          INTEGER NOT NULL AUTO INCREMENT, --FK from Devices
+        username        VARCHAR(20) NOT NULL,        -- CK & FK from Users
+        rating                DECIMAL(2,1),        -- users can give partial ratings
+        review                VARCHAR(1000),        -- need to determine appropriate size for this
+        CONSTRAINT reviews_PK PRIMARY KEY(username),
+        CONSTRAINT reviews_user_FM FOREIGN KEY(username) REFERENCES Users(username),
+        CONSTRAINT reviews_device_FK FOREIGN KEY(dev_id) REFERENCES Devices(dev_id)
 );
+
+INSERT INTO Manufacturers(name) VALUES
+        ('Samsung'),
+        ('Apple'),
+        ('Motorola'),
+        ('LG'),
+        ('HTC');
+
+INSERT INTO Retailers(name, region) VALUES
+        ('Best Buy', 'North America'),
+        ('Radioshack', 'North America'),
+        ('Amazon', 'North America'),
+        ('Costco', 'North America'),
+        ('Apple', 'North America');
+        
+INSERT INTO Components(name, comp_type) VALUES
+        ('13 MP', 'camera'),
+        ('2600 mAh Lithium Ion', 'Battery'),
+        ('HD Super AMOLED', 'Screen'),
+        ('2 GB LPDDR3', 'Memory'),
+        ('Snapdragon 600', 'CPU');
+
+INSERT INTO Countries(country_code, name) VALUES
+        ('USA', 'United States of America'),
+        ('MEX', 'Mexico'),
+        ('FRA', 'France'),
+        ('GBR', 'United Kingdom'),
+        ('CAN', 'Canada');
+
+INSERT INTO Carries(name, radio_spectrum) VALUES
+        ('Verizon Wireless', 'CDMA'),
+        ('Sprint', 'CDMA'),
+        ('AT&T', 'GSM'),
+        ('T-Mobile', 'GSM'),
+        ('Virgin Mobile', 'CDMA');
+
+INSERT INTO Software(name, version) VALUES
+        ('KitKat', 4.4),
+        ('Jelly Bean', 4.1),
+        ('Ice Cream Sandwich', 4.0),
+        ('iOS 7', 7.0),
+        ('iOS 6', 6.0);
