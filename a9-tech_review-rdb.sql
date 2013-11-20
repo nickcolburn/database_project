@@ -171,6 +171,9 @@ INSERT INTO Software(name, version) VALUES
 INSERT INTO Devices(name, model_number, listed_price, manufacturer, software, version, release_date, weight
         height, width, depth) VALUES
         ('Galaxy S4', 'GT-I9505', 199.99, 'Samsung', 'Jelly Bean', 4.1, '2013-04-26', 4.6, 136.6, 69.8, 7.9),
+        ('Galaxy S3', 'I9300', 99.99, 'Samsung', 'Jelly Bean', 4.1, '2012-05-01', 4.6, 136.6, 70.6, 8.6),
+        ('Razr', 'XT910', 30.00, 'Motorola', 'Ice Cream Sandwich', 4.0, '2011-10-01', 4.48, 130.7, 68.9, 7.1),
+        ('Nexus 5', '820', 349.00, 'LG', 'KitKat', 4.4, '2013-10-01', 4.59, 137.9, 69.2, 8.6),
         ('iPhone 5S', 'A1533', 199.99, 'Apple', 'iOS7', 7.0, '2013-09-20', 3.95, 123.8, 58.6, 7.6);
         
         
