@@ -72,7 +72,7 @@ CREATE TABLE Devices
         version DECIMAL(3,2), -- FK software version from Software
         weight DECIMAL(3,2), -- assumption: weight given is in ounces
         release_date DATE,
-        height DECIMAL(4,2), -- assumption: values are in millimeters
+        height DECIMAL(5,2), -- assumption: values are in millimeters
         width DECIMAL(3,2), -- assumption: values are in millimeters
         depth DECIMAL(3,2), -- assumption: values are in millimeters
         CONSTRAINT devices_PK PRIMARY KEY(dev_id),
