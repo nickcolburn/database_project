@@ -168,6 +168,7 @@ INSERT INTO Software(name, version) VALUES
         ('iOS 7', 7.0),
         ('iOS 6', 6.0);
 
+-- Listed price needs to be the off-contract price
 INSERT INTO Devices(name, model_number, listed_price, manufacturer, software, version, release_date, weight
         height, width, depth) VALUES
         ('Galaxy S4', 'GT-I9505', 199.99, 'Samsung', 'Jelly Bean', 4.1, '2013-04-26', 4.6, 136.6, 69.8, 7.9),
