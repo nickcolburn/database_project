@@ -3,13 +3,17 @@
 --          George Gutierrez
 --          Joao Leite
 
-DROP TABLE Manufacturers;
-DROP TABLE Retailers;
-DROP TABLE Components;
-DROP TABLE Countries;
-DROP TABLE Carriers;
-DROP TABLE Software;
+DROP TABLE Reviews;
+DROP TABLE Users;
+DROP TABLE Sales;
+DROP TABLE Supports;
+DROP TABLE Device_composition;
 DROP TABLE Devices;
+DROP TABLE Software;
+DROP TABLE Carriers;
+DROP TABLE Countries;
+DROP TABLE Components;
+DROP TABLE Manufacturers;
 
 
 CREATE TABLE Manufacturers
@@ -67,7 +71,7 @@ CREATE TABLE Devices
         version         DECIMAL(3,1),   -- FK software version from Software
         weight          DECIMAL(2,1),   -- assumption: weight given is in ounces
         release_date    DATE,        
-        height          DECIMAL(3,1),   -- assumption: values are in millimeters
+        height          DECIMAL(4,1),   -- assumption: values are in millimeters
         width           DECIMAL(3,1),   -- assumption: values are in millimeters
         depth           DECIMAL(3,1),   -- assumption: values are in millimeters
         CONSTRAINT devices_PK PRIMARY KEY(dev_id),
@@ -115,15 +119,15 @@ CREATE TABLE Users
         CONSTRAINT users_PK PRIMARY KEY(username)
 );  
 
-CREATE TABLE Review
+CREATE TABLE Reviews
 (
-        dev_id          INTEGER NOT NULL AUTO INCREMENT,        --FK from Devices
+        dev_id          INTEGER NOT NULL AUTO_INCREMENT,        --FK from Devices
         username        VARCHAR(20) NOT NULL,                   -- FK from Users
         rating          DECIMAL(2,1),                           -- users can give partial ratings
         review          VARCHAR(1000),                          -- need to determine appropriate size for this
-        CONSTRAINT reviews_PK PRIMARY KEY(username),
-        CONSTRAINT reviews_user_FK FOREIGN KEY(username) REFERENCES Users(username) ON UPDATE CASCADE ON DELETE CASCADE,
+        CONSTRAINT reviews_PK PRIMARY KEY(dev_id, username),
         CONSTRAINT reviews_device_FK FOREIGN KEY(dev_id) REFERENCES Devices(dev_id) ON UPDATE CASCADE ON DELETE CASCADE
+        CONSTRAINT reviews_user_FK FOREIGN KEY(username) REFERENCES Users(username) ON UPDATE CASCADE ON DELETE CASCADE,
 );
 
 INSERT INTO Manufacturers(name) VALUES
