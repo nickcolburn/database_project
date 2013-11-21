@@ -179,7 +179,9 @@ INSERT INTO Devices(name, model_number, listed_price, release_date, weight, heig
 INSERT INTO Sales(sale_price) VALUES
         (199.99),
         (0.0),
-        (149.99);
+        (149.99),
+        (49.99),
+        (299.99);
         
 INSERT INTO Users(username, first_name, last_name) VALUES
         ('George91340', 'George', 'Gutierrez'),
