@@ -72,9 +72,9 @@ CREATE TABLE Devices
         version DECIMAL(3,2), -- FK software version from Software
         weight DECIMAL(3,2), -- assumption: weight given is in ounces
         release_date DATE,
-        height DECIMAL(5,2), -- assumption: values are in millimeters
-        width DECIMAL(3,2), -- assumption: values are in millimeters
-        depth DECIMAL(3,2), -- assumption: values are in millimeters
+        height DECIMAL(5,1), -- assumption: values are in millimeters
+        width DECIMAL(3,1), -- assumption: values are in millimeters
+        depth DECIMAL(3,1), -- assumption: values are in millimeters
         CONSTRAINT devices_PK PRIMARY KEY(dev_id),
         CONSTRAINT devices_mfctr_FK FOREIGN KEY(manufacturer) REFERENCES Manufacturers(name) ON UPDATE CASCADE ON DELETE CASCADE,
         CONSTRAINT devices_software_FK FOREIGN KEY(software, version) REFERENCES Software(name, version) ON UPDATE CASCADE ON DELETE CASCADE
@@ -195,9 +195,12 @@ INSERT INTO Users(username, first_name, last_name) VALUES
         ('Spaz', 'Steven', 'Paz'),
         ('El Profe', 'Alvaro', 'Monge');
 
-INSERT INTO Review(rating, review) VALUES
+INSERT INTO Reviews(rating, review) VALUES
         (4.5, 'Best Phone I have owned. Great device, but there are minor nuisances like constant wifi notifications.'),
         (4.5, 'Best iPhone model yet! The camera is greatly improved and the fingerprint scanner is awesome!'),
         (4.0, 'I love the long lasting battery on the RAZR MAXX. No more needing to carry a charger around for this guy!'),
         (4.0, 'Kit Kat brings some fun cool new features to the phone. The only downside is that the camera struggles under auto setting.'),
         (4.5, 'Amazing phone! I only wish that the cheap plastic casing makes it feel and look like a cheap phone.');
+
+
+
