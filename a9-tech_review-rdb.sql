@@ -181,7 +181,7 @@ INSERT INTO Sales(sale_price) VALUES
         (0.0),
         (149.99);
         
-INSERT INTO Users(user_name, first_name, last_name) VALUES
+INSERT INTO Users(username, first_name, last_name) VALUES
         ('George91340', 'George', 'Gutierrez'),
         ('NickColburn', 'Nick', 'Colburn'),
         ('Joao_Brazil', 'Joao', 'Leite'),
