@@ -181,12 +181,15 @@ INSERT INTO Devices(name, model_number, listed_price, release_date, weight, heig
         ('Nexus 5 (16GB)', 'LG-D820', 349.00, '2013-10-31', 4.59, 137.9, 69.2, 8.6),
         ('iPhone 5S (16GB)', 'A1533', 649.99, '2013-09-20', 3.95, 123.8, 58.6, 7.6);
         
-INSERT INTO Sales(sale_price) VALUES
-        (199.99),
-        (0.0),
+INSERT INTO Sales(dev_id, retailer, sale_price) VALUES
+        
+        -- So this is basiaclly how we need to insert the FK values
+        ((SELECT dev_id salesFROM Devices WHERE dev_id=1),
+	 (SELECT name FROM Retailers WHERE name='Best Buy'),199.99);
+        /*(0.0),
         (149.99),
         (49.99),
-        (299.99);
+        (299.99);*/
         
 INSERT INTO Users(username, first_name, last_name) VALUES
         ('George91340', 'George', 'Gutierrez'),
