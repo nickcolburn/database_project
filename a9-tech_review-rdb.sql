@@ -3,24 +3,13 @@
 --          George Gutierrez
 --          Joao Leite
 
-DROP TABLE Reviews;
-DROP TABLE Users;
-DROP TABLE Sales;
-DROP TABLE Supports;
-DROP TABLE Device_composition;
-DROP TABLE Devices;
-DROP TABLE Software;
-DROP TABLE Carriers;
-DROP TABLE Countries;
-DROP TABLE Components;
-DROP TABLE Retailers;
 DROP TABLE Manufacturers;
-
-
-
-
-
-
+DROP TABLE Retailers;
+DROP TABLE Components;
+DROP TABLE Countries;
+DROP TABLE Carriers;
+DROP TABLE Software;
+DROP TABLE Devices;
 
 
 CREATE TABLE Manufacturers
@@ -66,29 +55,29 @@ CREATE TABLE Software
         version                DECIMAL(3,1),
         CONSTRAINT software_PK PRIMARY KEY(name, version)
 );
- 
+  
 CREATE TABLE Devices
 (
-        dev_id          INTEGER NOT NULL AUTO_INCREMENT,
+        dev_id          INTEGER NOT NULL AUTO_INCREMENT
         name            VARCHAR(20),
         model_number    VARCHAR(20),
-        listed_price    DECIMAL(5,2),
-        manufacturer    VARCHAR(20),        -- FK from Manufacturers
-        software_name   VARCHAR(20),        -- FK from Software
-        version         DECIMAL(3,1),        -- FK software version from Software
-        weight          DECIMAL(3,1),         -- assumption: weight given is in ounces
+        listed_price    DECIMAL(5,2),   -- assumption: listed price is full retail price 
+        manufacturer    VARCHAR(20),    -- FK from Manufacturers
+        software        VARCHAR(20),    -- FK from Software
+        version         DECIMAL(3,1),   -- FK software version from Software
+        weight          DECIMAL(2,1),   -- assumption: weight given is in ounces
         release_date    DATE,        
-        height          DECIMAL(4,1),         -- assumption: values are in millimeters
-        width           DECIMAL(3,1),         -- assumption: values are in millimeters
-        depth           DECIMAL(3,1),         -- assumption: values are in millimeters
+        height          DECIMAL(3,1),   -- assumption: values are in millimeters
+        width           DECIMAL(3,1),   -- assumption: values are in millimeters
+        depth           DECIMAL(3,1),   -- assumption: values are in millimeters
         CONSTRAINT devices_PK PRIMARY KEY(dev_id),
         CONSTRAINT devices_mfctr_FK FOREIGN KEY(manufacturer) REFERENCES Manufacturers(name) ON UPDATE CASCADE ON DELETE CASCADE,
-        CONSTRAINT devices_software_FK FOREIGN KEY(software_name, version) REFERENCES Software(name, version) ON UPDATE CASCADE ON DELETE CASCADE
+        CONSTRAINT devices_software_FK FOREIGN KEY(software, version) REFERENCES Software(name, version) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE Device_composition
 (
-        dev_id                INTEGER NOT NULL, -- FK from Devices
+        dev_id          INTEGER NOT NULL, -- FK from Devices
         comp_id         INTEGER NOT NULL, -- FK from Components
         CONSTRAINT dc_PK PRIMARY KEY(dev_id, comp_id),
         CONSTRAINT dc_devices_FK FOREIGN KEY(dev_id) REFERENCES Devices(dev_id) ON UPDATE CASCADE ON DELETE CASCADE,
@@ -98,8 +87,8 @@ CREATE TABLE Device_composition
 
 CREATE TABLE Supports
 (
-        dev_id                 INTEGER NOT NULL, --FK from Devices
-        carrier                VARCHAR(20) NOT NULL,        -- FK from Carriers
+        dev_id                 INTEGER NOT NULL,         --FK from Devices
+        carrier                VARCHAR(20) NOT NULL,     -- FK from Carriers
         country                CHAR(3)  NOT NULL,        -- FK from Countries
         CONSTRAINT supports_PK PRIMARY KEY(dev_id, carrier, country),
         CONSTRAINT supports_device_FK FOREIGN KEY(dev_id) REFERENCES Devices(dev_id) ON UPDATE CASCADE ON DELETE CASCADE,
@@ -109,9 +98,9 @@ CREATE TABLE Supports
 
 CREATE TABLE Sales
 (
-        retailer        VARCHAR(20) NOT NULL,         -- FK from Retailers
-        dev_id                 INTEGER NOT NULL, -- FK from Devices
-        sale_price        DECIMAL(5,2) NOT NULL,
+        retailer        VARCHAR(20) NOT NULL,   -- FK from Retailers
+        dev_id          INTEGER NOT NULL,       -- FK from Devices
+        sale_price      DECIMAL(5,2) NOT NULL,
         CONSTRAINT sales_PK PRIMARY KEY(dev_id, retailer),
         CONSTRAINT sales_device_FK FOREIGN KEY(dev_id) REFERENCES Devices(dev_id) ON UPDATE CASCADE ON DELETE CASCADE,
         CONSTRAINT sales_retailer_FK FOREIGN KEY(retailer) REFERENCES Retailers(name) ON UPDATE CASCADE ON DELETE CASCADE
@@ -123,17 +112,16 @@ CREATE TABLE Users
         username        VARCHAR(20) NOT NULL,
         first_name        VARCHAR(20),
         last_name        VARCHAR(20),
-        CONSTRAINT users_PK PRIMARY KEY(username),
-        CONSTRAINT users_CK UNIQUE(first_name, last_name)
+        CONSTRAINT users_PK PRIMARY KEY(username)
 );  
 
-CREATE TABLE Reviews
+CREATE TABLE Review
 (
-        dev_id          INTEGER NOT NULL AUTO_INCREMENT, --FK from Devices
-        username        VARCHAR(20) NOT NULL,        -- CK & FK from Users
-        rating                DECIMAL(2,1),        -- users can give partial ratings
-        review                VARCHAR(1000),        -- need to determine appropriate size for this
-        CONSTRAINT reviews_PK PRIMARY KEY(dev_id,username),
+        dev_id          INTEGER NOT NULL AUTO INCREMENT,        --FK from Devices
+        username        VARCHAR(20) NOT NULL,                   -- FK from Users
+        rating          DECIMAL(2,1),                           -- users can give partial ratings
+        review          VARCHAR(1000),                          -- need to determine appropriate size for this
+        CONSTRAINT reviews_PK PRIMARY KEY(username),
         CONSTRAINT reviews_user_FK FOREIGN KEY(username) REFERENCES Users(username) ON UPDATE CASCADE ON DELETE CASCADE,
         CONSTRAINT reviews_device_FK FOREIGN KEY(dev_id) REFERENCES Devices(dev_id) ON UPDATE CASCADE ON DELETE CASCADE
 );
@@ -160,13 +148,13 @@ INSERT INTO Components(name, comp_type) VALUES
         ('Snapdragon 600', 'CPU');
 
 INSERT INTO Countries(country_code, name) VALUES
-        ('USA', 'United States'),
+        ('USA', 'United States of America'),
         ('MEX', 'Mexico'),
         ('FRA', 'France'),
         ('GBR', 'United Kingdom'),
         ('CAN', 'Canada');
 
-INSERT INTO Carriers(name, radio_spectrum) VALUES
+INSERT INTO Carries(name, radio_spectrum) VALUES
         ('Verizon Wireless', 'CDMA'),
         ('Sprint', 'CDMA'),
         ('AT&T', 'GSM'),
@@ -177,14 +165,41 @@ INSERT INTO Software(name, version) VALUES
         ('KitKat', 4.4),
         ('Jelly Bean', 4.1),
         ('Ice Cream Sandwich', 4.0),
-        ('iOS', 7.0),
-        ('iOS', 6.0);
+        ('iOS 7', 7.0),
+        ('iOS 6', 6.0);
 
 -- Listed price needs to be the off-contract price
-INSERT INTO Devices(name, model_number, listed_price, manufacturer, software_name, version, release_date, weight,
-        height, width, depth) VALUES
-        ('Galaxy S4', 'GT-I9505', 199.99, 'Samsung', 'Jelly Bean', 4.1, '2013-04-26', 4.6, 136.6, 69.8, 7.9),
-        ('Galaxy S3', 'I9300', 99.99, 'Samsung', 'Jelly Bean', 4.1, '2012-05-01', 4.6, 136.6, 70.6, 8.6),
-        ('Razr', 'XT910', 30.00, 'Motorola', 'Ice Cream Sandwich', 4.0, '2011-10-01', 4.48, 130.7, 68.9, 7.1),
-        ('Nexus 5', '820', 349.00, 'LG', 'KitKat', 4.4, '2013-10-01', 4.59, 137.9, 69.2, 8.6),
-        ('iPhone 5S', 'A1533', 199.99, 'Apple', 'iOS', 7.0, '2013-09-20', 3.95, 123.8, 58.6, 7.6);
+INSERT INTO Devices(name, model_number, listed_price, release_date, weight, height, width, depth) VALUES
+        ('Galaxy S4', 'GT-I9505', 637.99, '2013-04-26', 4.6, 136.6, 69.8, 7.9),
+        ('Galaxy S3', 'I9300', 569.99, 4.1, '2012-05-01', 4.6, 136.6, 70.6, 8.6),
+        ('DROID MAXX', 'XT1080', 499.00, '2013-07-23', 4.48, 130.7, 68.9, 7.1),
+        ('Nexus 5 (16GB)', 'LG-D820', 349.00, '2013-10-31', 4.59, 137.9, 69.2, 8.6),
+        ('iPhone 5S (16GB)', 'A1533', 649.99, '2013-09-20', 3.95, 123.8, 58.6, 7.6);
+        
+INSERT INTO Sales(sale_price) VALUES
+        (199.99),
+        (0.0),
+        (149.99);
+        
+INSERT INTO Users(user_name, first_name, last_name) VALUES
+        ('George91340', 'George', 'Gutierrez'),
+        ('NickColburn', 'Nick', 'Colburn'),
+        ('Joao_Brazil', 'Joao', 'Leite'),
+        ('Spaz', 'Steven', 'Paz'),
+        ('El Profe', 'Alvaro', 'Monge');
+
+INSERT INTO Review(rating, review) VALUES
+        (4.5, 'Best Phone I have owned. Great device, but there are minor nuisances like constant wifi notifications.'),
+        (4.5, 'Best iPhone model yet! The camera is greatly improved and the fingerprint scanner is awesome!'),
+        (4.0, 'I love the long lasting battery on the RAZR MAXX. No more needing to carry a charger around for this guy!'),
+        (4.0, 'Kit Kat brings some fun cool new features to the phone. The only downside is that the camera struggles under auto setting.'),
+        (4.5, 'Amazing phone! I only wish that the cheap plastic casing makes it feel and look like a cheap phone.');
+        
+        
+        
+        
+        
+        
+        
+        
+        
