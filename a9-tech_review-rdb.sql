@@ -19,13 +19,13 @@ DROP TABLE Manufacturers;
 
 CREATE TABLE Manufacturers
 (
-        name	VARCHAR(20) NOT NULL,
+        name		VARCHAR(20) NOT NULL,
         CONSTRAINT mfctr_PK PRIMARY KEY(name)
 );
 
 CREATE TABLE Retailers
 (
-	name 		VARCHAR(20) 	NOT NULL,
+	name 		VARCHAR(20) NOT NULL,
         region 		VARCHAR(20),
         CONSTRAINT retailers_PK PRIMARY KEY(name, region)
 );
