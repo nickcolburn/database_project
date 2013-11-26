@@ -152,11 +152,31 @@ INSERT INTO Components(name, comp_type) VALUES
         ('Snapdragon 600', 'CPU');
 
 INSERT INTO Countries(country_code, name) VALUES
-        ('USA', 'United States'),
-        ('MEX', 'Mexico'),
+        ('AUS', 'Australia'),
+        ('AUT', 'Austria'),
+        ('BRA', 'Brazil'),
+        ('CAN', 'Canada'),
+        ('CHL', 'Chile'),
+        ('CHN', 'China'),
+        ('COL', 'Colombia'),
+        ('DEU', 'Germany'),
         ('FRA', 'France'),
         ('GBR', 'United Kingdom'),
-        ('CAN', 'Canada');
+        ('GRC', 'Greece'),
+        ('HKG', 'Hong Kong'),
+        ('IND', 'India'),
+        ('IRL', 'Ireland'),
+        ('ITA', 'Italy'),
+        ('JPN', 'Japan'),
+        ('MEX', 'Mexico'),
+        ('NLD', 'Netherlands'),
+        ('NZL', 'New Zealand'),
+        ('PER', 'Peru'),
+        ('PHL', 'Phillipines'),
+        ('PRI', 'Puerto Rico'),
+        ('SGP', 'Singapore'),
+        ('SWE', 'Sweden'),
+        ('USA', 'United States');
 
 INSERT INTO Carriers(name, radio_spectrum) VALUES
         ('Verizon Wireless', 'CDMA'),
