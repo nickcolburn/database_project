@@ -183,7 +183,28 @@ INSERT INTO Carriers(name, radio_spectrum) VALUES
         ('Sprint', 'CDMA'),
         ('AT&T', 'GSM'),
         ('T-Mobile', 'GSM'),
-        ('Virgin Mobile', 'CDMA');
+        ('Virgin Mobile', 'CDMA'),
+        ('Rogers Wireless', 'GSM'),
+        ('Telus Mobility', 'CDMA'),
+        ('Bell Wireless', 'CDMA'),
+        ('America Movil', 'tbd'),
+        ('Telefonica', 'tbd'),
+        ('Orange', 'tbd'),
+        ('Axiata', 'tbd'),
+        ('VimpelCom LTD', 'tbd'),
+        ('China Unicom', 'tbd'),
+        ('MTN Group', 'tbd'),
+        ('China Telecom', 'tbd'),
+        ('Etisalat', 'tbd'),
+        ('TeliaSonera' 'tbd'),
+        ('Telenor', 'tbd'),
+        ('Saudi Telecom Company', 'tbd'),
+        ('Reliance Communications', 'tbd'),
+        ('Idea Cellular', 'tbd'),
+        ('MTS', 'tbd'),
+        ('Telecom Italia Mobile', 'tbd'),
+        ('BSNL', 'tbd');
+        
 
 INSERT INTO Software(name, version) VALUES
         ('KitKat', 4.4),
