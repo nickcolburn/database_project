@@ -7,7 +7,7 @@ DROP TABLE Reviews;
 DROP TABLE Users;
 DROP TABLE Sales;
 DROP TABLE Supports;
-DROP TABLE Device_composition;
+DROP TABLE Internals;
 DROP TABLE Devices;
 DROP TABLE Software;
 DROP TABLE Carriers;
@@ -82,7 +82,7 @@ CREATE TABLE Devices
         CONSTRAINT devices_ck UNIQUE(name, model_number)
 );
 
-CREATE TABLE Device_composition
+CREATE TABLE Internals
 (
         dev_id 		INTEGER NOT NULL, -- FK from Devices
         comp_id 	INTEGER NOT NULL, -- FK from Components
@@ -173,7 +173,6 @@ INSERT INTO Countries(country_code, name) VALUES
         ('MEX', 'Mexico'),
         ('NLD', 'Netherlands'),
         ('NZL', 'New Zealand'),
-        ('PER', 'Peru'),
         ('PHL', 'Phillipines'),
         ('PRI', 'Puerto Rico'),
         ('SGP', 'Singapore'),
@@ -192,19 +191,8 @@ INSERT INTO Carriers(name, radio_spectrum) VALUES
         ('America Movil', 'tbd'),
         ('Telefonica', 'tbd'),
         ('Orange', 'tbd'),
-        ('Axiata', 'tbd'),
-        ('VimpelCom LTD', 'tbd'),
-        ('China Unicom', 'tbd'),
-        ('MTN Group', 'tbd'),
-        ('China Telecom', 'tbd'),
-        ('Etisalat', 'tbd'),
-        ('TeliaSonera' 'tbd'),
-        ('Telenor', 'tbd'),
-        ('Saudi Telecom Company', 'tbd'),
         ('Reliance Communications', 'tbd'),
-        ('Idea Cellular', 'tbd'),
         ('MTS', 'tbd'),
-        ('Telecom Italia Mobile', 'tbd'),
         ('BSNL', 'tbd');
         
 
