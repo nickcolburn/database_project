@@ -26,7 +26,7 @@ CREATE TABLE Manufacturers
 CREATE TABLE Retailers
 (
 	name 		VARCHAR(20) NOT NULL,
-        region 		VARCHAR(20),
+        region 		VARCHAR(20) NOT NULL,
         CONSTRAINT retailers_pk PRIMARY KEY(name, region) -- both name+region will be the PK to distinguish any retailers with the same name in different regions
 );
 
@@ -44,7 +44,8 @@ CREATE TABLE Countries
 (
         country_code 	CHAR(3) NOT NULL,
         name 		VARCHAR(20),
-        CONSTRAINT 	countries_pk PRIMARY KEY(country_code) -- country code is shorter than country name, so it should be used as PK
+        CONSTRAINT 	countries_pk PRIMARY KEY(country_code), -- country code is shorter than country name, so it should be used as PK
+	CONSTRAINT	countries_ck UNIQUE(name)
 );
 
 CREATE TABLE Carriers
@@ -56,8 +57,8 @@ CREATE TABLE Carriers
 
 CREATE TABLE Software
 (
-        name 		VARCHAR(20),
-        version 	DECIMAL(3,1), -- assumption: version number will be in XXX.X format
+        name 		VARCHAR(20) NOT NULL,
+        version 	DECIMAL(3,1) NOT NULL, -- assumption: version number will be in XX.X format
         CONSTRAINT 	software_pk PRIMARY KEY(name, version) -- name and version must be used because there may be several iterations of software with the same name. 
 );
   
@@ -68,7 +69,7 @@ CREATE TABLE Devices
         model_number 	VARCHAR(20),
         listed_price 	DECIMAL(5,2), 	-- assumption: listed price is full retail price
         manufacturer 	VARCHAR(20), 	-- FK from Manufacturers
-        software 	VARCHAR(20), 	-- FK from Software
+        software_name 	VARCHAR(20), 	-- FK from Software
         version 	DECIMAL(3,2),	-- FK software version from Software
         weight 		DECIMAL(3,2), 	-- assumption: weight given is in ounces
         release_date 	DATE,
@@ -76,8 +77,9 @@ CREATE TABLE Devices
         width 		DECIMAL(3,1), 	-- assumption: values are in millimeters
         depth 		DECIMAL(3,1),	-- assumption: values are in millimeters
         CONSTRAINT devices_pk PRIMARY KEY(dev_id), -- dev_id is a surrogate key
-        CONSTRAINT devices_mfctr_fk FOREIGN KEY(manufacturer) REFERENCES Manufacturers(name) ON UPDATE CASCADE ON DELETE CASCADE,
-        CONSTRAINT devices_software_fk FOREIGN KEY(software, version) REFERENCES Software(name, version) ON UPDATE CASCADE ON DELETE CASCADE
+        CONSTRAINT devices_mfctr_fk FOREIGN KEY(manufacturer) REFERENCES Manufacturers(name) ON UPDATE CASCADE ON DELETE RESTRICT,
+        CONSTRAINT devices_software_fk FOREIGN KEY(software_name, version) REFERENCES Software(name, version) ON UPDATE CASCADE ON DELETE RESTRICT,
+        CONSTRAINT devices_ck UNIQUE(name, model_number)
 );
 
 CREATE TABLE Device_composition
@@ -126,8 +128,8 @@ CREATE TABLE Reviews
         rating 		DECIMAL(2,1), 		-- users can give partial ratings
         review 		VARCHAR(1000), 		-- need to determine appropriate size for this
         CONSTRAINT 	reviews_pk PRIMARY KEY(dev_id, username),
-        CONSTRAINT 	reviews_device_fk FOREIGN KEY(dev_id) REFERENCES Devices(dev_id) ON UPDATE CASCADE ON DELETE CASCADE,
-        CONSTRAINT 	reviews_user_fk FOREIGN KEY(username) REFERENCES Users(username) ON UPDATE CASCADE ON DELETE CASCADE
+        CONSTRAINT 	reviews_device_fk FOREIGN KEY(dev_id) REFERENCES Devices(dev_id) ON UPDATE CASCADE ON DELETE RESTRICT,
+        CONSTRAINT 	reviews_user_fk FOREIGN KEY(username) REFERENCES Users(username) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
 INSERT INTO Manufacturers(name) VALUES
@@ -207,11 +209,11 @@ INSERT INTO Carriers(name, radio_spectrum) VALUES
         
 
 INSERT INTO Software(name, version) VALUES
-        ('KitKat', 4.4),
-        ('Jelly Bean', 4.1),
-        ('Ice Cream Sandwich', 4.0),
-        ('iOS 7', 7.0),
-        ('iOS 6', 6.0);
+        ('Android', 4.4),
+        ('Android', 4.1),
+        ('Android', 4.0),
+        ('iOS', 7.0),
+        ('iOS', 6.0);
 
 INSERT INTO Devices(name, model_number, listed_price, release_date, weight, height, width, depth) VALUES
         ('Galaxy S4', 'GT-I9505', 637.99, '2013-04-26', 4.6, 136.6, 69.8, 7.9),
