@@ -58,7 +58,7 @@ CREATE TABLE Carriers
 CREATE TABLE Software
 (
         name 		VARCHAR(20) NOT NULL,
-        version 	DECIMAL(3,1) NOT NULL, -- assumption: version number will be in XX.X format
+        version 	VARCHAR(20) NOT NULL, -- assumption: version number will be in XX.X format or named
         CONSTRAINT 	software_pk PRIMARY KEY(name, version) -- name and version must be used because there may be several iterations of software with the same name. 
 );
   
@@ -70,7 +70,7 @@ CREATE TABLE Devices
         listed_price 	DECIMAL(5,2), 	-- assumption: listed price is full retail price
         manufacturer 	VARCHAR(20), 	-- FK from Manufacturers
         software_name 	VARCHAR(20), 	-- FK from Software
-        version 	DECIMAL(3,2),	-- FK software version from Software
+        version 	VARCHAR(20),	-- FK software version from Software
         weight 		DECIMAL(3,2), 	-- assumption: weight given is in ounces
         release_date 	DATE,
         height 		DECIMAL(5,1), 	-- assumption: values are in millimeters
@@ -209,9 +209,9 @@ INSERT INTO Carriers(name, radio_spectrum) VALUES
         
 
 INSERT INTO Software(name, version) VALUES
-        ('Android', 4.4),
-        ('Android', 4.1),
-        ('Android', 4.0),
+        ('Android', 'KitKat'),
+        ('Android', 'Jelly Bean'),
+        ('Android', 'Ice Cream Sandwich'),
         ('iOS', 7.0),
         ('iOS', 6.0);
 
