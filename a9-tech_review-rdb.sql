@@ -74,7 +74,7 @@ CREATE TABLE Devices
         release_date 	DATE,
         height 		DECIMAL(5,1), 	-- assumption: values are in millimeters
         width 		DECIMAL(3,1), 	-- assumption: values are in millimeters
-        depth 		DECIMAL(3,1)	-- assumption: values are in millimeters
+        depth 		DECIMAL(3,1),	-- assumption: values are in millimeters
         CONSTRAINT devices_pk PRIMARY KEY(dev_id), -- dev_id is a surrogate key
         CONSTRAINT devices_mfctr_fk FOREIGN KEY(manufacturer) REFERENCES Manufacturers(name) ON UPDATE CASCADE ON DELETE CASCADE,
         CONSTRAINT devices_software_fk FOREIGN KEY(software, version) REFERENCES Software(name, version) ON UPDATE CASCADE ON DELETE CASCADE
