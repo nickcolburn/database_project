@@ -212,8 +212,8 @@ INSERT INTO Software(name, version) VALUES
         ('Android', 'KitKat'),
         ('Android', 'Jelly Bean'),
         ('Android', 'Ice Cream Sandwich'),
-        ('iOS', 7.0),
-        ('iOS', 6.0);
+        ('iOS', '7.0'),
+        ('iOS', '6.0');
 
 INSERT INTO Devices(name, model_number, listed_price, release_date, weight, height, width, depth) VALUES
         ('Galaxy S4', 'GT-I9505', 637.99, '2013-04-26', 4.6, 136.6, 69.8, 7.9),
