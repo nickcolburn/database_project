@@ -7,6 +7,7 @@ DROP TABLE Reviews;
 DROP TABLE Users;
 DROP TABLE Sales;
 DROP TABLE Supports;
+DROP TABLE Specification;
 DROP TABLE Internals;
 DROP TABLE Devices;
 DROP TABLE Software;
