@@ -3,5 +3,4 @@
 -- George Gutierrez
 -- Joao Leite
 
--- Insert Table Statements
--- Populates tables with a minimum of 10 rows
+-- Queries for Java Database Application
