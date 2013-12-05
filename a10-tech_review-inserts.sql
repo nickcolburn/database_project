@@ -56,7 +56,7 @@ INSERT INTO Countries(country_code, name) VALUES
         ('SWE', 'Sweden'),
         ('USA', 'United States');
 
-INSERT INTO Carriers(name, radio_spectrum) VALUES
+INSERT INTO Carriers(name, country_code) VALUES
         ('Verizon Wireless', 'CDMA'),
         ('Sprint', 'CDMA'),
         ('AT&T', 'GSM'),
@@ -86,7 +86,7 @@ INSERT INTO Devices(name, model_number, listed_price, release_date, weight, heig
         ('Nexus 5 (16GB)', 'LG-D820', 349.00, '2013-10-31', 4.59, 137.9, 69.2, 8.6),
         ('iPhone 5S (16GB)', 'A1533', 649.99, '2013-09-20', 3.95, 123.8, 58.6, 7.6);
         
-INSERT INTO Sales(dev_id, retailer, sale_price) VALUES
+INSERT INTO Sales(dev_id, retailer_id, sale_price) VALUES
         ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT name FROM Retailers WHERE name='Amazon'),                199.99),
         ((SELECT dev_id FROM Devices WHERE dev_id=2), (SELECT name FROM Retailers WHERE name='Best Buy'),        0.0),
         ((SELECT dev_id FROM Devices WHERE dev_id=3), (SELECT name FROM Retailers WHERE name='Best Buy'),        149.99),
@@ -107,7 +107,7 @@ INSERT INTO Reviews(dev_id, username, rating, review) VALUES
         ((SELECT dev_id FROM Devices WHERE dev_id=4), (SELECT username FROM Users WHERE username='Spaz'), 4.0, 'Kit Kat brings some fun cool new features to the phone. The only downside is that the camera struggles under auto setting.'),
         ((SELECT dev_id FROM Devices WHERE dev_id=5), (SELECT username FROM Users WHERE username='El Profe'), 4.5, 'Amazing phone! I only wish that the cheap plastic casing makes it feel and look like a cheap phone.');
 
-INSERT INTO Supports(dev_id, country, carrier) VALUES
+INSERT INTO Supports(dev_id, country_code, carrier_name) VALUES
         -- Samsung Galaxy S4 = dev_id 1
         ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT country FROM Countries WHERE name = 'United States'), (SELECT carrier FROM Carriers WHERE country_code = 'USA'),
         ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT country FROM Countries WHERE name = 'United States'), (SELECT carrier FROM Carriers WHERE name = 'AT&T'),
