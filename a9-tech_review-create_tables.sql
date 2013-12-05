@@ -10,8 +10,8 @@ DROP TABLE Supports;
 DROP TABLE Internals;
 DROP TABLE Devices;
 DROP TABLE Software;
-DROP TABLE Carriers;
 DROP TABLE Radio_spectrum;
+DROP TABLE Carriers;
 DROP TABLE Countries;
 DROP TABLE Components;
 DROP TABLE Retailers;
@@ -58,10 +58,10 @@ CREATE TABLE Carriers
 
 CREATE TABLE Radio_spectrum
 (
-	name		VARCHAR(20) NOT NULL,
+	carrier_name	VARCHAR(20) NOT NULL, -- FK from Carriers
 	radio_spectrum	VARCHAR(20) NOT NULL,
-	CONSTRAINT radio_spectrum_pk PRIMARY KEY(name, radio_spectrum),
-	CONTRAINT radio_carriers_fk FOREIGN KEY(name) REFERENCES Carriers(name)
+	CONSTRAINT 	radio_spectrum_pk PRIMARY KEY(name, radio_spectrum),
+	CONTRAINT 	radio_carriers_fk FOREIGN KEY(carrier_name) REFERENCES Carriers(name)
 );
 
 CREATE TABLE Software
@@ -100,12 +100,20 @@ CREATE TABLE Internals
         CONSTRAINT 	dc_components_fk FOREIGN KEY(comp_id) REFERENCES Components(comp_id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+CREATE TABLE Specification
+(
+	comp_id		INTEGER NOT NULL, -- FK form Components
+	specification	VARCHAR(20) NOT NULL,
+	CONSTRAINT	specification_pk PRIMARY KEY(comp_id, specification),
+	CONSTRAINT	specification_fk FOREIGN KEY(comp_id) REFERENCES Components(comp_id)
+);
+
 CREATE TABLE Supports
 (
         dev_id 		INTEGER NOT NULL, 	-- FK from Devices
         carrier 	VARCHAR(20) NOT NULL, 	-- FK from Carriers
         country 	CHAR(3) NOT NULL, 	-- FK from Countries
-        CONSTRAINT 	supports_PK PRIMARY KEY(dev_id, carrier, country),
+        CONSTRAINT 	supports_pk PRIMARY KEY(dev_id, carrier, country),
         CONSTRAINT 	supports_device_fk FOREIGN KEY(dev_id) REFERENCES Devices(dev_id) ON UPDATE CASCADE ON DELETE CASCADE,
         CONSTRAINT 	supports_carrier_fk FOREIGN KEY(carrier) REFERENCES Carriers(name) ON UPDATE CASCADE ON DELETE CASCADE,
         CONSTRAINT 	supports_country_fk FOREIGN KEY(country) REFERENCES Countries(country_code) ON UPDATE CASCADE ON DELETE CASCADE
