@@ -11,6 +11,7 @@ DROP TABLE Internals;
 DROP TABLE Devices;
 DROP TABLE Software;
 DROP TABLE Carriers;
+DROP TABLE Radio_spectrum;
 DROP TABLE Countries;
 DROP TABLE Components;
 DROP TABLE Retailers;
