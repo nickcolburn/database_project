@@ -32,7 +32,7 @@ CREATE TABLE Retailers
 	retailer_id	INTEGER NOT NULL AUTO_INCREMENT,
 	name 		VARCHAR(20),
         region 		VARCHAR(20),
-        CONSTRAINT 	retailers_pk PRIMARY KEY(retailer_id) -- both name+region will be the PK to distinguish any retailers with the same name in different regions
+        CONSTRAINT 	retailers_pk PRIMARY KEY(retailer_id), -- both name+region will be the PK to distinguish any retailers with the same name in different regions
 	CONSTRAINT	retailers_ck UNIQUE(name, region) -- name+region is used to determine retailers present in 2+ countries
 );
 
@@ -84,8 +84,8 @@ CREATE TABLE Devices
         name 		VARCHAR(20),
         model_number 	VARCHAR(20),
         listed_price 	DECIMAL(5,2), 	-- assumption: listed price is full retail price
-        mfctr_id 	VARCHAR(20), 	-- FK from Manufacturers
-        soft_id 	VARCHAR(20), 	-- FK from Software
+        mfctr_id 	INTEGER, 	-- FK from Manufacturers
+        soft_id 	INTEGER, 	-- FK from Software
         version 	VARCHAR(20),	-- FK software version from Software
         weight 		DECIMAL(3,2), 	-- assumption: weight given is in ounces
         release_date 	DATE,
