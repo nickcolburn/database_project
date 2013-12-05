@@ -191,7 +191,6 @@ INSERT INTO Carriers(name, radio_spectrum) VALUES
         ('America Movil', 'tbd'),
         ('Telefonica', 'tbd'),
         ('Orange', 'tbd'),
-        ('Reliance Communications', 'tbd'),
         ('MTS', 'tbd'),
         ('BSNL', 'tbd');
         
