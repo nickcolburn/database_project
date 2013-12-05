@@ -55,12 +55,12 @@ CREATE TABLE Carriers
         CONSTRAINT 	carriers_pk PRIMARY KEY(name) -- carrier name is enough to uniquely identify each tuple
 );
 
-CREATE TABLE Radium_spectrum
+CREATE TABLE Radio_spectrum
 (
 	name		VARCHAR(20) NOT NULL,
 	radio_spectrum	VARCHAR(20) NOT NULL,
-	CONSTRAINT radium_spectrum_pk PRIMARY KEY(name, radium_spectrum),
-	CONTRAINT radium_carriers_fk FOREIGN KEY(name) REFERENCES Carriers(name);
+	CONSTRAINT radio_spectrum_pk PRIMARY KEY(name, radio_spectrum),
+	CONTRAINT radio_carriers_fk FOREIGN KEY(name) REFERENCES Carriers(name)
 );
 
 CREATE TABLE Software
