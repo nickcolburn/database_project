@@ -1,1 +1,4 @@
--- Assignment 10
+-- Assignment 10 - Tech Review Queries
+-- Authors: Nick Colburn
+-- George Gutierrez
+-- Joao Leite
