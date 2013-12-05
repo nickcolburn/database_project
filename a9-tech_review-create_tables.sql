@@ -67,7 +67,7 @@ CREATE TABLE Radio_spectrum
 	carrier_name	VARCHAR(20) NOT NULL, -- FK from Carriers
 	radio_spectrum	VARCHAR(20) NOT NULL,
 	CONSTRAINT 	radio_spectrum_pk PRIMARY KEY(carrier_name, radio_spectrum),
-	CONTRAINT 	radio_carriers_fk FOREIGN KEY(carrier_name) REFERENCES Carriers(name) ON UPDATE CASCADE ON DELETE CASCADE
+	CONSTRAINT 	radio_carriers_fk FOREIGN KEY(carrier_name) REFERENCES Carriers(name) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE Software
@@ -113,7 +113,7 @@ CREATE TABLE Specification
 	comp_id		INTEGER NOT NULL, -- FK form Components
 	specification	VARCHAR(20) NOT NULL,
 	CONSTRAINT	specification_pk PRIMARY KEY(comp_id, specification),
-	CONSTRAINT	specification_fk FOREIGN KEY(comp_id) REFERENCES Components(comp_id) ON UPDATE CASCADE, ON DELETE CASCADE
+	CONSTRAINT	specification_fk FOREIGN KEY(comp_id) REFERENCES Components(comp_id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE Supports
