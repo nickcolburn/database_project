@@ -107,11 +107,11 @@ INSERT INTO Reviews(dev_id, username, rating, review) VALUES
         ((SELECT dev_id FROM Devices WHERE dev_id=4), (SELECT username FROM Users WHERE username='Spaz'), 4.0, 'Kit Kat brings some fun cool new features to the phone. The only downside is that the camera struggles under auto setting.'),
         ((SELECT dev_id FROM Devices WHERE dev_id=5), (SELECT username FROM Users WHERE username='El Profe'), 4.5, 'Amazing phone! I only wish that the cheap plastic casing makes it feel and look like a cheap phone.');
 
-INSERT INTO Supports(dev_id, country_code, carrier_name) VALUES
+INSERT INTO Supports(dev_id, country, carrier) VALUES
         -- Samsung Galaxy S4 = dev_id 1
-        ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT country FROM Countries WHERE name = 'United States'), (SELECT carrier FROM Carriers WHERE country_code = 'USA'),
-        ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT country FROM Countries WHERE name = 'United States'), (SELECT carrier FROM Carriers WHERE name = 'AT&T'),
-        ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT country FROM Countries WHERE name = 'United States'), (SELECT carrier FROM Carriers WHERE name = 'T-Mobile'),
-        ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT country FROM Countries WHERE name = 'United States'), (SELECT carrier FROM Carriers WHERE name = 'Sprint'),
-        ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT country FROM Countries WHERE name = 'United States'), (SELECT carrier FROM Carriers WHERE name = 'Verizon Wireless'),
-        ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT country FROM Countries WHERE name = 'United States'), (SELECT carrier FROM Carriers WHERE name = 'Verizon Wireless');
+        ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT country FROM Countries WHERE name = 'United States'), (SELECT carrier FROM Carriers WHERE country_code = 'USA')),
+        ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT country FROM Countries WHERE name = 'United States'), (SELECT carrier FROM Carriers WHERE name = 'AT&T')),
+        ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT country FROM Countries WHERE name = 'United States'), (SELECT carrier FROM Carriers WHERE name = 'T-Mobile')),
+        ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT country FROM Countries WHERE name = 'United States'), (SELECT carrier FROM Carriers WHERE name = 'Sprint')),
+        ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT country FROM Countries WHERE name = 'United States'), (SELECT carrier FROM Carriers WHERE name = 'Verizon Wireless')),
+        ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT country FROM Countries WHERE name = 'United States'), (SELECT carrier FROM Carriers WHERE name = 'Verizon Wireless'));
