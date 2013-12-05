@@ -131,7 +131,7 @@ CREATE TABLE Sales
         retailer_id	INTEGER NOT NULL, -- FK from Retailers
         dev_id 		INTEGER NOT NULL, 	-- FK from Devices
         sale_price 	DECIMAL(5,2) NOT NULL,
-        CONSTRAINT 	sales_pk PRIMARY KEY(dev_id, retailer),
+        CONSTRAINT 	sales_pk PRIMARY KEY(dev_id, retailer_id),
         CONSTRAINT 	sales_device_fk FOREIGN KEY(dev_id) REFERENCES Devices(dev_id) ON UPDATE CASCADE ON DELETE CASCADE,
         CONSTRAINT 	sales_retailer_fk FOREIGN KEY(retailer_id) REFERENCES Retailers(retailer_id) ON UPDATE CASCADE ON DELETE CASCADE
         
