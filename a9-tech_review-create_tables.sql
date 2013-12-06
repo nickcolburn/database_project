@@ -1,3 +1,24 @@
+-- Assignment 10 - Tech Review Relational Database
+-- Authors: Nick Colburn
+-- George Gutierrez
+-- Joao Leite
+
+DROP TABLE Reviews;
+DROP TABLE Users;
+DROP TABLE Sales;
+DROP TABLE Supports;
+DROP TABLE Specification;
+DROP TABLE Internals;
+DROP TABLE Devices;
+DROP TABLE Software;
+DROP TABLE Radio_spectrum;
+DROP TABLE Carriers;
+DROP TABLE Countries;
+DROP TABLE Components;
+DROP TABLE Retailers;
+DROP TABLE Manufacturers;
+
+
 CREATE TABLE Manufacturers
 (
         mfctr_id        INTEGER NOT NULL AUTO_INCREMENT, -- Surrogate PK for Manufacturer
