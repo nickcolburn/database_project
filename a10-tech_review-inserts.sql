@@ -1,10 +1,3 @@
--- Assignment 10 - Tech Review Queries
--- Authors: Nick Colburn
--- George Gutierrez
--- Joao Leite
-
--- Insert Table Statements
--- Populates tables with a minimum of 10 rows
 
 INSERT INTO Manufacturers(name) VALUES
         ('Samsung'),
@@ -55,21 +48,6 @@ INSERT INTO Countries(country_code, name) VALUES
         ('SGP', 'Singapore'),
         ('SWE', 'Sweden'),
         ('USA', 'United States');
-
---INSERT INTO Carriers(name, country_code) VALUES
---        ('Verizon Wireless', 'CDMA'),
---        ('Sprint', 'CDMA'),
---        ('AT&T', 'GSM'),
---        ('T-Mobile', 'GSM'),
---       ('Virgin Mobile', 'CDMA'),
---        ('Rogers Wireless', 'GSM'),
---        ('Telus Mobility', 'CDMA'),
---        ('Bell Wireless', 'CDMA'),
---        ('America Movil', 'tbd'),
---        ('Telefonica', 'tbd'),
---        ('Orange', 'tbd'),
---        ('MTS', 'tbd'),
---        ('BSNL', 'tbd');
         
 INSERT INTO Carriers(name, country_code) VALUES
         ('Verizon Wireless', 'USA'),
@@ -93,12 +71,14 @@ INSERT INTO Software(name, version) VALUES
         ('iOS', '7.0'),
         ('iOS', '6.0');
 
-INSERT INTO Devices(name, model_number, listed_price, release_date, weight, height, width, depth) VALUES
-        ('Galaxy S4', 'GT-I9505', 637.99, '2013-04-26', 4.6, 136.6, 69.8, 7.9),
-        ('Galaxy S3', 'I9300', 569.99,         '2012-05-01', 4.6, 136.6, 70.6, 8.6),
-        ('DROID MAXX', 'XT1080', 499.00, '2013-07-23', 4.48, 130.7, 68.9, 7.1),
-        ('Nexus 5 (16GB)', 'LG-D820', 349.00, '2013-10-31', 4.59, 137.9, 69.2, 8.6),
-        ('iPhone 5S (16GB)', 'A1533', 649.99, '2013-09-20', 3.95, 123.8, 58.6, 7.6);
+INSERT INTO Devices(name, model_number, listed_price, mfctr_id, soft_id, release_date, weight, height, width, depth) VALUES
+        -- mfcrt_id 1 = Samsung, 2=Apple, 3=Motorola, 4=LG
+        -- soft_id 1= Android KitKat, 2=Android Jelly Bean, 3=Android Ice Cream Sandwich, 4=iOS7, 5=iOS6
+        ('Galaxy S4',           'GT-I9505',     637.99, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=1) , (SELECT soft_id FROM Software WHERE soft_id=3),'2013-04-26', 4.6,  136.6, 69.8, 7.9),
+        ('Galaxy S3',           'I9300',        569.99, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=1) , (SELECT soft_id FROM Software WHERE soft_id=2),'2012-05-01', 4.6,  136.6, 70.6, 8.6),
+        ('DROID MAXX',          'XT1080',       499.00, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=3) , (SELECT soft_id FROM Software WHERE soft_id=2),'2013-07-23', 4.48, 130.7, 68.9, 7.1),
+        ('Nexus 5 (16GB)',      'LG-D820',      349.00, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=4) , (SELECT soft_id FROM Software WHERE soft_id=3),'2013-10-31', 4.59, 137.9, 69.2, 8.6),
+        ('iPhone 5S (16GB)',     'A1533',       649.99, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=2) , (SELECT soft_id FROM Software WHERE soft_id=4),'2013-09-20', 3.95, 123.8, 58.6, 7.6);
         
 INSERT INTO Sales(dev_id, retailer_id, sale_price) VALUES
         ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT retailer_id FROM Retailers WHERE name='Amazon'),                199.99),
@@ -129,4 +109,3 @@ INSERT INTO Supports(dev_id, country, carrier) VALUES
         ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT country_code FROM Countries WHERE name = 'United States'), (SELECT name FROM Carriers WHERE name = 'Sprint')),
         ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT country_code FROM Countries WHERE name = 'United States'), (SELECT name FROM Carriers WHERE name = 'Verizon Wireless')),
         ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT country_code FROM Countries WHERE name = 'United States'), (SELECT name FROM Carriers WHERE name = 'Orange'));
-
