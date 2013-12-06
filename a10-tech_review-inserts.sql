@@ -56,22 +56,36 @@ INSERT INTO Countries(country_code, name) VALUES
         ('SWE', 'Sweden'),
         ('USA', 'United States');
 
-INSERT INTO Carriers(name, country_code) VALUES
-        ('Verizon Wireless', 'CDMA'),
-        ('Sprint', 'CDMA'),
-        ('AT&T', 'GSM'),
-        ('T-Mobile', 'GSM'),
-        ('Virgin Mobile', 'CDMA'),
-        ('Rogers Wireless', 'GSM'),
-        ('Telus Mobility', 'CDMA'),
-        ('Bell Wireless', 'CDMA'),
-        ('America Movil', 'tbd'),
-        ('Telefonica', 'tbd'),
-        ('Orange', 'tbd'),
-        ('MTS', 'tbd'),
-        ('BSNL', 'tbd');
+--INSERT INTO Carriers(name, country_code) VALUES
+--        ('Verizon Wireless', 'CDMA'),
+--        ('Sprint', 'CDMA'),
+--        ('AT&T', 'GSM'),
+--        ('T-Mobile', 'GSM'),
+--       ('Virgin Mobile', 'CDMA'),
+--        ('Rogers Wireless', 'GSM'),
+--        ('Telus Mobility', 'CDMA'),
+--        ('Bell Wireless', 'CDMA'),
+--        ('America Movil', 'tbd'),
+--        ('Telefonica', 'tbd'),
+--        ('Orange', 'tbd'),
+--        ('MTS', 'tbd'),
+--        ('BSNL', 'tbd');
         
-
+INSERT INTO Carriers(name, country_code) VALUES
+        ('Verizon Wireless', 'USA'),
+        ('Sprint', 'USA'),
+        ('AT&T', 'USA'),
+        ('T-Mobile', 'USA'),
+        ('Virgin Mobile', 'USA'),
+        ('Rogers Wireless', 'CAN'),
+        ('Telus Mobility', 'USA'),
+        ('Bell Wireless', 'CAN'),
+        ('America Movil', 'MEX'),
+        ('Telefonica', 'MEX'),
+        ('Orange', 'MEX'),
+        ('MTS', 'MEX'),
+        ('BSNL', 'MEX');
+        
 INSERT INTO Software(name, version) VALUES
         ('Android', 'KitKat'),
         ('Android', 'Jelly Bean'),
@@ -87,12 +101,12 @@ INSERT INTO Devices(name, model_number, listed_price, release_date, weight, heig
         ('iPhone 5S (16GB)', 'A1533', 649.99, '2013-09-20', 3.95, 123.8, 58.6, 7.6);
         
 INSERT INTO Sales(dev_id, retailer_id, sale_price) VALUES
-        ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT name FROM Retailers WHERE name='Amazon'),                199.99),
-        ((SELECT dev_id FROM Devices WHERE dev_id=2), (SELECT name FROM Retailers WHERE name='Best Buy'),        0.0),
-        ((SELECT dev_id FROM Devices WHERE dev_id=3), (SELECT name FROM Retailers WHERE name='Best Buy'),        149.99),
-        ((SELECT dev_id FROM Devices WHERE dev_id=4), (SELECT name FROM Retailers WHERE name='Best Buy'),        49.99),
-        ((SELECT dev_id FROM Devices WHERE dev_id=5), (SELECT name FROM Retailers WHERE name='Best Buy'),        299.99);
-                        
+        ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT retailer_id FROM Retailers WHERE name='Amazon'),                199.99),
+        ((SELECT dev_id FROM Devices WHERE dev_id=2), (SELECT retailer_id FROM Retailers WHERE name='Best Buy'),        0.0),
+        ((SELECT dev_id FROM Devices WHERE dev_id=3), (SELECT retailer_id FROM Retailers WHERE name='Best Buy'),        149.99),
+        ((SELECT dev_id FROM Devices WHERE dev_id=4), (SELECT retailer_id FROM Retailers WHERE name='Best Buy'),        49.99),
+        ((SELECT dev_id FROM Devices WHERE dev_id=5), (SELECT retailer_id FROM Retailers WHERE name='Best Buy'),        299.99);                        
+
 INSERT INTO Users(username, first_name, last_name) VALUES
         ('George91340',        'George', 'Gutierrez'),
         ('NickColburn', 'Nick', 'Colburn'),
@@ -109,9 +123,10 @@ INSERT INTO Reviews(dev_id, username, rating, review) VALUES
 
 INSERT INTO Supports(dev_id, country, carrier) VALUES
         -- Samsung Galaxy S4 = dev_id 1
-        ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT country FROM Countries WHERE name = 'United States'), (SELECT carrier FROM Carriers WHERE country_code = 'USA')),
-        ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT country FROM Countries WHERE name = 'United States'), (SELECT carrier FROM Carriers WHERE name = 'AT&T')),
-        ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT country FROM Countries WHERE name = 'United States'), (SELECT carrier FROM Carriers WHERE name = 'T-Mobile')),
-        ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT country FROM Countries WHERE name = 'United States'), (SELECT carrier FROM Carriers WHERE name = 'Sprint')),
-        ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT country FROM Countries WHERE name = 'United States'), (SELECT carrier FROM Carriers WHERE name = 'Verizon Wireless')),
-        ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT country FROM Countries WHERE name = 'United States'), (SELECT carrier FROM Carriers WHERE name = 'Verizon Wireless'));
+        ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT country_code FROM Countries WHERE name = 'United States'), (SELECT name FROM Carriers WHERE name = 'Telefonica')),
+        ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT country_code FROM Countries WHERE name = 'United States'), (SELECT name FROM Carriers WHERE name = 'AT&T')),
+        ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT country_code FROM Countries WHERE name = 'United States'), (SELECT name FROM Carriers WHERE name = 'T-Mobile')),
+        ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT country_code FROM Countries WHERE name = 'United States'), (SELECT name FROM Carriers WHERE name = 'Sprint')),
+        ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT country_code FROM Countries WHERE name = 'United States'), (SELECT name FROM Carriers WHERE name = 'Verizon Wireless')),
+        ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT country_code FROM Countries WHERE name = 'United States'), (SELECT name FROM Carriers WHERE name = 'Orange'));
+
