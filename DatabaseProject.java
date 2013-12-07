@@ -82,7 +82,7 @@ public class DatabaseProject {
           "SELECT d.name AS Device_name, m.name AS Manufacturer_Name, s.name AS Software_name, s.version AS Software_version "
 		  +"FROM Devices d "
 		  +"LEFT OUTER JOIN Manufacturers m ON d.mfctr_id = m.mfctr_id "
-		  +"LEFT OUTER JOIN Software s ON d.soft_id = s.soft_id"
+		  +"LEFT OUTER JOIN Software s ON d.soft_id = s.soft_id "
 		  +"WHERE m.name = ?";
   /**
    * Scanner object attached to the user's input (via keyboard)
@@ -332,16 +332,16 @@ public class DatabaseProject {
 	  String selection = "";
 	  do{
 		  System.out.println("******************************************************************\n"
-				   +"*                    WELCOME TO THE MAIN MENU                    *\n"
-			  	   +"******************************************************************\n"
-			  	   +"* Please make a selection from the following:                    *\n"
-			  	   +"* 1. User Account Options                                        *\n"
-			  	   +"* 2. Product Search                                              *\n"
-			  	   +"* 3. Write A Review                                              *\n"
-			  	   +"* 4. Commit Changes                                              *\n"
-			  	   +"* 5. Undo Changes                                                *\n"
-			  	   +"* 6. Exit                                                        *\n"
-			  	   +"******************************************************************\n");
+			  				+"*                    WELCOME TO THE MAIN MENU                    *\n"
+			  				+"******************************************************************\n"
+			  				+"* Please make a selection from the following:                    *\n"
+			  				+"* 1. User Account Options                                        *\n"
+			  				+"* 2. Product Search                                              *\n"
+			  				+"* 3. Write A Review                                              *\n"
+			  				+"* 4. Commit Changes                                              *\n"
+			  				+"* 5. Undo Changes                                                *\n"
+			  				+"* 6. Exit                                                        *\n"
+			  				+"******************************************************************\n");
 	  System.out.println("Selection: ");
 	  selection = userInput.nextLine();
 	  }while(!mainMenuOption(selection).equals("6"));
@@ -406,14 +406,14 @@ public class DatabaseProject {
 	  String selection = "";
 	  do{
 		  System.out.println("******************************************************************\n"
-	  			    +"*                      PRODUCT SEARCH MENU                       *\n"
-	  			    +"******************************************************************\n"
-	  			    +"* Please make a selection from the following:                    *\n"
-	  			    +"* 1. Display All Products                                        *\n"
-	  			    +"* 2. Search By Product Name                                      *\n"
-	  			    +"* 3. Search By Product Rating                                    *\n"
-	  			    +"* 4. Return To Main Menu                                         *\n"
-	  			    +"******************************************************************\n");
+	  						+"*                      PRODUCT SEARCH MENU                       *\n"
+	  						+"******************************************************************\n"
+	  						+"* Please make a selection from the following:                    *\n"
+	  						+"* 1. Display All Products                                        *\n"
+	  						+"* 2. Search By Product Name                                      *\n"
+	  						+"* 3. Search By Product Rating                                    *\n"
+	  						+"* 4. Return To Main Menu                                         *\n"
+	  						+"******************************************************************\n");
 		  System.out.println("Selection: ");
 		  selection = userInput.nextLine();
 	  }while(!productMenuOption(selection).equals("4"));
