@@ -287,6 +287,11 @@ public class DatabaseProject {
 	            System.out.println("No devices made by " + name + " were found.");
 	          } else {
 	            do {
+	            	String mfctrName = returnedDevices.getString(1);
+	                String deviceName = returnedDevices.getString(2);
+	            	String softName = returnedDevices.getString(3);
+	                String softVersion = returnedDevices.getString(4);
+	                System.out.printf("%-20s %-20s %-20s %-20s %n", mfctrName, deviceName, softName, softVersion);
 	              
 	            } while (returnedDevices.next());
 	          }	    	  
