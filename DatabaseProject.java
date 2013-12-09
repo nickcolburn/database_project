@@ -88,6 +88,28 @@ public class DatabaseProject {
 		  +"WHERE m.name = ?";
   
   /**
+   * Query to insert a user into the DB
+   */
+  private final static String SQL_INSERT_USER =
+		  "INSERT INTO Users(username, first_name, last_name) VALUES "
+		  +"(?, ?, ?)";
+  /**
+   * Query to insert a user into the DB
+   */
+  private final static String SQL_INSERT_REVIEW =
+		  "INSERT INTO Reviews(dev_id, username, rating, review) VALUES "
+          +"(?, ?, ?)";
+        
+  
+  /**
+   * Query to display all reviews in DB
+   */
+  private final static String SQL_DISPLAY_ALL_REVIEWS =
+		  "SELECT d.name, r.rating, r.username, r.review "
+		  +"FROM reviews r INNER JOIN devices d ON r.dev_id = d.dev_id "
+		  +"ORDER BY rating";
+  
+  /**
    * Scanner object attached to the user's input (via keyboard)
    */
   private Scanner userInput = new Scanner(System.in);
@@ -202,7 +224,7 @@ public class DatabaseProject {
 	      LOGGER.log(Level.SEVERE, "Unable to rollback changes to the DB due to error {0}", sqle.getMessage());
 	    }
 	  }
-
+  
   /**
    * Executes a SELECT statement on the opened connection and displays its
    * retrieved information
@@ -268,9 +290,96 @@ public class DatabaseProject {
    * like to begin reviewing.
    */
   public void addReview() {
-	  System.out.println("To leave a review, please create a username: ");
+	  try {
+	      PreparedStatement addUserQuery = connection.prepareStatement(SQL_INSERT_USER);	      
+	 
+    	  System.out.println("In order to leave a review, please create a username: ");
+    	  String username = userInput.nextLine();
+    	  while(username.equals(" ")){
+    		  System.out.println("Username is mandatory: ");
+        	  username = userInput.nextLine();
+    	  }
+    	  System.out.println("Provide your full name (this is optional): ");
+    	  String line = userInput.nextLine();
+    	  String name[] = line.split(" ");
+    	  String review = userInput.next();
+    	  addUserQuery.setString(1, username);
+    	  addUserQuery.setString(2, name[0]);
+    	  addUserQuery.setString(3, name[1]);
+    	  addUserQuery.setString(4, review);
+    	  
+    	  System.out.println("What device are you reviewing?\n"
+    			  			+"(*Note* device must exist in database): ");
+    	  String device = userInput.nextLine();
+
+          addUserQuery.executeUpdate();	
+          displayAllReviews();
+          return;
+	          
+	      }catch (SQLException sqle) {
+	      LOGGER.log(Level.SEVERE, "Unable to process result due to error {0}", sqle.getMessage());
+	      }
 	  
   }
+  
+  /**
+   * 
+   */
+  public void displayAllReviews()  {
+	  try {
+	      //  use the Connection object here 
+	      Statement stmt = connection.createStatement();
+	      try {
+	        ResultSet rs = stmt.executeQuery(SQL_DISPLAY_ALL_REVIEWS);
+	        try {
+	        	String userName = "Username";
+	        	String rating = "Rating (0-5)";
+	        	String deviceName = "Device Name";
+	        	String review = "Review";
+	        	System.out.printf("%n%-20s %-20s %-20s %-100s %n",deviceName,rating,userName,review);
+	        	while (rs.next()) {
+	        	  displayOneReview(rs);
+	          }
+	        } finally {
+	          try {
+	            rs.close();
+	          } catch (Throwable ignore) {
+	            LOGGER.log(Level.SEVERE, "Unable to close result set due to error {0}", ignore.getMessage());
+	          }
+	        }
+
+	      } finally {
+	        //It's important to close the statement when you are done with it
+	        try {
+	          stmt.close();
+	        } catch (Throwable ignore) {
+	          LOGGER.log(Level.SEVERE, "Unable to close statement due to error {0}", ignore.getMessage());
+	        }
+	      }
+	    } catch (SQLException sqle) {
+	      LOGGER.log(Level.SEVERE, "Unable to execute DB statement due to error {0}", sqle.getMessage());
+	    }
+  }
+  
+  /**
+   * 
+   * @param rs
+   */
+  private void displayOneReview(ResultSet rs) {
+	    try {
+	      // Note the two different ways in which to retrieve the value of a column
+	      // Either by specifying the column number or by specifying the column name	    	
+        	String deviceName = rs.getString(1);
+        	float rating = rs.getFloat(2);
+        	String userName = rs.getString(3);
+        	String review = rs.getString(4);
+        	System.out.printf("%-20s %-20.1f %-20s %-100s %n",deviceName,rating,userName,review);
+        	
+	    } catch (SQLException sqle) {
+	      LOGGER.log(Level.SEVERE, "Unable to process result due to error {0}", sqle.getMessage());
+	    }
+	  }
+  
   
   /**
    * Asks user for the name of the device manufacturer they wish to search for.
@@ -289,7 +398,8 @@ public class DatabaseProject {
 	          ResultSet returnedDevices = preparedQuery.executeQuery();
 	          if (!returnedDevices.next()) {
 	            System.out.println("No devices made by " + name + " were found.");
-	          } else {
+	          } 
+	          else {
 	            do {
 	            	String mfctrName = returnedDevices.getString(1);
 	                String deviceName = returnedDevices.getString(2);
@@ -304,9 +414,9 @@ public class DatabaseProject {
 	          userResponse = userInput.nextLine();
 	        } while (isResponseYes(userResponse));
 	      return;
-	  }catch (SQLException sqle) {
+	      }catch (SQLException sqle) {
 	      LOGGER.log(Level.SEVERE, "Unable to process result due to error {0}", sqle.getMessage());
-	    }
+	      }
   }
 
   /**
@@ -421,7 +531,7 @@ public class DatabaseProject {
 	  						+"* Please make a selection from the following:                    *\n"
 	  						+"* 1. Display All Products                                        *\n"
 	  						+"* 2. Search By Product Name                                      *\n"
-	  						+"* 3. Search By Product Rating                                    *\n"
+	  						+"* 3. Display All Reviews                                         *\n"
 	  						+"* 4. Return To Main Menu                                         *\n"
 	  						+"******************************************************************\n");
 		  System.out.println("Selection: ");
@@ -444,7 +554,8 @@ public class DatabaseProject {
 		  		break;
 		  	}
 		  	case "3":{
-		  		
+		  		displayAllReviews();
+		  		break;
 		  	}
 		  	case "4":{
 		  		return(opt2);
