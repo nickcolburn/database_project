@@ -66,12 +66,16 @@ public class DatabaseProject {
    /**
     * JDBC Connection URL for the tech_review database (local instance), using the MySQL driver
     */
-    private final static String DB_URL = "jdbc:mysql://127.0.0.1:3306/cecs323";
+    //private final static String DB_URL = "jdbc:mysql://127.0.0.1:3306/cecs323";
+    /**
+     * JDBC Connection URL for the tech_review database on infoserver, using the MySQL driver
+     */
+     private final static String DB_URL = "jdbc:mysql://infoserver:3306/cecs323m8";
   /**
-   * Query to retrieve all loans including the owner of each loan in ascending order of sale price
+   * Query to retrieve all devices and 
    */
   private final static String SQL_FIND_ALL_DEVICES =
-          "SELECT r.name AS Retailer_Name, d.name AS Device_Name ,d.model_number AS Device_Model, d.listed_price AS Listed_Price,s.sale_price AS Sale_Price "
+          "SELECT d.dev_id, r.name AS Retailer_Name, d.name AS Device_Name ,d.listed_price AS Listed_Price,s.sale_price AS Sale_Price "
 		  + "FROM Sales s "
 		  + "LEFT OUTER JOIN Retailers r on s.retailer_id = r.retailer_id "
 		  + "LEFT OUTER JOIN Devices d ON d.dev_id = s.dev_id "
@@ -275,9 +279,9 @@ public class DatabaseProject {
     try {
       // Note the two different ways in which to retrieve the value of a column
       // Either by specifying the column number or by specifying the column name
-      String retailerName = rs.getString(1);
-      String deviceName = rs.getString(2);
-      System.out.printf("%-20s %-20s $%-15.2f $%-15.2f %n", retailerName, deviceName, rs.getFloat("listed_price"), rs.getFloat("sale_price"));
+      String retailerName = rs.getString("Retailer_Name");
+      String deviceName = rs.getString("Device_Name");
+      System.out.printf("%-20s %-20s $%-15.2f $%-15.2f %n", retailerName, deviceName, rs.getFloat("Listed_Price"), rs.getFloat("Sale_Price"));
 
     } catch (SQLException sqle) {
       LOGGER.log(Level.SEVERE, "Unable to process result due to error {0}", sqle.getMessage());
@@ -302,24 +306,22 @@ public class DatabaseProject {
     	  System.out.println("Provide your full name (this is optional): ");
     	  String line = userInput.nextLine();
     	  String name[] = line.split(" ");
-    	  String review = userInput.next();
     	  addUserQuery.setString(1, username);
     	  addUserQuery.setString(2, name[0]);
     	  addUserQuery.setString(3, name[1]);
-    	  addUserQuery.setString(4, review);
-    	  
-    	  System.out.println("What device are you reviewing?\n"
-    			  			+"(*Note* device must exist in database): ");
-    	  String device = userInput.nextLine();
-
-          addUserQuery.executeUpdate();	
-          displayAllReviews();
-          return;
-	          
-	      }catch (SQLException sqle) {
-	      LOGGER.log(Level.SEVERE, "Unable to process result due to error {0}", sqle.getMessage());
-	      }
-	  
+    	  addUserQuery.executeUpdate();
+    	  System.out.println("\n******************************************************************\n"
+					+"*                           REVIEW MENU                          *\n"
+					+"******************************************************************\n"
+					+"* Please choose a device to review:                              *\n");    	  
+    	  displayAllDevices();
+    	  System.out.println("******************************************************************\n"
+    			  	+"\nSelection: ");
+		  String selection = userInput.nextLine();
+		
+	  } catch (SQLException sqle) {
+          LOGGER.log(Level.SEVERE, "Unable to execute DB statement due to error {0}", sqle.getMessage());
+      }
   }
   
   /**
