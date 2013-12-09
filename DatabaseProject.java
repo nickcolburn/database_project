@@ -68,13 +68,15 @@ public class DatabaseProject {
     */
     private final static String DB_URL = "jdbc:mysql://127.0.0.1:3306/cecs323";
   /**
-   * Query to retrieve all loans including the owner of each loan
+   * Query to retrieve all loans including the owner of each loan in ascending order of sale price
    */
   private final static String SQL_FIND_ALL_DEVICES =
           "SELECT r.name AS Retailer_Name, d.name AS Device_Name ,d.model_number AS Device_Model, d.listed_price AS Listed_Price,s.sale_price AS Sale_Price "
 		  + "FROM Sales s "
 		  + "LEFT OUTER JOIN Retailers r on s.retailer_id = r.retailer_id "
-		  + "LEFT OUTER JOIN Devices d ON d.dev_id = s.dev_id";
+		  + "LEFT OUTER JOIN Devices d ON d.dev_id = s.dev_id "
+		  + "GROUP BY s.sale_price";
+
   /**
    * Query to retrieve the loans (number and amount) of a specified customer
    */
@@ -84,6 +86,7 @@ public class DatabaseProject {
 		  +"LEFT OUTER JOIN Manufacturers m ON d.mfctr_id = m.mfctr_id "
 		  +"LEFT OUTER JOIN Software s ON d.soft_id = s.soft_id "
 		  +"WHERE m.name = ?";
+  
   /**
    * Scanner object attached to the user's input (via keyboard)
    */
@@ -265,6 +268,7 @@ public class DatabaseProject {
    * like to begin reviewing.
    */
   public void addReview() {
+	  System.out.println("To leave a review, please create a username: ");
 	  
   }
   
@@ -329,14 +333,14 @@ public class DatabaseProject {
   public static void displayInstructions() {
     System.out.println("Tech Review Java Application\n\n");
     System.out.println("This application requires that you have the tech review relational database.\n"
-            + "As a user, you will see a menu with a variety of options pertaining to your curiosities\n"
-    		+ "about the most recent smartphones on the market.\n");
+            + "As a user, you will interact with a menu having a variety of options pertaining to\n"
+    		+ "your curiosities about the most recent smartphones on the market.\n");
   }
   
   public void displayMainMenu() {
 	  String selection = "";
 	  do{
-		  System.out.println("******************************************************************\n"
+		  System.out.println("\n******************************************************************\n"
 			  				+"*                    WELCOME TO THE MAIN MENU                    *\n"
 			  				+"******************************************************************\n"
 			  				+"* Please make a selection from the following:                    *\n"
@@ -366,7 +370,8 @@ public class DatabaseProject {
 		  		break;
 		  	}
 		  	case "3":{
-		  		
+		  		addReview();
+		  		break;
 		  	}
 		  	case "4":{
 		  		System.out.println("Are you sure you want to commit these changes (y/n)?:");
@@ -410,7 +415,7 @@ public class DatabaseProject {
   public void productSearchMenu(){
 	  String selection = "";
 	  do{
-		  System.out.println("******************************************************************\n"
+		  System.out.println("\n******************************************************************\n"
 	  						+"*                      PRODUCT SEARCH MENU                       *\n"
 	  						+"******************************************************************\n"
 	  						+"* Please make a selection from the following:                    *\n"
@@ -442,7 +447,7 @@ public class DatabaseProject {
 		  		
 		  	}
 		  	case "4":{
-		  		break;
+		  		return(opt2);
 		  	}
 		  	default: {
 	  			System.out.println("\n" + opt2 + " is an invalid option.\n"
