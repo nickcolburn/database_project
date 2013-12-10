@@ -31,17 +31,24 @@ INSERT INTO Components(name, comp_type) VALUES
 	('8 MP', 'Rear Camera'), -- comp_id = 4 (iPhone 5s, )
 	('2 Megapixels', 'Front Camera'), -- comp_id = 5 (Galaxy S4,)
 	('1.2 MP', 'Front Camera'), -- comp_id = 6 (iPhone 5s, )
+	('1.3 MP', 'Front Camera'), -- comp_id = 7 (Nexus 5)
         
         -- specific components for Galaxy S4
-        ('2600 mAh', 'Battery'), -- comp_id = 7
-        ('HD Super AMOLED', 'Display'), -- comp_id = 8
-	('Qualcomm Snapdragon 600', 'Processor'), -- comp_id = 9
+        ('2600 mAh', 'Battery'), -- comp_id = 8
+        ('HD Super AMOLED', 'Display'), -- comp_id = 9
+	('Qualcomm Snapdragon 600', 'Processor'), -- comp_id = 10
 
 	-- components for the iPhone 5s
-	('A7', 'Processor'), -- comp_id = 10
-	('Retina Display', 'Display'), -- comp_id = 11
-	('Touch ID', 'Fingerprint Sensor'), -- comp_id = 12
-	('1560 mAh', 'Battery'); -- comp_id = 13
+	('A7', 'Processor'), -- comp_id = 11
+	('Retina Display', 'Display'), -- comp_id = 12
+	('Touch ID', 'Fingerprint Sensor'), -- comp_id = 13
+	('1560 mAh', 'Battery'), -- comp_id = 14
+	
+	-- specific components for the Nexus 5
+	('Full HD IPS+', 'Display'), -- comp_id = 15
+	('2300 mAh', 'Battery'); -- comp_id = 16
+		
+	
 	
 	
 
@@ -96,18 +103,27 @@ INSERT INTO Software(name, version) VALUES
 INSERT INTO Devices(name, model_number, listed_price, mfctr_id, soft_id, release_date, weight, height, length, width) VALUES
         -- dev_id = 1, USA Model
         ('Galaxy S4', 'SCH-I545', 599.99, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=1) , (SELECT soft_id FROM Software WHERE soft_id=3),'2013-04-26', 4.6,  136.7, 69.6, 7.9),
+        
         -- dev_id = 2, International Model
         ('Galaxy S4', 'GT-I9500', 545.00, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=1) , (SELECT soft_id FROM Software WHERE soft_id=2),'2012-05-01', 4.6,  136.6, 69.8, 7.9),
+        
         -- dev_id = 3
-        ('DROID MAXX', 'XT1080', 499.00, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=3) , (SELECT soft_id FROM Software WHERE soft_id=2),'2013-07-23', 4.48, 130.7, 68.9, 7.1),
-        -- dev_id = 4
         ('Nexus 5 (16GB)', 'LG-D820', 349.00, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=4) , (SELECT soft_id FROM Software WHERE soft_id=3),'2013-10-31', 4.59, 137.9, 69.2, 8.6),
+        
+        -- dev_id = 4
+        ('Nexus 5 (32GB)', 'LG-D820', 399.00, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=4) , (SELECT soft_id FROM Software WHERE soft_id=3),'2013-10-31', 4.59, 137.9, 69.2, 8.6),
+        
         -- dev_id = 5
         ('iPhone 5s (16GB)', 'A1533', 649.99, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=2) , (SELECT soft_id FROM Software WHERE soft_id=4),'2013-09-20', 3.95, 123.8, 58.6, 7.6),
+        
         -- dev_id = 6
         ('iPhone 5s (32GB)', 'A1533', 749.99, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=2) , (SELECT soft_id FROM Software WHERE soft_id=4),'2013-09-20', 3.95, 123.8, 58.6, 7.6),
+        
         -- dev_id = 7
-        ('iPhone 5s (64GB)', 'A1533', 849.99, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=2) , (SELECT soft_id FROM Software WHERE soft_id=4),'2013-09-20', 3.95, 123.8, 58.6, 7.6);
+        ('iPhone 5s (64GB)', 'A1533', 849.99, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=2) , (SELECT soft_id FROM Software WHERE soft_id=4),'2013-09-20', 3.95, 123.8, 58.6, 7.6)
+        
+	-- dev_id = 8
+        ('DROID MAXX', 'XT1080', 499.00, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=3) , (SELECT soft_id FROM Software WHERE soft_id=2),'2013-07-23', 4.48, 130.7, 68.9, 7.1),;
 
 INSERT INTO Sales(dev_id, retailer_id, sale_price) VALUES
         ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT retailer_id FROM Retailers WHERE name='Amazon'),          199.99),
@@ -115,7 +131,7 @@ INSERT INTO Sales(dev_id, retailer_id, sale_price) VALUES
         ((SELECT dev_id FROM Devices WHERE dev_id=3), (SELECT retailer_id FROM Retailers WHERE name='Best Buy'),        149.99),
         ((SELECT dev_id FROM Devices WHERE dev_id=4), (SELECT retailer_id FROM Retailers WHERE name='Best Buy'),        49.99),
         ((SELECT dev_id FROM Devices WHERE dev_id=5), (SELECT retailer_id FROM Retailers WHERE name='Best Buy'),        299.99),    
-		((SELECT dev_id FROM Devices WHERE dev_id=5), (SELECT retailer_id FROM Retailers WHERE name='Best Buy'),        249.99);                      
+	((SELECT dev_id FROM Devices WHERE dev_id=5), (SELECT retailer_id FROM Retailers WHERE name='Best Buy'),        249.99);                      
 
 INSERT INTO Users(username, first_name, last_name) VALUES
         ('George91340',        'George', 'Gutierrez'),
