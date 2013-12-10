@@ -66,11 +66,11 @@ public class DatabaseProject {
    /**
     * JDBC Connection URL for the tech_review database (local instance), using the MySQL driver
     */
-    private final static String DB_URL = "jdbc:mysql://127.0.0.1:3306/cecs323";
+    //private final static String DB_URL = "jdbc:mysql://127.0.0.1:3306/cecs323";
     /**
      * JDBC Connection URL for the tech_review database on infoserver, using the MySQL driver
      */
-     //private final static String DB_URL = "jdbc:mysql://infoserver:3306/cecs323m8";
+     private final static String DB_URL = "jdbc:mysql://infoserver:3306/cecs323m8";
   /**
    * Query to retrieve all devices and 
    */
@@ -79,7 +79,8 @@ public class DatabaseProject {
 		  + "FROM Sales s "
 		  + "LEFT OUTER JOIN Retailers r on s.retailer_id = r.retailer_id "
 		  + "LEFT OUTER JOIN Devices d ON d.dev_id = s.dev_id "
-		  + "GROUP BY s.sale_price";
+		  //+"GROUP BY s.sales_price";
+		  + "GROUP BY d.dev_id";
 
   /**
    * Query to retrieve the loans (number and amount) of a specified customer
@@ -110,7 +111,7 @@ public class DatabaseProject {
    */
   private final static String SQL_DISPLAY_ALL_REVIEWS =
 		  "SELECT d.name, r.rating, r.username, r.review "
-		  +"FROM reviews r INNER JOIN devices d ON r.dev_id = d.dev_id "
+		  +"FROM Reviews r INNER JOIN Devices d ON r.dev_id = d.dev_id "
 		  +"ORDER BY rating";
   
   /**
@@ -245,6 +246,7 @@ public class DatabaseProject {
         	String lPrice = "Listed Price";
         	String sPrice = "Sale Price";
         	System.out.printf("%-20s %-20s %-15s %-15s %n",retailerName,deviceName,lPrice,sPrice);
+        	System.out.println("-------------        -----------          ------------    ----------");
         	while (rs.next()) {
         	  displayOneDevice(rs);
           }
@@ -295,16 +297,17 @@ public class DatabaseProject {
    */
   public void addReview() {
 	  try {
+		  userInput.nextLine();
 	      PreparedStatement addUserQuery = connection.prepareStatement(SQL_INSERT_USER);	      
 	 
 	      System.out.println("\n******************************************************************\n"
-					+"*                           REVIEW MENU                          *\n"
+					+"*                         PRODUCT REVIEW                         *\n"
 					+"******************************************************************\n"
 					+"* Provide the following information                              *\n");
 	      System.out.print("username: ");
     	  String username = userInput.nextLine();
-    	  while(username.equals(" ")){
-    		  System.out.println("Username is mandatory: ");
+    	  while(username.equals(" ") || username.length() > 20){
+    		  System.out.print("\nMust enter a username (max 20 char): ");
         	  username = userInput.nextLine();
     	  }
     	  System.out.print("\nFull name (optional): ");
@@ -316,8 +319,10 @@ public class DatabaseProject {
     	  addUserQuery.executeUpdate();   
     	  
     	  displayAllDevices();
+    	  
     	  System.out.print("\nSelection: ");
 		  int selection = userInput.nextInt();
+		  userInput.nextLine();
 		  System.out.print("\nWrite your review: ");
 		  String review = userInput.nextLine();
 		  System.out.print("\nHow would you rate this product? (0-5): ");
@@ -328,7 +333,9 @@ public class DatabaseProject {
 		  addReview.setString(2, username);
 		  addReview.setFloat(3, rating);
 		  addReview.setString(4, review);
+		  System.out.print("\nAdding your review to the database...");
 		  addReview.executeUpdate();
+		  System.out.print("Thank you for your feedback.\n");
 		  return;
 		
 	  } catch (SQLException sqle) {
@@ -351,6 +358,7 @@ public class DatabaseProject {
 	        	String deviceName = "Device Name";
 	        	String review = "Review";
 	        	System.out.printf("%n%-20s %-20s %-20s %-100s %n",deviceName,rating,userName,review);
+	        	System.out.println("-----------          ------------         --------             ------");
 	        	while (rs.next()) {
 	        	  displayOneReview(rs);
 	          }
@@ -467,9 +475,9 @@ public class DatabaseProject {
 			  				+"*                    WELCOME TO THE MAIN MENU                    *\n"
 			  				+"******************************************************************\n"
 			  				+"* Please make a selection from the following:                    *\n"
-			  				+"* 1. Search Options                                              *\n"
-			  				+"* 2. View Options                                                *\n"
-			  				+"* 3. Write A Review                                              *\n"
+			  				+"* 1. View Products                                               *\n"
+			  				+"* 2. Write A Review                                              *\n"
+			  				+"* 3. Delete User                                                 *\n"
 			  				+"* 4. Commit Changes                                              *\n"
 			  				+"* 5. Undo Changes                                                *\n"
 			  				+"* 6. Exit                                                        *\n"
@@ -493,13 +501,14 @@ public class DatabaseProject {
 		  		break;
 		  	}
 		  	case 2:{
-		  		//viewProducts();
-		  	}
-		  	case 3:{
 		  		addReview();
 		  		break;
 		  	}
+		  	case 3:{
+		  		//deleteUser();
+		  	}
 		  	case 4:{
+		  		userInput.nextLine();
 		  		System.out.println("Are you sure you want to commit these changes (y/n)?:");
 		  		if(isResponseYes(userInput.nextLine()) == true){
 		  			System.out.print("Committing changes to the database...");
@@ -509,6 +518,7 @@ public class DatabaseProject {
 		  		}
 		  	}
 		  	case 5:{
+		  		userInput.nextLine();
 		  		System.out.println("Are you sure you want to rollback these changes (y/n)?:");
 		  		if(isResponseYes(userInput.nextLine()) == true){
 		  			System.out.print("Rolling back changes to the database...");
@@ -518,6 +528,7 @@ public class DatabaseProject {
 		  		}		  		
 		  	}
 		  	case 6:{
+		  		userInput.nextLine();
 		  		System.out.println("Do you want to commit the last changes made (y/n)?:");
 		  		if(isResponseYes(userInput.nextLine()) == true){
 		  			System.out.print("Committing changes to the database...");
@@ -546,7 +557,7 @@ public class DatabaseProject {
 	  						+"******************************************************************\n"
 	  						+"* Please make a selection from the following:                    *\n"
 	  						+"* 1. Display All Products                                        *\n"
-	  						+"* 2. Search By Product Name                                      *\n"
+	  						+"* 2. Compare Products                                            *\n"
 	  						+"* 3. Display All Reviews                                         *\n"
 	  						+"* 4. Return To Main Menu                                         *\n"
 	  						+"******************************************************************\n");
