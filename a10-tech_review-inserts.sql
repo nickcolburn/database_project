@@ -93,21 +93,21 @@ INSERT INTO Software(name, version) VALUES
         ('iOS', '7.0'), -- soft_id = 4
         ('iOS', '6.0'); -- soft_id = 5
 
-INSERT INTO Devices(name, model_number, listed_price, mfctr_id, soft_id, release_date, weight, height, width, depth) VALUES
-        -- dev_id = 1
-        ('Galaxy S4',           'GT-I9505',     637.99, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=1) , (SELECT soft_id FROM Software WHERE soft_id=3),'2013-04-26', 4.6,  136.6, 69.8, 7.9),
-        -- dev_id = 2
-        ('Galaxy S3',           'I9300',        569.99, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=1) , (SELECT soft_id FROM Software WHERE soft_id=2),'2012-05-01', 4.6,  136.6, 70.6, 8.6),
+INSERT INTO Devices(name, model_number, listed_price, mfctr_id, soft_id, release_date, weight, height, length, width) VALUES
+        -- dev_id = 1, USA Model
+        ('Galaxy S4', 'SCH-I545', 599.99, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=1) , (SELECT soft_id FROM Software WHERE soft_id=3),'2013-04-26', 4.6,  136.7, 69.6, 7.9),
+        -- dev_id = 2, International Model
+        ('Galaxy S4', 'GT-I9500', 545.00, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=1) , (SELECT soft_id FROM Software WHERE soft_id=2),'2012-05-01', 4.6,  136.6, 69.8, 7.9),
         -- dev_id = 3
-        ('DROID MAXX',          'XT1080',       499.00, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=3) , (SELECT soft_id FROM Software WHERE soft_id=2),'2013-07-23', 4.48, 130.7, 68.9, 7.1),
+        ('DROID MAXX', 'XT1080', 499.00, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=3) , (SELECT soft_id FROM Software WHERE soft_id=2),'2013-07-23', 4.48, 130.7, 68.9, 7.1),
         -- dev_id = 4
-        ('Nexus 5 (16GB)',      'LG-D820',      349.00, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=4) , (SELECT soft_id FROM Software WHERE soft_id=3),'2013-10-31', 4.59, 137.9, 69.2, 8.6),
+        ('Nexus 5 (16GB)', 'LG-D820', 349.00, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=4) , (SELECT soft_id FROM Software WHERE soft_id=3),'2013-10-31', 4.59, 137.9, 69.2, 8.6),
         -- dev_id = 5
-        ('iPhone 5S (16GB)',     'A1533',       649.99, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=2) , (SELECT soft_id FROM Software WHERE soft_id=4),'2013-09-20', 3.95, 123.8, 58.6, 7.6),
+        ('iPhone 5s (16GB)', 'A1533', 649.99, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=2) , (SELECT soft_id FROM Software WHERE soft_id=4),'2013-09-20', 3.95, 123.8, 58.6, 7.6),
         -- dev_id = 6
-        ('iPhone 5S (32GB)',     'A1533',       749.99, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=2) , (SELECT soft_id FROM Software WHERE soft_id=4),'2013-09-20', 3.95, 123.8, 58.6, 7.6),
+        ('iPhone 5s (32GB)', 'A1533', 749.99, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=2) , (SELECT soft_id FROM Software WHERE soft_id=4),'2013-09-20', 3.95, 123.8, 58.6, 7.6),
         -- dev_id = 7
-        ('iPhone 5S (64GB)',     'A1533',       849.99, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=2) , (SELECT soft_id FROM Software WHERE soft_id=4),'2013-09-20', 3.95, 123.8, 58.6, 7.6);
+        ('iPhone 5s (64GB)', 'A1533', 849.99, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=2) , (SELECT soft_id FROM Software WHERE soft_id=4),'2013-09-20', 3.95, 123.8, 58.6, 7.6);
 
 INSERT INTO Sales(dev_id, retailer_id, sale_price) VALUES
         ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT retailer_id FROM Retailers WHERE name='Amazon'),          199.99),
