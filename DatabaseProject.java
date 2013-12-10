@@ -99,12 +99,17 @@ public class DatabaseProject {
 		  "INSERT INTO Users(username, first_name, last_name) VALUES "
 		  +"(?, ?, ?)";
   /**
+   * Query to delete a user from the DB
+   */
+  private final static String SQL_DELETE_USER =
+		  "DELETE FROM Users(username, first_name, last_name) VALUES "
+		  +"(?, ?, ?)";
+  /**
    * Query to insert a user into the DB
    */
   private final static String SQL_INSERT_REVIEW =
 		  "INSERT INTO Reviews(dev_id, username, rating, review) VALUES "
-          +"(?, ?, ?, ?)";
-        
+          +"(?, ?, ?, ?)";        
   
   /**
    * Query to display all reviews in DB
