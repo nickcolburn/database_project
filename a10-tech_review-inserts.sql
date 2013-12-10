@@ -30,7 +30,7 @@ INSERT INTO Components(name, comp_type) VALUES
 	('13 MP', 'Rear Camera'), -- comp_id = 3 (Galaxy S4,)
 	('8 MP', 'Rear Camera'), -- comp_id = 4 (iPhone 5s, )
 	('2 Megapixels', 'Front Camera'), -- comp_id = 5 (Galaxy S4,)
-	('1.2 MP' 'Front Camera'), -- comp_id = 6 (iPhone 5s, )
+	('1.2 MP', 'Front Camera'), -- comp_id = 6 (iPhone 5s, )
         
         -- specific components for Galaxy S4
         ('2600 mAh', 'Battery'), -- comp_id = 7
@@ -166,33 +166,33 @@ INSERT INTO Radio_spectrum(carrier_name, radio_spectrum) VALUES
 
 INSERT INTO Internals(dev_id, comp_id) VALUES
 	-- the following internals are for the Samsung Galaxy S4
-	((SELECT name FROM Devices WHERE dev_id = '1'),(SELECT name FROM Components WHERE comp_id = '1')),
-	((SELECT name FROM Devices WHERE dev_id = '1'),(SELECT name FROM Components WHERE comp_id = '3')), 
-	((SELECT name FROM Devices WHERE dev_id = '1'),(SELECT name FROM Components WHERE comp_id = '5')), 
-	((SELECT name FROM Devices WHERE dev_id = '1'),(SELECT name FROM Components WHERE comp_id = '7')), 
-	((SELECT name FROM Devices WHERE dev_id = '1'),(SELECT name FROM Components WHERE comp_id = '8')),
-	((SELECT name FROM Devices WHERE dev_id = '1'),(SELECT name FROM Components WHERE comp_id = '9')),
+	((SELECT dev_id FROM Devices WHERE dev_id = 1), (SELECT comp_id FROM Components WHERE comp_id = 1)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 1), (SELECT comp_id FROM Components WHERE comp_id = 3)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 1), (SELECT comp_id FROM Components WHERE comp_id = 5)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 1), (SELECT comp_id FROM Components WHERE comp_id = 7)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 1), (SELECT comp_id FROM Components WHERE comp_id = 8)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 1), (SELECT comp_id FROM Components WHERE comp_id = 9)),
 	-- the following internals are for the iPhone 5s (16 GB)
-	((SELECT name FROM Devices WHERE dev_id = '5'),(SELECT name FROM Components WHERE comp_id = '2')),
-	((SELECT name FROM Devices WHERE dev_id = '5'),(SELECT name FROM Components WHERE comp_id = '4')), 
-	((SELECT name FROM Devices WHERE dev_id = '5'),(SELECT name FROM Components WHERE comp_id = '6')), 
-	((SELECT name FROM Devices WHERE dev_id = '5'),(SELECT name FROM Components WHERE comp_id = '10')), 
-	((SELECT name FROM Devices WHERE dev_id = '5'),(SELECT name FROM Components WHERE comp_id = '11')),
-	((SELECT name FROM Devices WHERE dev_id = '5'),(SELECT name FROM Components WHERE comp_id = '12')),
-	((SELECT name FROM Devices WHERE dev_id = '5'),(SELECT name FROM Components WHERE comp_id = '13')),
+	((SELECT dev_id FROM Devices WHERE dev_id = 5), (SELECT comp_id FROM Components WHERE comp_id = 2)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 5), (SELECT comp_id FROM Components WHERE comp_id = 4)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 5), (SELECT comp_id FROM Components WHERE comp_id = 6)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 5), (SELECT comp_id FROM Components WHERE comp_id = 10)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 5), (SELECT comp_id FROM Components WHERE comp_id = 11)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 5), (SELECT comp_id FROM Components WHERE comp_id = 12)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 5), (SELECT comp_id FROM Components WHERE comp_id = 13)),
 	-- the following internals are for the iPhone 5s (32 GB)
-	((SELECT name FROM Devices WHERE dev_id = '6'),(SELECT name FROM Components WHERE comp_id = '2')),
-	((SELECT name FROM Devices WHERE dev_id = '6'),(SELECT name FROM Components WHERE comp_id = '4')), 
-	((SELECT name FROM Devices WHERE dev_id = '6'),(SELECT name FROM Components WHERE comp_id = '6')), 
-	((SELECT name FROM Devices WHERE dev_id = '6'),(SELECT name FROM Components WHERE comp_id = '10')), 
-	((SELECT name FROM Devices WHERE dev_id = '6'),(SELECT name FROM Components WHERE comp_id = '11')),
-	((SELECT name FROM Devices WHERE dev_id = '6'),(SELECT name FROM Components WHERE comp_id = '12')),
-	((SELECT name FROM Devices WHERE dev_id = '6'),(SELECT name FROM Components WHERE comp_id = '13')),
+	((SELECT dev_id FROM Devices WHERE dev_id = 6), (SELECT comp_id FROM Components WHERE comp_id = 2)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 6), (SELECT comp_id FROM Components WHERE comp_id = 4)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 6), (SELECT comp_id FROM Components WHERE comp_id = 6)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 6), (SELECT comp_id FROM Components WHERE comp_id = 10)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 6), (SELECT comp_id FROM Components WHERE comp_id = 11)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 6), (SELECT comp_id FROM Components WHERE comp_id = 12)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 6), (SELECT comp_id FROM Components WHERE comp_id = 13)),
 	-- the following internals are for the iPhone 5s (64 GB)
-	((SELECT name FROM Devices WHERE dev_id = '7'),(SELECT name FROM Components WHERE comp_id = '2')),
-	((SELECT name FROM Devices WHERE dev_id = '7'),(SELECT name FROM Components WHERE comp_id = '4')), 
-	((SELECT name FROM Devices WHERE dev_id = '7'),(SELECT name FROM Components WHERE comp_id = '6')), 
-	((SELECT name FROM Devices WHERE dev_id = '7'),(SELECT name FROM Components WHERE comp_id = '10')), 
-	((SELECT name FROM Devices WHERE dev_id = '7'),(SELECT name FROM Components WHERE comp_id = '11')),
-	((SELECT name FROM Devices WHERE dev_id = '7'),(SELECT name FROM Components WHERE comp_id = '12')),
-	((SELECT name FROM Devices WHERE dev_id = '7'),(SELECT name FROM Components WHERE comp_id = '13'));
+	((SELECT dev_id FROM Devices WHERE dev_id = 7), (SELECT comp_id FROM Components WHERE comp_id = 2)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 7), (SELECT comp_id FROM Components WHERE comp_id = 4)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 7), (SELECT comp_id FROM Components WHERE comp_id = 6)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 7), (SELECT comp_id FROM Components WHERE comp_id = 10)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 7), (SELECT comp_id FROM Components WHERE comp_id = 11)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 7), (SELECT comp_id FROM Components WHERE comp_id = 12)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 7), (SELECT comp_id FROM Components WHERE comp_id = 13));
