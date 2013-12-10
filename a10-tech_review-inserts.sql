@@ -62,7 +62,7 @@ INSERT INTO Carriers(name, country_code) VALUES
         ('Virgin Mobile', 'USA'),
         ('Rogers Wireless', 'CAN'),
         ('Telus Mobility', 'USA'),
-        ('Bell Wireless', 'CAN'),
+        ('Bell Mobility', 'CAN'),
         ('America Movil', 'MEX'),
         ('Vivo', 'BRA'),
         ('Orange', 'MEX'),
@@ -119,3 +119,25 @@ INSERT INTO Supports(dev_id, country, carrier) VALUES
         ((SELECT dev_id FROM Devices WHERE dev_id=4), (SELECT country_code FROM Countries WHERE name = 'United States'), (SELECT name FROM Carriers WHERE name = 'Sprint')),
         ((SELECT dev_id FROM Devices WHERE dev_id=5), (SELECT country_code FROM Countries WHERE name = 'United States'), (SELECT name FROM Carriers WHERE name = 'Verizon Wireless')),
         ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT country_code FROM Countries WHERE name = 'United States'), (SELECT name FROM Carriers WHERE name = 'Orange'));
+    
+INSERT INTO Radio_spectrum(carrier_name, radio_spectrum) VALUE
+	((SELECT name FROM Devices WHERE name = 'Verizon'), 'CDMA'),
+	((SELECT name FROM Devices WHERE name = 'AT&T'), 'GSM'),
+	((SELECT name FROM Devices WHERE name = 'T-Mobile'), 'GSM'),
+	((SELECT name FROM Devices WHERE name = 'Sprint'), 'CDMA'),
+	((SELECT name FROM Devices WHERE name = 'Virgin Mobile'), 'CDMA'),
+	((SELECT name FROM Devices WHERE name = 'Rogers Wireless'), 'GSM'),
+	((SELECT name FROM Devices WHERE name = 'Telus Mobility'), 'CDMA'),
+	((SELECT name FROM Devices WHERE name = 'Telus Mobility'), 'HSPA+'),
+	((SELECT name FROM Devices WHERE name = 'Bell Mobility'), 'CDMA'),
+	((SELECT name FROM Devices WHERE name = 'Bell Mobility'), 'HSPA+'),
+	((SELECT name FROM Devices WHERE name = 'America Movil'), 'CDMA'),
+	((SELECT name FROM Devices WHERE name = 'America Movil'), 'HSPA+'),
+	((SELECT name FROM Devices WHERE name = 'Vivo'), 'CDMA'),
+	((SELECT name FROM Devices WHERE name = 'Vivo'), 'GSM'),
+	((SELECT name FROM Devices WHERE name = 'Vivo'), 'HSPA+'),
+	((SELECT name FROM Devices WHERE name = 'Orange'), 'GSM'),
+	((SELECT name FROM Devices WHERE name = 'MTS'), 'GSM'), -- RUSSIA
+	((SELECT name FROM Devices WHERE name = 'BSNL'), 'GSM'), -- INDIA
+	
+	;
