@@ -88,8 +88,8 @@ CREATE TABLE Devices
         weight                 DECIMAL(3,2),         -- assumption: weight given is in ounces
         release_date         DATE,
         height                 DECIMAL(5,1),         -- assumption: values are in millimeters
-        width                 DECIMAL(3,1),         -- assumption: values are in millimeters
-        depth                 DECIMAL(3,1),        -- assumption: values are in millimeters
+        length                 DECIMAL(3,1),         -- assumption: values are in millimeters
+        width                 DECIMAL(3,1),        -- assumption: values are in millimeters
         CONSTRAINT devices_pk PRIMARY KEY(dev_id), -- dev_id is a surrogate key
         CONSTRAINT devices_mfctr_fk FOREIGN KEY(mfctr_id) REFERENCES Manufacturers(mfctr_id) ON UPDATE CASCADE ON DELETE RESTRICT,
         CONSTRAINT devices_software_fk FOREIGN KEY(soft_id) REFERENCES Software(soft_id) ON UPDATE CASCADE ON DELETE RESTRICT,
