@@ -138,6 +138,4 @@ INSERT INTO Radio_spectrum(carrier_name, radio_spectrum) VALUE
 	((SELECT name FROM Devices WHERE name = 'Vivo'), 'HSPA+'),
 	((SELECT name FROM Devices WHERE name = 'Orange'), 'GSM'),
 	((SELECT name FROM Devices WHERE name = 'MTS'), 'GSM'), -- RUSSIA
-	((SELECT name FROM Devices WHERE name = 'BSNL'), 'GSM'), -- INDIA
-	
-	;
+	((SELECT name FROM Devices WHERE name = 'BSNL'), 'GSM'); -- INDIA
