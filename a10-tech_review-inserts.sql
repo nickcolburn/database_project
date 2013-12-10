@@ -23,13 +23,14 @@ INSERT INTO Retailers(name, region) VALUES
         
 INSERT INTO Components(name, comp_type) VALUES
 	-- RAM sizes
-	('2 GB DDR3', 'Memory'), -- comp_id = 1 (Galaxy S4,)
+	('2 GB DDR3', 'Memory'), -- comp_id = 1 (Galaxy S4, xPeria Z1)
 	('1 GB DDR3', 'RAM'), -- comp_id = 2 (iPhone 5s, )
 	
 	-- Cameras
+	('20.7 MP', 'Rear Camera'), -- comp_id = (xPeria Z1)
 	('13 MP', 'Rear Camera'), -- comp_id = 3 (Galaxy S4,)
 	('8 MP', 'Rear Camera'), -- comp_id = 4 (iPhone 5s, )
-	('2 Megapixels', 'Front Camera'), -- comp_id = 5 (Galaxy S4,)
+	('2 Megapixels', 'Front Camera'), -- comp_id = 5 (Galaxy S4, xPeria Z1)
 	('1.2 MP', 'Front Camera'), -- comp_id = 6 (iPhone 5s, )
 	('1.3 MP', 'Front Camera'), -- comp_id = 7 (Nexus 5)
         
@@ -46,7 +47,12 @@ INSERT INTO Components(name, comp_type) VALUES
 	
 	-- specific components for the Nexus 5
 	('Full HD IPS+', 'Display'), -- comp_id = 15
-	('2300 mAh', 'Battery'); -- comp_id = 16
+	('2300 mAh', 'Battery'), -- comp_id = 16
+	
+	-- specific components for the xPeria Z1
+	('TFT', 'Display'), -- comp_id =
+	('Qualcomm MSM8974 Snapdragon 800', 'Processor'), -- comp_id = 
+	('3000 mAh', 'Battery'); -- comp_id = 
 		
 	
 	
@@ -123,8 +129,8 @@ INSERT INTO Devices(name, model_number, listed_price, mfctr_id, soft_id, release
         ('iPhone 5s (64GB)', 'A1533', 849.99, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=2) , (SELECT soft_id FROM Software WHERE soft_id=4),'2013-09-20', 3.95, 123.8, 58.6, 7.6)
         
 	-- dev_id = 8
-        ('DROID MAXX', 'XT1080', 499.00, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=3) , (SELECT soft_id FROM Software WHERE soft_id=2),'2013-07-23', 4.48, 130.7, 68.9, 7.1),;
-
+        ('xPeria Z1', 'C6906', 649.99, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=5) , (SELECT soft_id FROM Software WHERE soft_id=2), '2013-09-20', 6.0, 144, 74, 8.5);
+        
 INSERT INTO Sales(dev_id, retailer_id, sale_price) VALUES
         ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT retailer_id FROM Retailers WHERE name='Amazon'),          199.99),
         ((SELECT dev_id FROM Devices WHERE dev_id=2), (SELECT retailer_id FROM Retailers WHERE name='Best Buy'),        0.0),
