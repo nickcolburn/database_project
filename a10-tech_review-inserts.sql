@@ -145,24 +145,24 @@ INSERT INTO Supports(dev_id, country, carrier) VALUES
         ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT country_code FROM Countries WHERE name = 'United States'), (SELECT name FROM Carriers WHERE name = 'Orange'));
     
 INSERT INTO Radio_spectrum(carrier_name, radio_spectrum) VALUES
-	((SELECT name FROM Devices WHERE name = 'Verizon'), 'CDMA'),
-	((SELECT name FROM Devices WHERE name = 'AT&T'), 'GSM'),
-	((SELECT name FROM Devices WHERE name = 'T-Mobile'), 'GSM'),
-	((SELECT name FROM Devices WHERE name = 'Sprint'), 'CDMA'),
-	((SELECT name FROM Devices WHERE name = 'Virgin Mobile'), 'CDMA'),
-	((SELECT name FROM Devices WHERE name = 'Rogers Wireless'), 'GSM'),
-	((SELECT name FROM Devices WHERE name = 'Telus Mobility'), 'CDMA'),
-	((SELECT name FROM Devices WHERE name = 'Telus Mobility'), 'HSPA+'),
-	((SELECT name FROM Devices WHERE name = 'Bell Mobility'), 'CDMA'),
-	((SELECT name FROM Devices WHERE name = 'Bell Mobility'), 'HSPA+'),
-	((SELECT name FROM Devices WHERE name = 'America Movil'), 'CDMA'),
-	((SELECT name FROM Devices WHERE name = 'America Movil'), 'HSPA+'),
-	((SELECT name FROM Devices WHERE name = 'Vivo'), 'CDMA'),
-	((SELECT name FROM Devices WHERE name = 'Vivo'), 'GSM'),
-	((SELECT name FROM Devices WHERE name = 'Vivo'), 'HSPA+'),
-	((SELECT name FROM Devices WHERE name = 'Orange'), 'GSM'),
-	((SELECT name FROM Devices WHERE name = 'MTS'), 'GSM'), -- RUSSIA
-	((SELECT name FROM Devices WHERE name = 'BSNL'), 'GSM'); -- INDIA
+	((SELECT name FROM Carriers WHERE name = 'Verizon Wireless'), 'CDMA'),
+	((SELECT name FROM Carriers WHERE name = 'AT&T'), 'GSM'),
+	((SELECT name FROM Carriers WHERE name = 'T-Mobile'), 'GSM'),
+	((SELECT name FROM Carriers WHERE name = 'Sprint'), 'CDMA'),
+	((SELECT name FROM Carriers WHERE name = 'Virgin Mobile'), 'CDMA'),
+	((SELECT name FROM Carriers WHERE name = 'Rogers Wireless'), 'GSM'),
+	((SELECT name FROM Carriers WHERE name = 'Telus Mobility'), 'CDMA'),
+	((SELECT name FROM Carriers WHERE name = 'Telus Mobility'), 'HSPA+'),
+	((SELECT name FROM Carriers WHERE name = 'Bell Mobility'), 'CDMA'),
+	((SELECT name FROM Carriers WHERE name = 'Bell Mobility'), 'HSPA+'),
+	((SELECT name FROM Carriers WHERE name = 'America Movil'), 'CDMA'),
+	((SELECT name FROM Carriers WHERE name = 'America Movil'), 'HSPA+'),
+	((SELECT name FROM Carriers WHERE name = 'Vivo'), 'CDMA'),
+	((SELECT name FROM Carriers WHERE name = 'Vivo'), 'GSM'),
+	((SELECT name FROM Carriers WHERE name = 'Vivo'), 'HSPA+'),
+	((SELECT name FROM Carriers WHERE name = 'Orange'), 'GSM'),
+	((SELECT name FROM Carriers WHERE name = 'MTS'), 'GSM'), -- RUSSIA
+	((SELECT name FROM Carriers WHERE name = 'BSNL'), 'GSM'); -- INDIA
 
 INSERT INTO Internals(dev_id, comp_id) VALUES
 	-- the following internals are for the Samsung Galaxy S4
