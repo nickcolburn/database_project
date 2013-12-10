@@ -7,7 +7,6 @@ DROP TABLE Reviews;
 DROP TABLE Users;
 DROP TABLE Sales;
 DROP TABLE Supports;
-DROP TABLE Specification;
 DROP TABLE Internals;
 DROP TABLE Devices;
 DROP TABLE Software;
@@ -113,14 +112,6 @@ CREATE TABLE Internals
         CONSTRAINT         dc_pk PRIMARY KEY(dev_id, comp_id),
         CONSTRAINT         dc_devices_fk FOREIGN KEY(dev_id) REFERENCES Devices(dev_id) ON UPDATE CASCADE ON DELETE CASCADE,
         CONSTRAINT         dc_components_fk FOREIGN KEY(comp_id) REFERENCES Components(comp_id) ON UPDATE CASCADE ON DELETE CASCADE
-);
-
-CREATE TABLE Specification
-(
-        comp_id                INTEGER NOT NULL, -- FK form Components
-        specification        VARCHAR(20) NOT NULL,
-        CONSTRAINT        specification_pk PRIMARY KEY(comp_id, specification),
-        CONSTRAINT        specification_fk FOREIGN KEY(comp_id) REFERENCES Components(comp_id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE Supports
