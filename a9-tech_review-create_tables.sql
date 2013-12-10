@@ -98,6 +98,15 @@ CREATE TABLE Devices
         CONSTRAINT devices_ck UNIQUE(name, model_number)
 );
 
+CREATE TABLE Users
+(
+        username         VARCHAR(20) NOT NULL, -- assumption: usernames in the database must be unique
+        first_name         VARCHAR(20),
+        last_name         VARCHAR(20),
+        CONSTRAINT         users_pk PRIMARY KEY(username) -- usernames are unique and so can serve as the PK
+);
+
+
 CREATE TABLE Internals
 (
         dev_id                 INTEGER NOT NULL, -- FK from Devices
@@ -136,14 +145,6 @@ CREATE TABLE Sales
         CONSTRAINT         sales_device_fk FOREIGN KEY(dev_id) REFERENCES Devices(dev_id) ON UPDATE CASCADE ON DELETE CASCADE,
         CONSTRAINT         sales_retailer_fk FOREIGN KEY(retailer_id) REFERENCES Retailers(retailer_id) ON UPDATE CASCADE ON DELETE CASCADE
         
-);
-
-CREATE TABLE Users
-(
-        username         VARCHAR(20) NOT NULL, -- assumption: usernames in the database must be unique
-        first_name         VARCHAR(20),
-        last_name         VARCHAR(20),
-        CONSTRAINT         users_pk PRIMARY KEY(username) -- usernames are unique and so can serve as the PK
 );
 
 CREATE TABLE Reviews
