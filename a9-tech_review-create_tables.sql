@@ -154,5 +154,5 @@ CREATE TABLE Reviews
         review                 VARCHAR(1000),                 -- need to determine appropriate size for this
         CONSTRAINT         reviews_pk PRIMARY KEY(dev_id, username),
         CONSTRAINT         reviews_device_fk FOREIGN KEY(dev_id) REFERENCES Devices(dev_id) ON UPDATE CASCADE ON DELETE RESTRICT,
-        CONSTRAINT         reviews_user_fk FOREIGN KEY(username) REFERENCES Users(username) ON UPDATE CASCADE ON DELETE RESTRICT
+        CONSTRAINT         reviews_user_fk FOREIGN KEY(username) REFERENCES Users(username) ON UPDATE CASCADE ON DELETE CASCADE
 );
