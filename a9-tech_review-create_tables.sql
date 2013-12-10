@@ -41,7 +41,6 @@ CREATE TABLE Components
         comp_id         INTEGER NOT NULL AUTO_INCREMENT,         -- surrogate key introduced to make database easier to manage
         name                 VARCHAR(20),
         comp_type         VARCHAR(20),                                 -- component type (type must be an SQL keyword)
-        specification         VARCHAR(20),
         CONSTRAINT        retailers_pk PRIMARY KEY(comp_id)         -- comp_id is a surrogate key
 );
 
