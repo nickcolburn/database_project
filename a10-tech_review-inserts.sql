@@ -187,4 +187,12 @@ INSERT INTO Internals(dev_id, comp_id) VALUES
 	((SELECT name = FROM Devices WHERE dev_id = '6'),(SELECT name FROM Components WHERE comp_id = '10'), 
 	((SELECT name = FROM Devices WHERE dev_id = '6'),(SELECT name FROM Components WHERE comp_id = '11'),
 	((SELECT name = FROM Devices WHERE dev_id = '6'),(SELECT name FROM Components WHERE comp_id = '12'),
-	((SELECT name = FROM Devices WHERE dev_id = '6'),(SELECT name FROM Components WHERE comp_id = '13');
+	((SELECT name = FROM Devices WHERE dev_id = '6'),(SELECT name FROM Components WHERE comp_id = '13'),
+	-- the following internals are for the iPhone 5s (64 GB)
+	((SELECT name = FROM Devices WHERE dev_id = '7'),(SELECT name FROM Components WHERE comp_id = '2'),
+	((SELECT name = FROM Devices WHERE dev_id = '7'),(SELECT name FROM Components WHERE comp_id = '4'), 
+	((SELECT name = FROM Devices WHERE dev_id = '7'),(SELECT name FROM Components WHERE comp_id = '6'), 
+	((SELECT name = FROM Devices WHERE dev_id = '7'),(SELECT name FROM Components WHERE comp_id = '10'), 
+	((SELECT name = FROM Devices WHERE dev_id = '7'),(SELECT name FROM Components WHERE comp_id = '11'),
+	((SELECT name = FROM Devices WHERE dev_id = '7'),(SELECT name FROM Components WHERE comp_id = '12'),
+	((SELECT name = FROM Devices WHERE dev_id = '7'),(SELECT name FROM Components WHERE comp_id = '13');
