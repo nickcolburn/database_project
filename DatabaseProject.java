@@ -66,11 +66,11 @@ public class DatabaseProject {
    /**
     * JDBC Connection URL for the tech_review database (local instance), using the MySQL driver
     */
-    //private final static String DB_URL = "jdbc:mysql://127.0.0.1:3306/cecs323";
+    private final static String DB_URL = "jdbc:mysql://127.0.0.1:3306/cecs323";
     /**
      * JDBC Connection URL for the tech_review database on infoserver, using the MySQL driver
      */
-     private final static String DB_URL = "jdbc:mysql://infoserver:3306/cecs323m8";
+     //private final static String DB_URL = "jdbc:mysql://infoserver:3306/cecs323m8";
   /**
    * Query to retrieve all devices and 
    */
@@ -102,7 +102,7 @@ public class DatabaseProject {
    */
   private final static String SQL_INSERT_REVIEW =
 		  "INSERT INTO Reviews(dev_id, username, rating, review) VALUES "
-          +"(?, ?, ?)";
+          +"(?, ?, ?, ?)";
         
   
   /**
@@ -297,27 +297,39 @@ public class DatabaseProject {
 	  try {
 	      PreparedStatement addUserQuery = connection.prepareStatement(SQL_INSERT_USER);	      
 	 
-    	  System.out.println("In order to leave a review, please create a username: ");
+	      System.out.println("\n******************************************************************\n"
+					+"*                           REVIEW MENU                          *\n"
+					+"******************************************************************\n"
+					+"* Provide the following information                              *\n");
+	      System.out.print("username: ");
     	  String username = userInput.nextLine();
     	  while(username.equals(" ")){
     		  System.out.println("Username is mandatory: ");
         	  username = userInput.nextLine();
     	  }
-    	  System.out.println("Provide your full name (this is optional): ");
+    	  System.out.print("\nFull name (optional): ");
     	  String line = userInput.nextLine();
     	  String name[] = line.split(" ");
     	  addUserQuery.setString(1, username);
     	  addUserQuery.setString(2, name[0]);
     	  addUserQuery.setString(3, name[1]);
-    	  addUserQuery.executeUpdate();
-    	  System.out.println("\n******************************************************************\n"
-					+"*                           REVIEW MENU                          *\n"
-					+"******************************************************************\n"
-					+"* Please choose a device to review:                              *\n");    	  
+    	  addUserQuery.executeUpdate();   
+    	  
     	  displayAllDevices();
-    	  System.out.println("******************************************************************\n"
-    			  	+"\nSelection: ");
-		  String selection = userInput.nextLine();
+    	  System.out.print("\nSelection: ");
+		  int selection = userInput.nextInt();
+		  System.out.print("\nWrite your review: ");
+		  String review = userInput.nextLine();
+		  System.out.print("\nHow would you rate this product? (0-5): ");
+		  float rating = userInput.nextFloat();
+		  
+		  PreparedStatement addReview = connection.prepareStatement(SQL_INSERT_REVIEW);
+		  addReview.setInt(1, selection);
+		  addReview.setString(2, username);
+		  addReview.setFloat(3, rating);
+		  addReview.setString(4, review);
+		  addReview.executeUpdate();
+		  return;
 		
 	  } catch (SQLException sqle) {
           LOGGER.log(Level.SEVERE, "Unable to execute DB statement due to error {0}", sqle.getMessage());
@@ -389,7 +401,6 @@ public class DatabaseProject {
   public void searchByName() {
 	  try {
 	      PreparedStatement preparedQuery = connection.prepareStatement(SQL_FIND_SPECIFIC_DEVICE);
-
 	      String userResponse;
 	      
 	      do{
@@ -450,42 +461,45 @@ public class DatabaseProject {
   }
   
   public void displayMainMenu() {
-	  String selection = "";
+	  int selection = 0;
 	  do{
 		  System.out.println("\n******************************************************************\n"
 			  				+"*                    WELCOME TO THE MAIN MENU                    *\n"
 			  				+"******************************************************************\n"
 			  				+"* Please make a selection from the following:                    *\n"
-			  				+"* 1. User Account Options                                        *\n"
-			  				+"* 2. Product Search                                              *\n"
+			  				+"* 1. Search Options                                              *\n"
+			  				+"* 2. View Options                                                *\n"
 			  				+"* 3. Write A Review                                              *\n"
 			  				+"* 4. Commit Changes                                              *\n"
 			  				+"* 5. Undo Changes                                                *\n"
 			  				+"* 6. Exit                                                        *\n"
 			  				+"******************************************************************\n");
-	  System.out.println("Selection: ");
-	  selection = userInput.nextLine();
-	  }while(!mainMenuOption(selection).equals("6"));
+	  System.out.print("\nSelection: ");
+	  selection = userInput.nextInt();
+	  }while(mainMenuOption(selection) != 6);
   }
-  public String mainMenuOption(String opt1)
+  public int mainMenuOption(int menuOpt)
   {
 	  boolean valid;
 	  do {
 		  valid = true;
-		  switch(opt1)
+		  switch(menuOpt)
 		  {
-		  	case "1":{
-		  		
+		  	case 0:{
+		  		break;
 		  	}
-		  	case "2":{
+		  	case 1:{
 		  		productSearchMenu();
 		  		break;
 		  	}
-		  	case "3":{
+		  	case 2:{
+		  		//viewProducts();
+		  	}
+		  	case 3:{
 		  		addReview();
 		  		break;
 		  	}
-		  	case "4":{
+		  	case 4:{
 		  		System.out.println("Are you sure you want to commit these changes (y/n)?:");
 		  		if(isResponseYes(userInput.nextLine()) == true){
 		  			System.out.print("Committing changes to the database...");
@@ -494,7 +508,7 @@ public class DatabaseProject {
 		  			break;
 		  		}
 		  	}
-		  	case "5":{
+		  	case 5:{
 		  		System.out.println("Are you sure you want to rollback these changes (y/n)?:");
 		  		if(isResponseYes(userInput.nextLine()) == true){
 		  			System.out.print("Rolling back changes to the database...");
@@ -503,7 +517,7 @@ public class DatabaseProject {
 		  			break;
 		  		}		  		
 		  	}
-		  	case "6":{
+		  	case 6:{
 		  		System.out.println("Do you want to commit the last changes made (y/n)?:");
 		  		if(isResponseYes(userInput.nextLine()) == true){
 		  			System.out.print("Committing changes to the database...");
@@ -514,18 +528,18 @@ public class DatabaseProject {
 		  		break;
 		  	}
 	  		default: {
-	  			System.out.println("\n" + opt1 + " is an invalid option.\n"
+	  			System.out.println("\n" + menuOpt + " is an invalid option.\n"
 	  							  +"Please re-enter a menu option: ");
-	  			opt1 = userInput.nextLine();
+	  			menuOpt = userInput.nextInt();
 	  			valid = false;
 	  			break;
 	  		}
 		  }
 	  }while(valid==false);
-	  return opt1;
+	  return menuOpt;
   }
   public void productSearchMenu(){
-	  String selection = "";
+	  int selection = 0;
 	  do{
 		  System.out.println("\n******************************************************************\n"
 	  						+"*                      PRODUCT SEARCH MENU                       *\n"
@@ -536,41 +550,44 @@ public class DatabaseProject {
 	  						+"* 3. Display All Reviews                                         *\n"
 	  						+"* 4. Return To Main Menu                                         *\n"
 	  						+"******************************************************************\n");
-		  System.out.println("Selection: ");
-		  selection = userInput.nextLine();
-	  }while(!productMenuOption(selection).equals("4"));
+		  System.out.print("\nSelection: ");
+		  selection = userInput.nextInt();
+	  }while(productMenuOption(selection) != 4);
 	  return;
   }
-  public String productMenuOption(String opt2){
+  public int productMenuOption(int menuOpt){
 	  boolean valid;
 	  do {
 		  valid = true;
-		  switch(opt2)
+		  switch(menuOpt)
 		  {
-		  	case "1":{
+		  	case 0:{
+		  		break;
+		  	}
+		  	case 1:{
 		  		displayAllDevices();
 		  		break;
 		  	}
-		  	case "2":{
+		  	case 2:{
 		  		searchByName();
 		  		break;
 		  	}
-		  	case "3":{
+		  	case 3:{
 		  		displayAllReviews();
 		  		break;
 		  	}
-		  	case "4":{
-		  		return(opt2);
+		  	case 4:{
+		  		return(menuOpt);
 		  	}
 		  	default: {
-	  			System.out.println("\n" + opt2 + " is an invalid option.\n"
+	  			System.out.println("\n" + menuOpt + " is an invalid option.\n"
 	  							  +"Please re-enter a menu option: ");
-	  			opt2 = userInput.nextLine();
+	  			menuOpt = userInput.nextInt();
 	  			valid = false;
 	  			break;
 	  		}
 		  }
 	  }while(valid==false);
-	  return opt2;
+	  return menuOpt;
   }
 }
