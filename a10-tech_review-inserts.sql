@@ -105,9 +105,9 @@ INSERT INTO Devices(name, model_number, listed_price, mfctr_id, soft_id, release
         -- dev_id = 5
         ('iPhone 5S (16GB)',     'A1533',       649.99, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=2) , (SELECT soft_id FROM Software WHERE soft_id=4),'2013-09-20', 3.95, 123.8, 58.6, 7.6),
         -- dev_id = 6
-        ('iPhone 5S (32GB)',     'A1533',       649.99, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=2) , (SELECT soft_id FROM Software WHERE soft_id=4),'2013-09-20', 3.95, 123.8, 58.6, 7.6),
+        ('iPhone 5S (32GB)',     'A1533',       749.99, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=2) , (SELECT soft_id FROM Software WHERE soft_id=4),'2013-09-20', 3.95, 123.8, 58.6, 7.6),
         -- dev_id = 7
-        ('iPhone 5S (64GB)',     'A1533',       649.99, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=2) , (SELECT soft_id FROM Software WHERE soft_id=4),'2013-09-20', 3.95, 123.8, 58.6, 7.6);
+        ('iPhone 5S (64GB)',     'A1533',       849.99, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=2) , (SELECT soft_id FROM Software WHERE soft_id=4),'2013-09-20', 3.95, 123.8, 58.6, 7.6);
 
 INSERT INTO Sales(dev_id, retailer_id, sale_price) VALUES
         ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT retailer_id FROM Retailers WHERE name='Amazon'),          199.99),
