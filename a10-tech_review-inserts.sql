@@ -192,11 +192,9 @@ INSERT INTO Devices(name, model_number, listed_price, mfctr_id, soft_id, release
         ('HTC One (64 GB)', 'M7_UL', 669.99, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=6) , (SELECT soft_id FROM Software WHERE soft_id=2), '2013-03-01', 5.04, 137.4, 68.2, 9.3),
         
         -- dev_id = 14, United States Model 
-        ('Lumia 1520', 'RM-940', 584.99, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=5) , (SELECT soft_id FROM Software WHERE soft_id=4), '2013-11-13', 7.37, 162.8, 85.4, 8.7),
+        ('Lumia 1520', 'RM-940', 584.99, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=5) , (SELECT soft_id FROM Software WHERE soft_id=4), '2013-11-13', 7.37, 162.8, 85.4, 8.7);
         
-        -- dev_id = 15, International Model
-        ('Lumia 1520', 'RM-937', 584.99, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=5) , (SELECT soft_id FROM Software WHERE soft_id=4), '2013-11-13', 7.37, 162.8, 85.4, 8.7);
-
+       
 INSERT INTO Sales(dev_id, retailer_id, sale_price) VALUES
         ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT retailer_id FROM Retailers WHERE name='Amazon'),          199.99),
         ((SELECT dev_id FROM Devices WHERE dev_id=2), (SELECT retailer_id FROM Retailers WHERE name='Best Buy'),        0.0),
@@ -219,13 +217,8 @@ INSERT INTO Reviews(dev_id, username, rating, review) VALUES
         ((SELECT dev_id FROM Devices WHERE dev_id=5), (SELECT username FROM Users WHERE username='Spaz'), 4.0, 'Kit Kat brings some fun cool new features to the phone. The only downside is that the camera struggles under auto setting.'),
         ((SELECT dev_id FROM Devices WHERE dev_id=5), (SELECT username FROM Users WHERE username='El Profe'), 4.5, 'Amazing phone! I only wish that the cheap plastic casing makes it feel and look like a cheap phone.');
 
-INSERT INTO Supports(dev_id, country, carrier) VALUES
+INSERT INTO Supports(dev_id, country_code, carrier) VALUES
         		
-	-- Samsung Galaxy S3 = dev_id 2
-		-- Motorola DROID MAXX = dev_id 3
-		-- LG Nexus 5 (16 GB) = dev_id 4
-		-- Apple iPhone 5S (16GB) = dev_id 5
-		
 	-- Samsung Galaxy S4 (CDMA Version)
 	((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT country_code FROM Countries WHERE country_code = 'USA'), (SELECT name FROM Carriers WHERE name = 'Verizon Wireless')),
     	((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT country_code FROM Countries WHERE country_code = 'USA'), (SELECT name FROM Carriers WHERE name = 'Sprint')),
@@ -254,17 +247,25 @@ INSERT INTO Supports(dev_id, country, carrier) VALUES
     	-- Nexus 5 16 GB Model
     	((SELECT dev_id FROM Devices WHERE dev_id=3), (SELECT country_code FROM Countries WHERE country_code = 'USA'), (SELECT name FROM Carriers WHERE name = 'Sprint')),
     	((SELECT dev_id FROM Devices WHERE dev_id=3), (SELECT country_code FROM Countries WHERE country_code = 'USA'), (SELECT name FROM Carriers WHERE name = 'T-Mobile')),
-    	
+    	((SELECT dev_id FROM Devices WHERE dev_id=3), (SELECT country_code FROM Countries WHERE country_code = 'CAN'), (SELECT name FROM Carriers WHERE name = 'Rogers Wireless')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=3), (SELECT country_code FROM Countries WHERE country_code = 'CAN'), (SELECT name FROM Carriers WHERE name = 'Telus Mobility')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=3), (SELECT country_code FROM Countries WHERE country_code = 'CAN'), (SELECT name FROM Carriers WHERE name = 'Bell Mobility')),
     	-- Nexus 5 32 GB Model
     	((SELECT dev_id FROM Devices WHERE dev_id=4), (SELECT country_code FROM Countries WHERE country_code = 'USA'), (SELECT name FROM Carriers WHERE name = 'Sprint')),
     	((SELECT dev_id FROM Devices WHERE dev_id=4), (SELECT country_code FROM Countries WHERE country_code = 'USA'), (SELECT name FROM Carriers WHERE name = 'T-Mobile')),
-    	
+    	((SELECT dev_id FROM Devices WHERE dev_id=4), (SELECT country_code FROM Countries WHERE country_code = 'CAN'), (SELECT name FROM Carriers WHERE name = 'Rogers Wireless')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=4), (SELECT country_code FROM Countries WHERE country_code = 'CAN'), (SELECT name FROM Carriers WHERE name = 'Telus Mobility')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=4), (SELECT country_code FROM Countries WHERE country_code = 'CAN'), (SELECT name FROM Carriers WHERE name = 'Bell Mobility')),
+
     	-- iPhone 5s 16 GB model
     	((SELECT dev_id FROM Devices WHERE dev_id=5), (SELECT country_code FROM Countries WHERE country_code = 'USA'), (SELECT name FROM Carriers WHERE name = 'Verizon Wireless')),
     	((SELECT dev_id FROM Devices WHERE dev_id=5), (SELECT country_code FROM Countries WHERE country_code = 'USA'), (SELECT name FROM Carriers WHERE name = 'AT&T')),
     	((SELECT dev_id FROM Devices WHERE dev_id=5), (SELECT country_code FROM Countries WHERE country_code = 'USA'), (SELECT name FROM Carriers WHERE name = 'Sprint')),
     	((SELECT dev_id FROM Devices WHERE dev_id=5), (SELECT country_code FROM Countries WHERE country_code = 'USA'), (SELECT name FROM Carriers WHERE name = 'T-Mobile')),
     	((SELECT dev_id FROM Devices WHERE dev_id=5), (SELECT country_code FROM Countries WHERE country_code = 'USA'), (SELECT name FROM Carriers WHERE name = 'Virgin Mobile')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=5), (SELECT country_code FROM Countries WHERE country_code = 'CAN'), (SELECT name FROM Carriers WHERE name = 'Virgin Mobile')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=5), (SELECT country_code FROM Countries WHERE country_code = 'FRA'), (SELECT name FROM Carriers WHERE name = 'Virgin Mobile')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=5), (SELECT country_code FROM Countries WHERE country_code = 'AUS'), (SELECT name FROM Carriers WHERE name = 'Virgin Mobile')),
     	((SELECT dev_id FROM Devices WHERE dev_id=5), (SELECT country_code FROM Countries WHERE country_code = 'GBM'), (SELECT name FROM Carriers WHERE name = 'Orange')),
     	((SELECT dev_id FROM Devices WHERE dev_id=5), (SELECT country_code FROM Countries WHERE country_code = 'ARM'), (SELECT name FROM Carriers WHERE name = 'Orange')),
     	((SELECT dev_id FROM Devices WHERE dev_id=5), (SELECT country_code FROM Countries WHERE country_code = 'BEL'), (SELECT name FROM Carriers WHERE name = 'Orange')),
@@ -277,8 +278,16 @@ INSERT INTO Supports(dev_id, country, carrier) VALUES
     	((SELECT dev_id FROM Devices WHERE dev_id=5), (SELECT country_code FROM Countries WHERE country_code = 'ROU'), (SELECT name FROM Carriers WHERE name = 'Orange')),
     	((SELECT dev_id FROM Devices WHERE dev_id=5), (SELECT country_code FROM Countries WHERE country_code = 'SVK'), (SELECT name FROM Carriers WHERE name = 'Orange')),
     	((SELECT dev_id FROM Devices WHERE dev_id=5), (SELECT country_code FROM Countries WHERE country_code = 'CHE'), (SELECT name FROM Carriers WHERE name = 'Orange')),
-    	
+	((SELECT dev_id FROM Devices WHERE dev_id=5), (SELECT country_code FROM Countries WHERE country_code = 'CHE'), (SELECT name FROM Carriers WHERE name = 'Orange')),
     	-- iPhone 5s 32 GB model
+    	((SELECT dev_id FROM Devices WHERE dev_id=6), (SELECT country_code FROM Countries WHERE country_code = 'USA'), (SELECT name FROM Carriers WHERE name = 'Verizon Wireless')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=6), (SELECT country_code FROM Countries WHERE country_code = 'USA'), (SELECT name FROM Carriers WHERE name = 'AT&T')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=6), (SELECT country_code FROM Countries WHERE country_code = 'USA'), (SELECT name FROM Carriers WHERE name = 'Sprint')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=6), (SELECT country_code FROM Countries WHERE country_code = 'USA'), (SELECT name FROM Carriers WHERE name = 'T-Mobile')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=6), (SELECT country_code FROM Countries WHERE country_code = 'USA'), (SELECT name FROM Carriers WHERE name = 'Virgin Mobile')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=6), (SELECT country_code FROM Countries WHERE country_code = 'CAN'), (SELECT name FROM Carriers WHERE name = 'Virgin Mobile')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=6), (SELECT country_code FROM Countries WHERE country_code = 'FRA'), (SELECT name FROM Carriers WHERE name = 'Virgin Mobile')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=6), (SELECT country_code FROM Countries WHERE country_code = 'AUS'), (SELECT name FROM Carriers WHERE name = 'Virgin Mobile')),
     	((SELECT dev_id FROM Devices WHERE dev_id=6), (SELECT country_code FROM Countries WHERE country_code = 'GBM'), (SELECT name FROM Carriers WHERE name = 'Orange')),
     	((SELECT dev_id FROM Devices WHERE dev_id=6), (SELECT country_code FROM Countries WHERE country_code = 'ARM'), (SELECT name FROM Carriers WHERE name = 'Orange')),
     	((SELECT dev_id FROM Devices WHERE dev_id=6), (SELECT country_code FROM Countries WHERE country_code = 'BEL'), (SELECT name FROM Carriers WHERE name = 'Orange')),
@@ -291,8 +300,15 @@ INSERT INTO Supports(dev_id, country, carrier) VALUES
     	((SELECT dev_id FROM Devices WHERE dev_id=6), (SELECT country_code FROM Countries WHERE country_code = 'ROU'), (SELECT name FROM Carriers WHERE name = 'Orange')),
     	((SELECT dev_id FROM Devices WHERE dev_id=6), (SELECT country_code FROM Countries WHERE country_code = 'SVK'), (SELECT name FROM Carriers WHERE name = 'Orange')),
     	((SELECT dev_id FROM Devices WHERE dev_id=6), (SELECT country_code FROM Countries WHERE country_code = 'CHE'), (SELECT name FROM Carriers WHERE name = 'Orange')),
-    	
     	-- iPhone 5s 64 GB Model
+    	((SELECT dev_id FROM Devices WHERE dev_id=7), (SELECT country_code FROM Countries WHERE country_code = 'USA'), (SELECT name FROM Carriers WHERE name = 'Verizon Wireless')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=7), (SELECT country_code FROM Countries WHERE country_code = 'USA'), (SELECT name FROM Carriers WHERE name = 'AT&T')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=7), (SELECT country_code FROM Countries WHERE country_code = 'USA'), (SELECT name FROM Carriers WHERE name = 'Sprint')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=7), (SELECT country_code FROM Countries WHERE country_code = 'USA'), (SELECT name FROM Carriers WHERE name = 'T-Mobile')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=7), (SELECT country_code FROM Countries WHERE country_code = 'USA'), (SELECT name FROM Carriers WHERE name = 'Virgin Mobile')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=7), (SELECT country_code FROM Countries WHERE country_code = 'CAN'), (SELECT name FROM Carriers WHERE name = 'Virgin Mobile')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=7), (SELECT country_code FROM Countries WHERE country_code = 'FRA'), (SELECT name FROM Carriers WHERE name = 'Virgin Mobile')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=7), (SELECT country_code FROM Countries WHERE country_code = 'AUS'), (SELECT name FROM Carriers WHERE name = 'Virgin Mobile')),    	
     	((SELECT dev_id FROM Devices WHERE dev_id=7), (SELECT country_code FROM Countries WHERE country_code = 'GBM'), (SELECT name FROM Carriers WHERE name = 'Orange')),
     	((SELECT dev_id FROM Devices WHERE dev_id=7), (SELECT country_code FROM Countries WHERE country_code = 'ARM'), (SELECT name FROM Carriers WHERE name = 'Orange')),
     	((SELECT dev_id FROM Devices WHERE dev_id=7), (SELECT country_code FROM Countries WHERE country_code = 'BEL'), (SELECT name FROM Carriers WHERE name = 'Orange')),
@@ -307,9 +323,12 @@ INSERT INTO Supports(dev_id, country, carrier) VALUES
     	((SELECT dev_id FROM Devices WHERE dev_id=7), (SELECT country_code FROM Countries WHERE country_code = 'CHE'), (SELECT name FROM Carriers WHERE name = 'Orange')),
     	
     	-- Sony Xperia Z1 US Model
-    	((SELECT dev_id FROM Devices WHERE dev_id=8), (SELECT country_code FROM Countries WHERE country_code = 'USA'), (SELECT name FROM Carriers WHERE name = 'Verizon AT&T')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=8), (SELECT country_code FROM Countries WHERE country_code = 'USA'), (SELECT name FROM Carriers WHERE name = 'AT&T')),
     	
     	-- Sony Xperia Z1 International Model
+    	((SELECT dev_id FROM Devices WHERE dev_id=9), (SELECT country_code FROM Countries WHERE country_code = 'AUS'), (SELECT name FROM Carriers WHERE name = 'Virgin Mobile')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=9), (SELECT country_code FROM Countries WHERE country_code = 'CAN'), (SELECT name FROM Carriers WHERE name = 'Bell Mobility')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=9), (SELECT country_code FROM Countries WHERE country_code = 'CAN'), (SELECT name FROM Carriers WHERE name = 'Rogers Wireless')),
     	((SELECT dev_id FROM Devices WHERE dev_id=9), (SELECT country_code FROM Countries WHERE country_code = 'GBM'), (SELECT name FROM Carriers WHERE name = 'Orange')),
     	((SELECT dev_id FROM Devices WHERE dev_id=9), (SELECT country_code FROM Countries WHERE country_code = 'ARM'), (SELECT name FROM Carriers WHERE name = 'Orange')),
     	((SELECT dev_id FROM Devices WHERE dev_id=9), (SELECT country_code FROM Countries WHERE country_code = 'BEL'), (SELECT name FROM Carriers WHERE name = 'Orange')),
@@ -322,8 +341,10 @@ INSERT INTO Supports(dev_id, country, carrier) VALUES
     	((SELECT dev_id FROM Devices WHERE dev_id=9), (SELECT country_code FROM Countries WHERE country_code = 'ROU'), (SELECT name FROM Carriers WHERE name = 'Orange')),
     	((SELECT dev_id FROM Devices WHERE dev_id=9), (SELECT country_code FROM Countries WHERE country_code = 'SVK'), (SELECT name FROM Carriers WHERE name = 'Orange')),
     	((SELECT dev_id FROM Devices WHERE dev_id=9), (SELECT country_code FROM Countries WHERE country_code = 'CHE'), (SELECT name FROM Carriers WHERE name = 'Orange')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=9), (SELECT country_code FROM Countries WHERE country_code = 'RUS'), (SELECT name FROM Carriers WHERE name = 'MTS')),
     	
     	-- HTC One US Model 32 GB
+    	((SELECT dev_id FROM Devices WHERE dev_id=10), (SELECT country_code FROM Countries WHERE country_code = 'USA'), (SELECT name FROM Carriers WHERE name = 'Verizon Wireless')),
     	((SELECT dev_id FROM Devices WHERE dev_id=10), (SELECT country_code FROM Countries WHERE country_code = 'USA'), (SELECT name FROM Carriers WHERE name = 'AT&T')),
     	((SELECT dev_id FROM Devices WHERE dev_id=10), (SELECT country_code FROM Countries WHERE country_code = 'USA'), (SELECT name FROM Carriers WHERE name = 'Sprint')),
     	((SELECT dev_id FROM Devices WHERE dev_id=10), (SELECT country_code FROM Countries WHERE country_code = 'USA'), (SELECT name FROM Carriers WHERE name = 'T-Mobile')),
@@ -334,22 +355,46 @@ INSERT INTO Supports(dev_id, country, carrier) VALUES
     	((SELECT dev_id FROM Devices WHERE dev_id=11), (SELECT country_code FROM Countries WHERE country_code = 'USA'), (SELECT name FROM Carriers WHERE name = 'T-Mobile')),
     	
     	
-	-- HTC One US Model 64 GB
-    	((SELECT dev_id FROM Devices WHERE dev_id=12), (SELECT country_code FROM Countries WHERE country_code = 'USA'), (SELECT name FROM Carriers WHERE name = 'AT&T')),
-    	((SELECT dev_id FROM Devices WHERE dev_id=12), (SELECT country_code FROM Countries WHERE country_code = 'USA'), (SELECT name FROM Carriers WHERE name = 'Sprint')),
-    	((SELECT dev_id FROM Devices WHERE dev_id=12), (SELECT country_code FROM Countries WHERE country_code = 'USA'), (SELECT name FROM Carriers WHERE name = 'T-Mobile')),
+	-- HTC One International Model 32 GB
+    	((SELECT dev_id FROM Devices WHERE dev_id=12), (SELECT country_code FROM Countries WHERE country_code = 'CAN'), (SELECT name FROM Carriers WHERE name = 'Rogers Wireless')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=12), (SELECT country_code FROM Countries WHERE country_code = 'CAN'), (SELECT name FROM Carriers WHERE name = 'Telus Mobility')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=12), (SELECT country_code FROM Countries WHERE country_code = 'CAN'), (SELECT name FROM Carriers WHERE name = 'Bell Mobility')),    	
+    	((SELECT dev_id FROM Devices WHERE dev_id=12), (SELECT country_code FROM Countries WHERE country_code = 'AUS'), (SELECT name FROM Carriers WHERE name = 'Virgin Mobile')),    	
+    	((SELECT dev_id FROM Devices WHERE dev_id=12), (SELECT country_code FROM Countries WHERE country_code = 'GBM'), (SELECT name FROM Carriers WHERE name = 'Orange')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=12), (SELECT country_code FROM Countries WHERE country_code = 'ARM'), (SELECT name FROM Carriers WHERE name = 'Orange')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=12), (SELECT country_code FROM Countries WHERE country_code = 'BEL'), (SELECT name FROM Carriers WHERE name = 'Orange')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=12), (SELECT country_code FROM Countries WHERE country_code = 'SPN'), (SELECT name FROM Carriers WHERE name = 'Orange')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=12), (SELECT country_code FROM Countries WHERE country_code = 'FRA'), (SELECT name FROM Carriers WHERE name = 'Orange')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=12), (SELECT country_code FROM Countries WHERE country_code = 'LUX'), (SELECT name FROM Carriers WHERE name = 'Orange')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=12), (SELECT country_code FROM Countries WHERE country_code = 'MDA'), (SELECT name FROM Carriers WHERE name = 'Orange')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=12), (SELECT country_code FROM Countries WHERE country_code = 'PUL'), (SELECT name FROM Carriers WHERE name = 'Orange')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=12), (SELECT country_code FROM Countries WHERE country_code = 'PRT'), (SELECT name FROM Carriers WHERE name = 'Orange')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=12), (SELECT country_code FROM Countries WHERE country_code = 'ROU'), (SELECT name FROM Carriers WHERE name = 'Orange')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=12), (SELECT country_code FROM Countries WHERE country_code = 'SVK'), (SELECT name FROM Carriers WHERE name = 'Orange')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=12), (SELECT country_code FROM Countries WHERE country_code = 'CHE'), (SELECT name FROM Carriers WHERE name = 'Orange')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=12), (SELECT country_code FROM Countries WHERE country_code = 'RUS'), (SELECT name FROM Carriers WHERE name = 'MTS')),
     	
-    	-- HTC One US Model 64 GB
-    	((SELECT dev_id FROM Devices WHERE dev_id=13), (SELECT country_code FROM Countries WHERE country_code = 'USA'), (SELECT name FROM Carriers WHERE name = 'AT&T')),
-    	((SELECT dev_id FROM Devices WHERE dev_id=13), (SELECT country_code FROM Countries WHERE country_code = 'USA'), (SELECT name FROM Carriers WHERE name = 'Sprint')),
-    	((SELECT dev_id FROM Devices WHERE dev_id=13), (SELECT country_code FROM Countries WHERE country_code = 'USA'), (SELECT name FROM Carriers WHERE name = 'T-Mobile')),
-
-	-- Nokia Lumia US Model
-	((SELECT dev_id FROM Devices WHERE dev_id=14), (SELECT country_code FROM Countries WHERE country_code = 'USA'), (SELECT name FROM Carriers WHERE name = 'AT&T')),
+    	-- HTC One International Model 64 GB
+    	((SELECT dev_id FROM Devices WHERE dev_id=13), (SELECT country_code FROM Countries WHERE country_code = 'CAN'), (SELECT name FROM Carriers WHERE name = 'Rogers Wireless')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=13), (SELECT country_code FROM Countries WHERE country_code = 'CAN'), (SELECT name FROM Carriers WHERE name = 'Telus Mobility')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=13), (SELECT country_code FROM Countries WHERE country_code = 'CAN'), (SELECT name FROM Carriers WHERE name = 'Bell Mobility')),    	
+    	((SELECT dev_id FROM Devices WHERE dev_id=12), (SELECT country_code FROM Countries WHERE country_code = 'AUS'), (SELECT name FROM Carriers WHERE name = 'Virgin Mobile')),    	
+    	((SELECT dev_id FROM Devices WHERE dev_id=13), (SELECT country_code FROM Countries WHERE country_code = 'GBM'), (SELECT name FROM Carriers WHERE name = 'Orange')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=13), (SELECT country_code FROM Countries WHERE country_code = 'ARM'), (SELECT name FROM Carriers WHERE name = 'Orange')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=13), (SELECT country_code FROM Countries WHERE country_code = 'BEL'), (SELECT name FROM Carriers WHERE name = 'Orange')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=13), (SELECT country_code FROM Countries WHERE country_code = 'SPN'), (SELECT name FROM Carriers WHERE name = 'Orange')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=13), (SELECT country_code FROM Countries WHERE country_code = 'FRA'), (SELECT name FROM Carriers WHERE name = 'Orange')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=13), (SELECT country_code FROM Countries WHERE country_code = 'LUX'), (SELECT name FROM Carriers WHERE name = 'Orange')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=13), (SELECT country_code FROM Countries WHERE country_code = 'MDA'), (SELECT name FROM Carriers WHERE name = 'Orange')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=13), (SELECT country_code FROM Countries WHERE country_code = 'PUL'), (SELECT name FROM Carriers WHERE name = 'Orange')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=13), (SELECT country_code FROM Countries WHERE country_code = 'PRT'), (SELECT name FROM Carriers WHERE name = 'Orange')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=13), (SELECT country_code FROM Countries WHERE country_code = 'ROU'), (SELECT name FROM Carriers WHERE name = 'Orange')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=13), (SELECT country_code FROM Countries WHERE country_code = 'SVK'), (SELECT name FROM Carriers WHERE name = 'Orange')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=13), (SELECT country_code FROM Countries WHERE country_code = 'CHE'), (SELECT name FROM Carriers WHERE name = 'Orange')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=13), (SELECT country_code FROM Countries WHERE country_code = 'RUS'), (SELECT name FROM Carriers WHERE name = 'MTS')),
 	
-	-- Nokia Lumia International Model
-    	((SELECT dev_id FROM Devices WHERE dev_id=15), (SELECT country_code FROM Countries WHERE country_code = 'USA'), (SELECT name FROM Carriers WHERE name = 'T-Mobile'));
-
+	-- Nokia Lumia 1520 US Model
+	((SELECT dev_id FROM Devices WHERE dev_id=14), (SELECT country_code FROM Countries WHERE country_code = 'USA'), (SELECT name FROM Carriers WHERE name = 'AT&T'));
     	
 INSERT INTO Radio_spectrum(carrier_name, radio_spectrum) VALUES
 	((SELECT name FROM Carriers WHERE name = 'Verizon Wireless'), 'CDMA'),
