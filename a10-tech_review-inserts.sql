@@ -189,21 +189,31 @@ INSERT INTO Supports(dev_id, country, carrier) VALUES
     
 INSERT INTO Radio_spectrum(carrier_name, radio_spectrum) VALUES
 	((SELECT name FROM Carriers WHERE name = 'Verizon Wireless'), 'CDMA'),
+	((SELECT name FROM Carriers WHERE name = 'Verizon Wireless'), 'LTE'),
 	((SELECT name FROM Carriers WHERE name = 'AT&T'), 'GSM'),
+	((SELECT name FROM Carriers WHERE name = 'AT&T'), 'HSPA+'),
+	((SELECT name FROM Carriers WHERE name = 'AT&T'), 'LTE'),
 	((SELECT name FROM Carriers WHERE name = 'T-Mobile'), 'GSM'),
+	((SELECT name FROM Carriers WHERE name = 'T-Mobile'), 'HSPA+'),
+	((SELECT name FROM Carriers WHERE name = 'T-Mobile'), 'LTE'),
 	((SELECT name FROM Carriers WHERE name = 'Sprint'), 'CDMA'),
-	((SELECT name FROM Carriers WHERE name = 'Virgin Mobile'), 'CDMA'),
-	((SELECT name FROM Carriers WHERE name = 'Rogers Wireless'), 'GSM'),
-	((SELECT name FROM Carriers WHERE name = 'Telus Mobility'), 'CDMA'),
-	((SELECT name FROM Carriers WHERE name = 'Telus Mobility'), 'HSPA+'),
-	((SELECT name FROM Carriers WHERE name = 'Bell Mobility'), 'CDMA'),
-	((SELECT name FROM Carriers WHERE name = 'Bell Mobility'), 'HSPA+'),
-	((SELECT name FROM Carriers WHERE name = 'America Movil'), 'CDMA'),
-	((SELECT name FROM Carriers WHERE name = 'America Movil'), 'HSPA+'),
-	((SELECT name FROM Carriers WHERE name = 'Vivo'), 'CDMA'),
-	((SELECT name FROM Carriers WHERE name = 'Vivo'), 'GSM'),
-	((SELECT name FROM Carriers WHERE name = 'Vivo'), 'HSPA+'),
-	((SELECT name FROM Carriers WHERE name = 'Orange'), 'GSM'),
+	((SELECT name FROM Carriers WHERE name = 'Sprint'), 'LTE'),
+	((SELECT name FROM Carriers WHERE name = 'Virgin Mobile'), 'CDMA'), -- USA
+	((SELECT name FROM Carriers WHERE name = 'Virgin Mobile'), 'GSM'), -- outside USA
+	((SELECT name FROM Carriers WHERE name = 'Virgin Mobile'), 'LTE'),
+	((SELECT name FROM Carriers WHERE name = 'Rogers Wireless'), 'GSM'), -- Canada
+	((SELECT name FROM Carriers WHERE name = 'Rogers Wireless'), 'HSPA+'), -- Canada
+	((SELECT name FROM Carriers WHERE name = 'Rogers Wireless'), 'LTE'), -- Canada
+	((SELECT name FROM Carriers WHERE name = 'Telus Mobility'), 'CDMA'), -- Canada
+	((SELECT name FROM Carriers WHERE name = 'Telus Mobility'), 'HSPA+'), -- Canada
+	((SELECT name FROM Carriers WHERE name = 'Bell Mobility'), 'CDMA'), -- Canada
+	((SELECT name FROM Carriers WHERE name = 'Bell Mobility'), 'HSPA+'), -- Canada
+	((SELECT name FROM Carriers WHERE name = 'America Movil'), 'CDMA'), -- Mexico
+	((SELECT name FROM Carriers WHERE name = 'America Movil'), 'HSPA+'), -- Mexico
+	((SELECT name FROM Carriers WHERE name = 'Vivo'), 'CDMA'), -- Brazil
+	((SELECT name FROM Carriers WHERE name = 'Vivo'), 'GSM'), -- Brazil
+	((SELECT name FROM Carriers WHERE name = 'Vivo'), 'HSPA+'), -- Brazil
+	((SELECT name FROM Carriers WHERE name = 'Orange'), 'GSM'), -- UK
 	((SELECT name FROM Carriers WHERE name = 'MTS'), 'GSM'), -- RUSSIA
 	((SELECT name FROM Carriers WHERE name = 'BSNL'), 'GSM'); -- INDIA
 
