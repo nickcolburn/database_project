@@ -22,42 +22,42 @@ INSERT INTO Retailers(name, region) VALUES
         ('Apple', 'North America');
         
 INSERT INTO Components(name, comp_type) VALUES
-	-- RAM sizes
-	('2 GB DDR3', 'Memory'), -- comp_id = 1 (Galaxy S4, xPeria Z1)
-	('1 GB DDR3', 'RAM'), -- comp_id = 2 (iPhone 5s, )
+	-- Batteries
+	('1560 mAh', 'Battery'), -- comp_id = (iPhone 5s)
+	('2300 mAh', 'Battery'), -- comp_id = (Nexus 5, HTC One)
+	('2600 mAh', 'Battery'), -- comp_id =  (Galaxy S4)
+	('3000 mAh', 'Battery'), -- comp_id = (xPeria Z1)
 	
 	-- Cameras
 	('20.7 MP', 'Rear Camera'), -- comp_id = (xPeria Z1)
-	('13 MP', 'Rear Camera'), -- comp_id = 3 (Galaxy S4,)
-	('8 MP', 'Rear Camera'), -- comp_id = 4 (iPhone 5s, )
+	('13 MP', 'Rear Camera'), -- comp_id = 3 (Galaxy S4)
+	('8 MP', 'Rear Camera'), -- comp_id = 4 (iPhone 5s, Nexus 5)
+	('4 MP', 'Rear Camera'), -- comp_id = (HTC One)
+	
+	('2.1 MP', 'Front Camera'), -- comp_id = (HTC One)
 	('2 Megapixels', 'Front Camera'), -- comp_id = 5 (Galaxy S4, xPeria Z1)
-	('1.2 MP', 'Front Camera'), -- comp_id = 6 (iPhone 5s, )
+	('1.2 MP', 'Front Camera'), -- comp_id = 6 (iPhone 5s)
 	('1.3 MP', 'Front Camera'), -- comp_id = 7 (Nexus 5)
-        
-        -- specific components for Galaxy S4
-        ('2600 mAh', 'Battery'), -- comp_id = 8
-        ('HD Super AMOLED', 'Display'), -- comp_id = 9
-	('Qualcomm Snapdragon 600', 'Processor'), -- comp_id = 10
-
-	-- components for the iPhone 5s
-	('A7', 'Processor'), -- comp_id = 11
-	('Retina Display', 'Display'), -- comp_id = 12
-	('Touch ID', 'Fingerprint Sensor'), -- comp_id = 13
-	('1560 mAh', 'Battery'), -- comp_id = 14
 	
-	-- specific components for the Nexus 5
-	('Full HD IPS+', 'Display'), -- comp_id = 15
-	('2300 mAh', 'Battery'), -- comp_id = 16
+	-- Displays
+	('HD Super AMOLED', 'Display'), -- comp_id = (Galaxy S4)
+	('Retina Display', 'Display'), -- comp_id = (iPhone 5s)
+	('Full HD IPS+', 'Display'), -- comp_id =  (Nexus 5)
+	('TFT', 'Display'), -- comp_id = (xPeria Z1)
+	('Super LCD3', 'Display'), -- comp_id = (HTC One)
 	
-	-- specific components for the xPeria Z1
-	('TFT', 'Display'), -- comp_id =
-	('Qualcomm MSM8974 Snapdragon 800', 'Processor'), -- comp_id = 
-	('3000 mAh', 'Battery'); -- comp_id = 
-		
+	-- RAM sizes
+	('2 GB DDR3', 'Memory'), -- comp_id = 1 (Galaxy S4, Nexus 5, xPeria Z1, HTC One)
+	('1 GB DDR3', 'RAM'), -- comp_id = 2 (iPhone 5s)
 	
+	-- Processors
+	('Qualcomm Snapdragon 600', 'Processor'), -- comp_id =  (Galaxy S4, HTC One)
+        ('A7', 'Processor'), -- comp_id = 11 (iPhone 5s)
+        ('Qualcomm Snapdragon 800', 'Processor'), -- comp_id = (Nexus 5, xPeria Z1)
 	
+	-- Misc. Items
+	('Touch ID', 'Fingerprint Sensor'); -- comp_id = 13
 	
-
 INSERT INTO Countries(country_code, name) VALUES
         ('AUS', 'Australia'),
         ('AUT', 'Austria'),
@@ -126,10 +126,25 @@ INSERT INTO Devices(name, model_number, listed_price, mfctr_id, soft_id, release
         ('iPhone 5s (32GB)', 'A1533', 749.99, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=2) , (SELECT soft_id FROM Software WHERE soft_id=4),'2013-09-20', 3.95, 123.8, 58.6, 7.6),
         
         -- dev_id = 7
-        ('iPhone 5s (64GB)', 'A1533', 849.99, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=2) , (SELECT soft_id FROM Software WHERE soft_id=4),'2013-09-20', 3.95, 123.8, 58.6, 7.6)
+        ('iPhone 5s (64GB)', 'A1533', 849.99, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=2) , (SELECT soft_id FROM Software WHERE soft_id=4),'2013-09-20', 3.95, 123.8, 58.6, 7.6),
         
-	-- dev_id = 8
-        ('xPeria Z1', 'C6906', 649.99, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=5) , (SELECT soft_id FROM Software WHERE soft_id=2), '2013-09-20', 6.0, 144, 74, 8.5);
+	-- dev_id = 8, North America Model
+        ('xPeria Z1', 'C6906', 649.99, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=5) , (SELECT soft_id FROM Software WHERE soft_id=2), '2013-09-20', 6.0, 144, 74, 8.5),
+        
+        -- dev_id = 9, Worldwide Model
+        ('xPeria Z1', 'L39h', 649.99, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=5) , (SELECT soft_id FROM Software WHERE soft_id=2), '2013-09-20', 6.0, 144, 74, 8.5),
+        
+        -- dev_id = 10, North America Model
+        ('HTC One (32 GB)', '801n', 599.99, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=8) , (SELECT soft_id FROM Software WHERE soft_id=2), '2013-03-01', 5.04, 137.4, 68.2, 9.3),
+
+	-- dev_id = 11, North America Model
+        ('HTC One (64 GB)', '801n', 669.99, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=8) , (SELECT soft_id FROM Software WHERE soft_id=2), '2013-03-01', 5.04, 137.4, 68.2, 9.3),
+        
+        -- dev_id = 12, Europe/Middle East/Africa Model
+        ('HTC One (32 GB)', 'M7_UL', 599.99, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=8) , (SELECT soft_id FROM Software WHERE soft_id=2), '2013-03-01', 5.04, 137.4, 68.2, 9.3),
+        
+        -- dev_id = 13, Europe/Middle East/Africa Model
+        ('HTC One (64 GB)', 'M7_UL', 669.99, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=8) , (SELECT soft_id FROM Software WHERE soft_id=2), '2013-03-01', 5.04, 137.4, 68.2, 9.3);
         
 INSERT INTO Sales(dev_id, retailer_id, sale_price) VALUES
         ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT retailer_id FROM Retailers WHERE name='Amazon'),          199.99),
