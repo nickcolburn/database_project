@@ -60,45 +60,89 @@ INSERT INTO Components(name, comp_type) VALUES
 	('Touch ID', 'Fingerprint Sensor'); -- comp_id = 26
 	
 INSERT INTO Countries(country_code, name) VALUES
-        ('AUS', 'Australia'),
-        ('AUT', 'Austria'),
-        ('BRA', 'Brazil'),
-        ('CAN', 'Canada'),
-        ('CHL', 'Chile'),
-        ('CHN', 'China'),
-        ('COL', 'Colombia'),
-        ('DEU', 'Germany'),
-        ('FRA', 'France'),
-        ('GBR', 'United Kingdom'),
-        ('GRC', 'Greece'),
-        ('HKG', 'Hong Kong'),
-        ('IND', 'India'),
-        ('IRL', 'Ireland'),
-        ('ITA', 'Italy'),
-        ('JPN', 'Japan'),
-        ('MEX', 'Mexico'),
-        ('NLD', 'Netherlands'),
-        ('NZL', 'New Zealand'),
-        ('PHL', 'Phillipines'),
-        ('PRI', 'Puerto Rico'),
-        ('SGP', 'Singapore'),
-        ('SWE', 'Sweden'),
-        ('USA', 'United States');
+        ('ARG', 'Argentina'), -- America Movil
+        ('ARM', 'Armenia'), -- Orange
+        ('AUS', 'Australia'), -- Virgin Mobile
+        ('BRA', 'Brazil'), -- America Movil, Vivo, 
+        ('BEL', 'Belgium') -- Orange
+        ('CAN', 'Canada'), -- Virgin Mobile, Rogers Wireless, Telus Mobility, Bell Mobility
+        ('CHL', 'Chile'), -- America Movil, Virgin Mobile
+        ('COL', 'Colombia'), -- America Movil, Virgin Mobile
+        ('DOM', 'Dominican Republic'), -- America Movil
+        ('ECU', 'Ecuador'), -- America Movil
+        ('SLV', 'El Salvador'), -- America Movil
+        ('FRA', 'France'), -- Orange, Virgin Mobile, 
+        ('GBR', 'United Kingdom'), -- Orange, Virgin Mobile
+        ('GTM', 'Guatemala'), -- America Movil
+        ('HND', 'Honduras') -- America Movil
+        ('IND', 'India'), -- MTS, Virgin Mobile
+        ('JAM', 'Jamaica'), -- America Movil
+        ('LUX', 'Luxembourg'), -- Orange
+        ('MEX', 'Mexico'), -- America Movil
+        ('MDA', 'Moldova'), -- Orange
+        ('NIC', 'Nicaragua'), -- America Movil
+        ('PAN', 'Panama'), -- America Movil
+        ('PRY', 'Paraguay'), -- America Movil
+        ('PER', 'Peru'), -- America Movil
+        ('POL', 'Poland'), -- Orange, Virgin Mobile
+        ('PRT', 'Portugal') -- Orange
+        ('ROU', 'Romania'), -- Orange
+        ('SVK', 'Slovakia'), -- Orange
+        ('SPN', 'Spain'), -- Orange
+        ('ZAF', 'South Africa'), -- Virgin Mobile
+        ('CHE', 'Switzerland'), -- Orange
+        ('URY', 'Uruguay'), -- America Movil 
+        ('USA', 'United States'); -- America Movil, Verizon Wireless, AT&T, T-Mobile, Virgin Mobile
         
 INSERT INTO Carriers(name, country_code) VALUES
-        ('Verizon Wireless', 'USA'),
-        ('Sprint', 'USA'),
-        ('AT&T', 'USA'),
-        ('T-Mobile', 'USA'),
-        ('Virgin Mobile', 'USA'),
-        ('Rogers Wireless', 'CAN'),
-        ('Telus Mobility', 'USA'),
-        ('Bell Mobility', 'CAN'),
-        ('America Movil', 'MEX'),
-        ('Vivo', 'BRA'),
-        ('Orange', 'MEX'),
-        ('MTS', 'MEX'),
-        ('BSNL', 'MEX');
+        ('Verizon Wireless', (SELECT country_code FROM Countries WHERE country_code = 'USA')),
+        ('Sprint', (SELECT country_code FROM Countries WHERE country_code = 'USA')),
+        ('AT&T', (SELECT country_code FROM Countries WHERE country_code = 'USA')),
+        ('T-Mobile',(SELECT country_code FROM Countries WHERE country_code = 'USA')),
+        ('Virgin Mobile', (SELECT country_code FROM Countries WHERE country_code = 'AUS')),
+        ('Virgin Mobile', (SELECT country_code FROM Countries WHERE country_code = 'USA')),
+        ('Virgin Mobile', (SELECT country_code FROM Countries WHERE country_code = 'CAN')),
+        ('Virgin Mobile', (SELECT country_code FROM Countries WHERE country_code = 'FRA')),
+        ('Virgin Mobile', (SELECT country_code FROM Countries WHERE country_code = 'IND')),
+        ('Virgin Mobile', (SELECT country_code FROM Countries WHERE country_code = 'POL')),
+        ('Virgin Mobile', (SELECT country_code FROM Countries WHERE country_code = 'ZAF')),
+        ('Virgin Mobile', (SELECT country_code FROM Countries WHERE country_code = 'GBR')),
+        ('Virgin Mobile', (SELECT country_code FROM Countries WHERE country_code = 'CHL')),
+        ('Virgin Mobile', (SELECT country_code FROM Countries WHERE country_code = 'COL')),
+        ('Rogers Wireless', (SELECT country_code FROM Countries WHERE country_code = 'CAN')),
+        ('Telus Mobility', (SELECT country_code FROM Countries WHERE country_code = 'CAN')),
+        ('Bell Mobility', (SELECT country_code FROM Countries WHERE country_code = 'CAN')),
+        ('America Movil', (SELECT country_code FROM Countries WHERE country_code = 'USA')),
+        ('America Movil', (SELECT country_code FROM Countries WHERE country_code = 'MEX')),
+        ('America Movil', (SELECT country_code FROM Countries WHERE country_code = 'BRA')),
+        ('America Movil', (SELECT country_code FROM Countries WHERE country_code = 'COL')),
+        ('America Movil', (SELECT country_code FROM Countries WHERE country_code = 'ECU')),
+        ('America Movil', (SELECT country_code FROM Countries WHERE country_code = 'PER')),
+        ('America Movil', (SELECT country_code FROM Countries WHERE country_code = 'CHL')),
+        ('America Movil', (SELECT country_code FROM Countries WHERE country_code = 'PRY')),
+        ('America Movil', (SELECT country_code FROM Countries WHERE country_code = 'URY')),
+        ('America Movil', (SELECT country_code FROM Countries WHERE country_code = 'PRI')),
+        ('America Movil', (SELECT country_code FROM Countries WHERE country_code = 'DOM')),
+        ('America Movil', (SELECT country_code FROM Countries WHERE country_code = 'JAM')),
+        ('America Movil', (SELECT country_code FROM Countries WHERE country_code = 'GTM')),
+        ('America Movil', (SELECT country_code FROM Countries WHERE country_code = 'SLV')),
+        ('America Movil', (SELECT country_code FROM Countries WHERE country_code = 'HND')),
+        ('America Movil', (SELECT country_code FROM Countries WHERE country_code = 'NIC')),
+        ('America Movil', (SELECT country_code FROM Countries WHERE country_code = 'PAN')),
+        ('Vivo', (SELECT country_code FROM Countries WHERE country_code = 'BRA')),
+        ('Orange', (SELECT country_code FROM Countries WHERE country_code = 'ARM')),
+        ('Orange', (SELECT country_code FROM Countries WHERE country_code = 'BEL')),
+        ('Orange', (SELECT country_code FROM Countries WHERE country_code = 'SPN')),
+        ('Orange', (SELECT country_code FROM Countries WHERE country_code = 'FRA')),
+        ('Orange', (SELECT country_code FROM Countries WHERE country_code = 'LUX')),
+        ('Orange', (SELECT country_code FROM Countries WHERE country_code = 'MDA')),
+        ('Orange', (SELECT country_code FROM Countries WHERE country_code = 'POL')),
+        ('Orange', (SELECT country_code FROM Countries WHERE country_code = 'PRT')),
+        ('Orange', (SELECT country_code FROM Countries WHERE country_code = 'ROU')),
+        ('Orange', (SELECT country_code FROM Countries WHERE country_code = 'SVK')),
+        ('Orange', (SELECT country_code FROM Countries WHERE country_code = 'CHE')),
+        ('Orange', (SELECT country_code FROM Countries WHERE country_code = 'GBR')),
+        ('MTS', (SELECT country_code FROM Countries WHERE country_code = 'IND'));
         
 INSERT INTO Software(name, version) VALUES
 	('Android', 'KitKat'), -- soft_id = 1
@@ -107,10 +151,10 @@ INSERT INTO Software(name, version) VALUES
         ('Windows Phone 8', 'Update 3'); -- soft_id = 4 (Lumia 1520)
 
 INSERT INTO Devices(name, model_number, listed_price, mfctr_id, soft_id, release_date, weight, height, length, width) VALUES
-        -- dev_id = 1, USA Model
+        -- dev_id = 1, CDMA Model
         ('Galaxy S4', 'SCH-I545', 599.99, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=1) , (SELECT soft_id FROM Software WHERE soft_id=2),'2013-04-26', 4.6,  136.7, 69.6, 7.9),
         
-        -- dev_id = 2, International Model
+        -- dev_id = 2, International Model (GSM)
         ('Galaxy S4', 'GT-I9500', 545.00, (SELECT mfctr_id FROM Manufacturers WHERE mfctr_id=1) , (SELECT soft_id FROM Software WHERE soft_id=2),'2012-05-01', 4.6,  136.6, 69.8, 7.9),
         
         -- dev_id = 3
@@ -164,7 +208,7 @@ INSERT INTO Users(username, first_name, last_name) VALUES
         ('George91340',        'George', 'Gutierrez'),
         ('NickColburn', 'Nick', 'Colburn'),
         ('Joao_Brazil', 'Joao', 'Leite'),
-        ('Spaz', 'Steven', 'Paz'),
+        ('Spaz', 'Steven', 'Paz'),	
         ('El Profe', 'Alvaro', 'Monge');
 
 INSERT INTO Reviews(dev_id, username, rating, review) VALUES
@@ -176,10 +220,11 @@ INSERT INTO Reviews(dev_id, username, rating, review) VALUES
 
 INSERT INTO Supports(dev_id, country, carrier) VALUES
         -- Samsung Galaxy S4 = dev_id 1		
-		-- Samsung Galaxy S3 = dev_id 2
+	-- Samsung Galaxy S3 = dev_id 2
 		-- Motorola DROID MAXX = dev_id 3
 		-- LG Nexus 5 (16 GB) = dev_id 4
 		-- Apple iPhone 5S (16GB) = dev_id 5
+		((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT country_code FROM Countries WHERE name = 'Brazil'), (SELECT name FROM Carriers WHERE name = 'Vivo')),
         ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT country_code FROM Countries WHERE name = 'Brazil'), (SELECT name FROM Carriers WHERE name = 'Vivo')),
         ((SELECT dev_id FROM Devices WHERE dev_id=2), (SELECT country_code FROM Countries WHERE name = 'United States'), (SELECT name FROM Carriers WHERE name = 'AT&T')),
         ((SELECT dev_id FROM Devices WHERE dev_id=3), (SELECT country_code FROM Countries WHERE name = 'United States'), (SELECT name FROM Carriers WHERE name = 'T-Mobile')),
