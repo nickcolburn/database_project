@@ -91,7 +91,7 @@ public class DatabaseProject {
 		  +"NATURAL JOIN Devices d "
 		  +"LEFT OUTER JOIN Manufacturers m ON d.mfctr_id = m.mfctr_id "
 		  +"LEFT OUTER JOIN Software s ON d.soft_id = s.soft_id "
-		  +"WHERE r.rating > ?";
+		  +"WHERE r.rating > 4.0";
 
   /**
    * Query to retrieve all devices in the DB
@@ -371,7 +371,7 @@ public class DatabaseProject {
 					+"*                           DELETE USER                          *\n"
 					+"******************************************************************\n"
 					+" Please choose a Username to delete                               \n");
-	      //displayAllUsers();
+	      
     	  
     	  System.out.print("\nSelection: ");
 		  String username = userInput.nextLine();
@@ -609,8 +609,8 @@ public class DatabaseProject {
 	  						+"*                      PRODUCT SEARCH MENU                       *\n"
 	  						+"******************************************************************\n"
 	  						+"* Please make a selection from the following:                    *\n"
-	  						+"* 1. View By Rating                                              *\n"
-	  						+"* 2. View By Screen Size                                         *\n"
+	  						+"* 1. Display All Products                                        *\n"
+	  						+"* 2. View By Rating                                              *\n"
 	  						+"* 3. Display All Reviews                                         *\n"
 	  						+"* 4. Return To Main Menu                                         *\n"
 	  						+"******************************************************************\n");
@@ -630,11 +630,11 @@ public class DatabaseProject {
 		  		break;
 		  	}
 		  	case 1:{
-		  		searchByRating();
+		  		displayAllDevices();
 		  		break;
 		  	}
 		  	case 2:{
-		  		//searchByScreen();
+		  		searchByRating();
 		  		break;
 		  	}
 		  	case 3:{
