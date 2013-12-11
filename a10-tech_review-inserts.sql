@@ -209,33 +209,122 @@ INSERT INTO Radio_spectrum(carrier_name, radio_spectrum) VALUES
 
 INSERT INTO Internals(dev_id, comp_id) VALUES
 	-- the following internals are for the Samsung Galaxy S4
-	((SELECT dev_id FROM Devices WHERE dev_id = 1), (SELECT comp_id FROM Components WHERE comp_id = 1)),
-	((SELECT dev_id FROM Devices WHERE dev_id = 1), (SELECT comp_id FROM Components WHERE comp_id = 3)), 
-	((SELECT dev_id FROM Devices WHERE dev_id = 1), (SELECT comp_id FROM Components WHERE comp_id = 5)), 
-	((SELECT dev_id FROM Devices WHERE dev_id = 1), (SELECT comp_id FROM Components WHERE comp_id = 7)), 
-	((SELECT dev_id FROM Devices WHERE dev_id = 1), (SELECT comp_id FROM Components WHERE comp_id = 8)),
-	((SELECT dev_id FROM Devices WHERE dev_id = 1), (SELECT comp_id FROM Components WHERE comp_id = 9)),
-	-- the following internals are for the iPhone 5s (16 GB)
-	((SELECT dev_id FROM Devices WHERE dev_id = 5), (SELECT comp_id FROM Components WHERE comp_id = 2)),
-	((SELECT dev_id FROM Devices WHERE dev_id = 5), (SELECT comp_id FROM Components WHERE comp_id = 4)), 
-	((SELECT dev_id FROM Devices WHERE dev_id = 5), (SELECT comp_id FROM Components WHERE comp_id = 6)), 
-	((SELECT dev_id FROM Devices WHERE dev_id = 5), (SELECT comp_id FROM Components WHERE comp_id = 10)), 
-	((SELECT dev_id FROM Devices WHERE dev_id = 5), (SELECT comp_id FROM Components WHERE comp_id = 11)),
-	((SELECT dev_id FROM Devices WHERE dev_id = 5), (SELECT comp_id FROM Components WHERE comp_id = 12)),
-	((SELECT dev_id FROM Devices WHERE dev_id = 5), (SELECT comp_id FROM Components WHERE comp_id = 13)),
-	-- the following internals are for the iPhone 5s (32 GB)
-	((SELECT dev_id FROM Devices WHERE dev_id = 6), (SELECT comp_id FROM Components WHERE comp_id = 2)),
-	((SELECT dev_id FROM Devices WHERE dev_id = 6), (SELECT comp_id FROM Components WHERE comp_id = 4)), 
-	((SELECT dev_id FROM Devices WHERE dev_id = 6), (SELECT comp_id FROM Components WHERE comp_id = 6)), 
-	((SELECT dev_id FROM Devices WHERE dev_id = 6), (SELECT comp_id FROM Components WHERE comp_id = 10)), 
-	((SELECT dev_id FROM Devices WHERE dev_id = 6), (SELECT comp_id FROM Components WHERE comp_id = 11)),
-	((SELECT dev_id FROM Devices WHERE dev_id = 6), (SELECT comp_id FROM Components WHERE comp_id = 12)),
-	((SELECT dev_id FROM Devices WHERE dev_id = 6), (SELECT comp_id FROM Components WHERE comp_id = 13)),
-	-- the following internals are for the iPhone 5s (64 GB)
-	((SELECT dev_id FROM Devices WHERE dev_id = 7), (SELECT comp_id FROM Components WHERE comp_id = 2)),
-	((SELECT dev_id FROM Devices WHERE dev_id = 7), (SELECT comp_id FROM Components WHERE comp_id = 4)), 
-	((SELECT dev_id FROM Devices WHERE dev_id = 7), (SELECT comp_id FROM Components WHERE comp_id = 6)), 
-	((SELECT dev_id FROM Devices WHERE dev_id = 7), (SELECT comp_id FROM Components WHERE comp_id = 10)), 
-	((SELECT dev_id FROM Devices WHERE dev_id = 7), (SELECT comp_id FROM Components WHERE comp_id = 11)),
-	((SELECT dev_id FROM Devices WHERE dev_id = 7), (SELECT comp_id FROM Components WHERE comp_id = 12)),
-	((SELECT dev_id FROM Devices WHERE dev_id = 7), (SELECT comp_id FROM Components WHERE comp_id = 13));
+	-- USA Model
+	((SELECT dev_id FROM Devices WHERE dev_id = 1), (SELECT comp_id FROM Components WHERE comp_id = 3)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 1), (SELECT comp_id FROM Components WHERE comp_id = 8)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 1), (SELECT comp_id FROM Components WHERE comp_id = 12)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 1), (SELECT comp_id FROM Components WHERE comp_id = 15)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 1), (SELECT comp_id FROM Components WHERE comp_id = 21)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 1), (SELECT comp_id FROM Components WHERE comp_id = 23)),
+	-- International Model
+	((SELECT dev_id FROM Devices WHERE dev_id = 2), (SELECT comp_id FROM Components WHERE comp_id = 3)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 2), (SELECT comp_id FROM Components WHERE comp_id = 8)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 2), (SELECT comp_id FROM Components WHERE comp_id = 12)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 2), (SELECT comp_id FROM Components WHERE comp_id = 15)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 2), (SELECT comp_id FROM Components WHERE comp_id = 21)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 2), (SELECT comp_id FROM Components WHERE comp_id = 23)),
+	
+	-- the following internals are for the Nexus 5 
+	-- 16 GB Model
+	((SELECT dev_id FROM Devices WHERE dev_id = 3), (SELECT comp_id FROM Components WHERE comp_id = 2)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 3), (SELECT comp_id FROM Components WHERE comp_id = 9)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 3), (SELECT comp_id FROM Components WHERE comp_id = 14)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 3), (SELECT comp_id FROM Components WHERE comp_id = 17)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 3), (SELECT comp_id FROM Components WHERE comp_id = 21)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 3), (SELECT comp_id FROM Components WHERE comp_id = 25)),
+	-- 32 GB Model
+	((SELECT dev_id FROM Devices WHERE dev_id = 4), (SELECT comp_id FROM Components WHERE comp_id = 2)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 4), (SELECT comp_id FROM Components WHERE comp_id = 9)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 4), (SELECT comp_id FROM Components WHERE comp_id = 14)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 4), (SELECT comp_id FROM Components WHERE comp_id = 17)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 4), (SELECT comp_id FROM Components WHERE comp_id = 21)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 4), (SELECT comp_id FROM Components WHERE comp_id = 25)),
+	
+	-- the following internals are for the iPhone 5s 
+	-- 16 GB Model
+	((SELECT dev_id FROM Devices WHERE dev_id = 5), (SELECT comp_id FROM Components WHERE comp_id = 1)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 5), (SELECT comp_id FROM Components WHERE comp_id = 9)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 5), (SELECT comp_id FROM Components WHERE comp_id = 13)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 5), (SELECT comp_id FROM Components WHERE comp_id = 16)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 5), (SELECT comp_id FROM Components WHERE comp_id = 22)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 5), (SELECT comp_id FROM Components WHERE comp_id = 24)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 5), (SELECT comp_id FROM Components WHERE comp_id = 26)),
+	-- 32 GB Model
+	((SELECT dev_id FROM Devices WHERE dev_id = 6), (SELECT comp_id FROM Components WHERE comp_id = 1)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 6), (SELECT comp_id FROM Components WHERE comp_id = 9)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 6), (SELECT comp_id FROM Components WHERE comp_id = 13)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 6), (SELECT comp_id FROM Components WHERE comp_id = 16)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 6), (SELECT comp_id FROM Components WHERE comp_id = 22)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 6), (SELECT comp_id FROM Components WHERE comp_id = 24)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 6), (SELECT comp_id FROM Components WHERE comp_id = 26)),
+	-- 64 GB Model
+	((SELECT dev_id FROM Devices WHERE dev_id = 7), (SELECT comp_id FROM Components WHERE comp_id = 1)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 7), (SELECT comp_id FROM Components WHERE comp_id = 9)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 7), (SELECT comp_id FROM Components WHERE comp_id = 13)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 7), (SELECT comp_id FROM Components WHERE comp_id = 16)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 7), (SELECT comp_id FROM Components WHERE comp_id = 22)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 7), (SELECT comp_id FROM Components WHERE comp_id = 24)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 7), (SELECT comp_id FROM Components WHERE comp_id = 26)),
+	
+	-- the following internals are for the xPeria Z1
+	-- North America Model
+	((SELECT dev_id FROM Devices WHERE dev_id = 8), (SELECT comp_id FROM Components WHERE comp_id = 4)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 8), (SELECT comp_id FROM Components WHERE comp_id = 6)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 8), (SELECT comp_id FROM Components WHERE comp_id = 12)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 8), (SELECT comp_id FROM Components WHERE comp_id = 18)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 8), (SELECT comp_id FROM Components WHERE comp_id = 21)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 8), (SELECT comp_id FROM Components WHERE comp_id = 25)),
+	-- Worldwide Model
+	((SELECT dev_id FROM Devices WHERE dev_id = 9), (SELECT comp_id FROM Components WHERE comp_id = 4)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 9), (SELECT comp_id FROM Components WHERE comp_id = 6)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 9), (SELECT comp_id FROM Components WHERE comp_id = 12)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 9), (SELECT comp_id FROM Components WHERE comp_id = 18)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 9), (SELECT comp_id FROM Components WHERE comp_id = 21)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 9), (SELECT comp_id FROM Components WHERE comp_id = 25)),
+	
+	-- the following internals are for the HTC One
+	-- North America Model, 32 GB
+	((SELECT dev_id FROM Devices WHERE dev_id = 10), (SELECT comp_id FROM Components WHERE comp_id = 2)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 10), (SELECT comp_id FROM Components WHERE comp_id = 10)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 10), (SELECT comp_id FROM Components WHERE comp_id = 11)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 10), (SELECT comp_id FROM Components WHERE comp_id = 19)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 10), (SELECT comp_id FROM Components WHERE comp_id = 21)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 10), (SELECT comp_id FROM Components WHERE comp_id = 23)),
+	-- North America Model, 64 GB
+	((SELECT dev_id FROM Devices WHERE dev_id = 11), (SELECT comp_id FROM Components WHERE comp_id = 2)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 11), (SELECT comp_id FROM Components WHERE comp_id = 10)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 11), (SELECT comp_id FROM Components WHERE comp_id = 11)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 11), (SELECT comp_id FROM Components WHERE comp_id = 19)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 11), (SELECT comp_id FROM Components WHERE comp_id = 21)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 11), (SELECT comp_id FROM Components WHERE comp_id = 23)),
+	-- Europe/Middle East/Africa Model, 32 GB
+	((SELECT dev_id FROM Devices WHERE dev_id = 12), (SELECT comp_id FROM Components WHERE comp_id = 2)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 12), (SELECT comp_id FROM Components WHERE comp_id = 10)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 12), (SELECT comp_id FROM Components WHERE comp_id = 11)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 12), (SELECT comp_id FROM Components WHERE comp_id = 19)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 12), (SELECT comp_id FROM Components WHERE comp_id = 21)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 12), (SELECT comp_id FROM Components WHERE comp_id = 23)),
+	-- Europe/Middle East/Africa Model, 64 GB
+	((SELECT dev_id FROM Devices WHERE dev_id = 13), (SELECT comp_id FROM Components WHERE comp_id = 2)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 13), (SELECT comp_id FROM Components WHERE comp_id = 10)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 13), (SELECT comp_id FROM Components WHERE comp_id = 11)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 13), (SELECT comp_id FROM Components WHERE comp_id = 19)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 13), (SELECT comp_id FROM Components WHERE comp_id = 21)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 13), (SELECT comp_id FROM Components WHERE comp_id = 23)),
+	
+	-- the following internals are for the HTC One
+	-- United States Model, 32 GB
+	((SELECT dev_id FROM Devices WHERE dev_id = 14), (SELECT comp_id FROM Components WHERE comp_id = 5)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 14), (SELECT comp_id FROM Components WHERE comp_id = 7)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 14), (SELECT comp_id FROM Components WHERE comp_id = 13)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 14), (SELECT comp_id FROM Components WHERE comp_id = 20)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 14), (SELECT comp_id FROM Components WHERE comp_id = 21)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 14), (SELECT comp_id FROM Components WHERE comp_id = 25)),
+	-- International Model, 32 GB
+	((SELECT dev_id FROM Devices WHERE dev_id = 15), (SELECT comp_id FROM Components WHERE comp_id = 5)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 15), (SELECT comp_id FROM Components WHERE comp_id = 7)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 15), (SELECT comp_id FROM Components WHERE comp_id = 13)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 15), (SELECT comp_id FROM Components WHERE comp_id = 20)), 
+	((SELECT dev_id FROM Devices WHERE dev_id = 15), (SELECT comp_id FROM Components WHERE comp_id = 21)),
+	((SELECT dev_id FROM Devices WHERE dev_id = 15), (SELECT comp_id FROM Components WHERE comp_id = 25));
+	
