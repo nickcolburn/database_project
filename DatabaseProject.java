@@ -71,16 +71,6 @@ public class DatabaseProject {
      * JDBC Connection URL for the tech_review database on infoserver, using the MySQL driver
      */
      //private final static String DB_URL = "jdbc:mysql://infoserver:3306/cecs323m8";
-  /**
-   * Query to retrieve all devices based on price 
-   */
-  private final static String SQL__DEVICES_BY_PRICE =
-          "SELECT d.name, d.model_number AS model_number, m.name AS manufacturer_name, s.name AS software_name, d.listed_price " 
-		  +"FROM Devices d "
-		  +"LEFT OUTER JOIN Manufacturers m ON d.mfctr_id = m.mfctr_id "
-		  +"LEFT OUTER JOIN Software s ON d.soft_id = s.soft_id "
-		  +"GROUP BY d.listed_price "
-		  +"HAVING d.listed_price > ?";
   
   /**
    * Query to retrieve all devices based on review rating 
@@ -253,8 +243,7 @@ public class DatabaseProject {
 	  }
   
   /**
-   * Executes a SELECT statement on the opened connection and displays its
-   * retrieved information
+   * Displays all the devices in the DB in a formatted fashion
   */
   public void displayAllDevices() {
     try {
@@ -333,7 +322,7 @@ public class DatabaseProject {
                   System.out.print("\nMust enter a username (max 20 char): ");
               username = userInput.nextLine();
           }
-          System.out.print("\nFull name: ");
+          System.out.print("\nFull Name: ");
           String line = userInput.nextLine();
           String name[] = line.split(" ");
           addUserQuery.setString(1, username);
@@ -465,9 +454,8 @@ public class DatabaseProject {
 	    }
 	  }
   
-  
-  /**
-   * Asks user for the name of the device manufacturer they wish to search for.
+    /**
+   * Asks user for the minimum rating they would like to search for
    */
   public void searchByRating() {
 	  try {
@@ -631,8 +619,8 @@ public class DatabaseProject {
 	  						+"*                      PRODUCT SEARCH MENU                       *\n"
 	  						+"******************************************************************\n"
 	  						+"* Please make a selection from the following:                    *\n"
-	  						+"* 1. Display All Products                                        *\n"
-	  						+"* 2. View By Rating                                              *\n"
+	  						+"* 1. View By Rating                                              *\n"
+	  						+"* 2. Display All Products                                        *\n"
 	  						+"* 3. Display All Reviews                                         *\n"
 	  						+"* 4. Return To Main Menu                                         *\n"
 	  						+"******************************************************************\n");
@@ -652,11 +640,11 @@ public class DatabaseProject {
 		  		break;
 		  	}
 		  	case 1:{
-		  		displayAllDevices();
+		  		searchByRating();
 		  		break;
 		  	}
 		  	case 2:{
-		  		searchByRating();
+		  		displayAllDevices();
 		  		break;
 		  	}
 		  	case 3:{
