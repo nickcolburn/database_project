@@ -66,34 +66,44 @@ public class DatabaseProject {
    /**
     * JDBC Connection URL for the tech_review database (local instance), using the MySQL driver
     */
-    //private final static String DB_URL = "jdbc:mysql://127.0.0.1:3306/cecs323";
+    private final static String DB_URL = "jdbc:mysql://127.0.0.1:3306/cecs323";
     /**
      * JDBC Connection URL for the tech_review database on infoserver, using the MySQL driver
      */
-     private final static String DB_URL = "jdbc:mysql://infoserver:3306/cecs323m8";
+     //private final static String DB_URL = "jdbc:mysql://infoserver:3306/cecs323m8";
   /**
-   * Query to retrieve all devices and 
+   * Query to retrieve all devices based on price 
    */
-  private final static String SQL_FIND_ALL_DEVICES =
-          "SELECT d.dev_id, r.name AS Retailer_Name, d.name AS Device_Name ,d.listed_price AS Listed_Price,s.sale_price AS Sale_Price "
-		  + "FROM Sales s "
-		  + "LEFT OUTER JOIN Retailers r on s.retailer_id = r.retailer_id "
-		  + "LEFT OUTER JOIN Devices d ON d.dev_id = s.dev_id "
-		  //+"GROUP BY s.sales_price";
-		  + "GROUP BY d.dev_id";
-
-  /**
-   * Query to retrieve the loans (number and amount) of a specified customer
-   */
-  private final static String SQL_FIND_SPECIFIC_DEVICE =
-          "SELECT d.name AS Device_name, m.name AS Manufacturer_Name, s.name AS Software_name, s.version AS Software_version "
+  private final static String SQL__DEVICES_BY_PRICE =
+          "SELECT d.name, d.model_number AS model_number, m.name AS manufacturer_name, s.name AS software_name, d.listed_price " 
 		  +"FROM Devices d "
 		  +"LEFT OUTER JOIN Manufacturers m ON d.mfctr_id = m.mfctr_id "
 		  +"LEFT OUTER JOIN Software s ON d.soft_id = s.soft_id "
-		  +"WHERE m.name = ?";
+		  +"GROUP BY d.listed_price "
+		  +"HAVING d.listed_price > ?";
   
   /**
-   * Query to insert a user into the DB
+   * Query to retrieve all devices based on review rating 
+   */
+  private final static String SQL_FIND_DEVICES_BY_RATING =
+          "SELECT r.rating AS Rating, d.name as Device_Name, d.model_number as Model_Number, m.name as Manufacturer_Name, s.name as Software_Name " 
+		  +"FROM Reviews r "
+		  +"NATURAL JOIN Devices d "
+		  +"LEFT OUTER JOIN Manufacturers m ON d.mfctr_id = m.mfctr_id "
+		  +"LEFT OUTER JOIN Software s ON d.soft_id = s.soft_id "
+		  +"WHERE r.rating > ?";
+
+  /**
+   * Query to retrieve all devices in the DB
+   */
+  private final static String SQL_FIND_ALL_DEVICES =
+          "SELECT d.dev_id, m.name AS manufacturer_name, d.name AS device_name, d.model_number AS model_number, d.listed_price AS listed_price, s.name AS software_name "
+          +"FROM Devices d "
+          +"LEFT OUTER JOIN Manufacturers m ON d.mfctr_id = m.mfctr_id "
+          +"LEFT OUTER JOIN Software s ON d.soft_id = s.soft_id ";
+  
+  /**
+   * Query to insert a user into the DB (needed to insert a review)
    */
   private final static String SQL_INSERT_USER =
 		  "INSERT INTO Users(username, first_name, last_name) VALUES "
@@ -102,10 +112,10 @@ public class DatabaseProject {
    * Query to delete a user from the DB
    */
   private final static String SQL_DELETE_USER =
-		  "DELETE FROM Users(username, first_name, last_name) VALUES "
-		  +"(?, ?, ?)";
+		  "DELETE FROM Users "
+		  +"WHERE username = ?";
   /**
-   * Query to insert a user into the DB
+   * Query to insert a review into the DB
    */
   private final static String SQL_INSERT_REVIEW =
 		  "INSERT INTO Reviews(dev_id, username, rating, review) VALUES "
@@ -246,12 +256,13 @@ public class DatabaseProject {
       try {
         ResultSet rs = stmt.executeQuery(SQL_FIND_ALL_DEVICES);
         try {
-        	String retailerName = "Retailer Name";
+        	String dev_id = "#";
         	String deviceName = "Device Name";
+        	String manufacturer = "Manufacturer";
         	String lPrice = "Listed Price";
-        	String sPrice = "Sale Price";
-        	System.out.printf("%-20s %-20s %-15s %-15s %n",retailerName,deviceName,lPrice,sPrice);
-        	System.out.println("-------------        -----------          ------------    ----------");
+        	String software = "Software";
+        	System.out.printf("%-2s %-20s %-20s %-15s %-20s %n",dev_id, deviceName, manufacturer,lPrice,software);
+        	System.out.println("   -----------          ------------         ------------    ----------");
         	while (rs.next()) {
         	  displayOneDevice(rs);
           }
@@ -284,11 +295,11 @@ public class DatabaseProject {
    */
   private void displayOneDevice(ResultSet rs) {
     try {
-      // Note the two different ways in which to retrieve the value of a column
-      // Either by specifying the column number or by specifying the column name
-      String retailerName = rs.getString("Retailer_Name");
-      String deviceName = rs.getString("Device_Name");
-      System.out.printf("%-20s %-20s $%-15.2f $%-15.2f %n", retailerName, deviceName, rs.getFloat("Listed_Price"), rs.getFloat("Sale_Price"));
+      int dev_id = rs.getInt("dev_id");
+      String manufacturer = rs.getString("manufacturer_name");
+      String deviceName = rs.getString("device_name");
+      String software = rs.getString("software_name");
+      System.out.printf("%-2d %-20s %-20s $%-15.2f %-20s %n", dev_id, manufacturer, deviceName, rs.getFloat("Listed_Price"), software);
 
     } catch (SQLException sqle) {
       LOGGER.log(Level.SEVERE, "Unable to process result due to error {0}", sqle.getMessage());
@@ -308,23 +319,22 @@ public class DatabaseProject {
 	      System.out.println("\n******************************************************************\n"
 					+"*                         PRODUCT REVIEW                         *\n"
 					+"******************************************************************\n"
-					+"* Provide the following information                              *\n");
+					+"Provide the following information                               \n");
 	      System.out.print("username: ");
-    	  String username = userInput.nextLine();
-    	  while(username.equals(" ") || username.length() > 20){
-    		  System.out.print("\nMust enter a username (max 20 char): ");
-        	  username = userInput.nextLine();
-    	  }
-    	  System.out.print("\nFull name (optional): ");
-    	  String line = userInput.nextLine();
-    	  String name[] = line.split(" ");
-    	  addUserQuery.setString(1, username);
-    	  addUserQuery.setString(2, name[0]);
-    	  addUserQuery.setString(3, name[1]);
-    	  addUserQuery.executeUpdate();   
-    	  
+          String username = userInput.nextLine();
+          while(username.equals(" ") || username.length() > 20){
+                  System.out.print("\nMust enter a username (max 20 char): ");
+              username = userInput.nextLine();
+          }
+          System.out.print("\nFull name: ");
+          String line = userInput.nextLine();
+          String name[] = line.split(" ");
+          addUserQuery.setString(1, username);
+          addUserQuery.setString(2, name[0]);
+          addUserQuery.setString(3, name[1]);
+          addUserQuery.executeUpdate(); 
+   	  
     	  displayAllDevices();
-    	  
     	  System.out.print("\nSelection: ");
 		  int selection = userInput.nextInt();
 		  userInput.nextLine();
@@ -341,6 +351,37 @@ public class DatabaseProject {
 		  System.out.print("\nAdding your review to the database...");
 		  addReview.executeUpdate();
 		  System.out.print("Thank you for your feedback.\n");
+		  return;			
+	  } catch (SQLException sqle) {
+          LOGGER.log(Level.SEVERE, "Unable to execute DB statement due to error {0}", sqle.getMessage());
+      }
+	
+  }
+  /**
+   * Asks user to provide a first and last name, as well as a username, in order
+   * to initiate a product review. Then asks user for the product they would
+   * like to begin reviewing.
+   */
+  public void deleteUser() {
+	  try {
+		  userInput.nextLine();
+	      PreparedStatement deleteUserQuery = connection.prepareStatement(SQL_DELETE_USER);	      
+	 
+	      System.out.println("\n******************************************************************\n"
+					+"*                           DELETE USER                          *\n"
+					+"******************************************************************\n"
+					+" Please choose a Username to delete                               \n");
+	      //displayAllUsers();
+    	  
+    	  System.out.print("\nSelection: ");
+		  String username = userInput.nextLine();
+		  deleteUserQuery.setString(1, username);
+		  System.out.println("\n**WARNING**"
+				  			+"\nDeleting this user will remove"
+				  			+"\nany reviews associated with them."
+				  			+"\nDo you wish to continue? (y/n): ");
+		  if(isResponseYes(userInput.nextLine()))
+			  deleteUserQuery.executeUpdate();
 		  return;
 		
 	  } catch (SQLException sqle) {
@@ -411,38 +452,43 @@ public class DatabaseProject {
   /**
    * Asks user for the name of the device manufacturer they wish to search for.
    */
-  public void searchByName() {
+  public void searchByRating() {
 	  try {
-	      PreparedStatement preparedQuery = connection.prepareStatement(SQL_FIND_SPECIFIC_DEVICE);
-	      String userResponse;
-	      
-	      do{
-	    	  System.out.println("Name of manufacturer: ");
-	    	  String name = userInput.nextLine();
-	    	  preparedQuery.setString(1, name);
-
-	          ResultSet returnedDevices = preparedQuery.executeQuery();
-	          if (!returnedDevices.next()) {
-	            System.out.println("No devices made by " + name + " were found.");
-	          } 
-	          else {
-	            do {
-	            	String mfctrName = returnedDevices.getString(1);
-	                String deviceName = returnedDevices.getString(2);
-	            	String softName = returnedDevices.getString(3);
-	                String softVersion = returnedDevices.getString(4);
-	                System.out.printf("%-20s %-20s %-20s %-20s %n", mfctrName, deviceName, softName, softVersion);
-	              
-	            } while (returnedDevices.next());
-	          }	    	  
+		  userInput.nextLine();
+	      PreparedStatement preparedQuery = connection.prepareStatement(SQL_FIND_DEVICES_BY_RATING);
+	      try{ 
+	    	  System.out.println("Enter the minimum rating you would like to see: ");
+	    	  float ratingInput = userInput.nextFloat();
+	    	  preparedQuery.setFloat(1, ratingInput);
 	    	  
-	    	  System.out.print("Continue searching (y/n)?: ");
-	          userResponse = userInput.nextLine();
-	        } while (isResponseYes(userResponse));
-	      return;
-	      }catch (SQLException sqle) {
-	      LOGGER.log(Level.SEVERE, "Unable to process result due to error {0}", sqle.getMessage());
-	      }
+	          ResultSet returnedDevices = preparedQuery.executeQuery();
+	          try{
+		          do {
+		        	  float rating = returnedDevices.getFloat("Rating");
+		        	  String deviceName = returnedDevices.getString("Device_Name");
+		        	  String model = returnedDevices.getString("Model_Number");
+		        	  String software = returnedDevices.getString("Software_Name");
+		        	  System.out.printf("%-2.1f %-20s %-20s %-20s %n", rating, deviceName, model, software);
+		          
+		          } while (returnedDevices.next());
+	          }finally{
+	        	  try{
+	        		  returnedDevices.close();
+	        	  }catch(Throwable ignore){
+	        		  LOGGER.log(Level.SEVERE,"Unable to process result due to error {0}", ignore.getMessage());
+	        	  }
+	          }
+		  }finally{
+	        	  try{
+	        		  preparedQuery.close();
+	        		  return;
+	        	  }catch (Throwable ignore) {
+		      LOGGER.log(Level.SEVERE, "Unable to process statement to error {0}", ignore.getMessage());
+	        	  }
+		  }
+	  }catch (SQLException sqle) {
+	      LOGGER.log(Level.SEVERE, "Unable to execute DB statement due to error {0}", sqle.getMessage());
+	  }
   }
 
   /**
@@ -484,7 +530,7 @@ public class DatabaseProject {
 			  				+"* 2. Write A Review                                              *\n"
 			  				+"* 3. Delete User                                                 *\n"
 			  				+"* 4. Commit Changes                                              *\n"
-			  				+"* 5. Undo Changes                                                *\n"
+			  				+"* 5. Rollback Changes                                            *\n"
 			  				+"* 6. Exit                                                        *\n"
 			  				+"******************************************************************\n");
 	  System.out.print("\nSelection: ");
@@ -499,6 +545,7 @@ public class DatabaseProject {
 		  switch(menuOpt)
 		  {
 		  	case 0:{
+		  		//prevents menu from going to default if returning from a submenu
 		  		break;
 		  	}
 		  	case 1:{
@@ -510,7 +557,8 @@ public class DatabaseProject {
 		  		break;
 		  	}
 		  	case 3:{
-		  		//deleteUser();
+		  		deleteUser();
+		  		break;
 		  	}
 		  	case 4:{
 		  		userInput.nextLine();
@@ -561,8 +609,8 @@ public class DatabaseProject {
 	  						+"*                      PRODUCT SEARCH MENU                       *\n"
 	  						+"******************************************************************\n"
 	  						+"* Please make a selection from the following:                    *\n"
-	  						+"* 1. Display All Products                                        *\n"
-	  						+"* 2. Compare Products                                            *\n"
+	  						+"* 1. View By Rating                                              *\n"
+	  						+"* 2. View By Screen Size                                         *\n"
 	  						+"* 3. Display All Reviews                                         *\n"
 	  						+"* 4. Return To Main Menu                                         *\n"
 	  						+"******************************************************************\n");
@@ -578,14 +626,15 @@ public class DatabaseProject {
 		  switch(menuOpt)
 		  {
 		  	case 0:{
+		  		//prevents menu from going to default if returning from a submenu
 		  		break;
 		  	}
 		  	case 1:{
-		  		displayAllDevices();
+		  		searchByRating();
 		  		break;
 		  	}
 		  	case 2:{
-		  		searchByName();
+		  		//searchByScreen();
 		  		break;
 		  	}
 		  	case 3:{
