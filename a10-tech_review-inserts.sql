@@ -348,7 +348,7 @@ INSERT INTO Supports(dev_id, country, carrier) VALUES
 	((SELECT dev_id FROM Devices WHERE dev_id=14), (SELECT country_code FROM Countries WHERE country_code = 'USA'), (SELECT name FROM Carriers WHERE name = 'AT&T')),
 	
 	-- Nokia Lumia International Model
-    	((SELECT dev_id FROM Devices WHERE dev_id=15), (SELECT country_code FROM Countries WHERE country_code = 'USA'), (SELECT name FROM Carriers WHERE name = 'T-Mobile')),
+    	((SELECT dev_id FROM Devices WHERE dev_id=15), (SELECT country_code FROM Countries WHERE country_code = 'USA'), (SELECT name FROM Carriers WHERE name = 'T-Mobile'));
 
     	
 INSERT INTO Radio_spectrum(carrier_name, radio_spectrum) VALUES
