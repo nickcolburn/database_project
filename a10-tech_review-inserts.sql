@@ -14,10 +14,17 @@ INSERT INTO Manufacturers(name) VALUES
 
 INSERT INTO Retailers(name, region) VALUES
         ('Best Buy', 'North America'),
-        ('Radioshack', 'North America'),
         ('Amazon', 'North America'),
-        ('Costco', 'North America'),
-        ('Apple', 'North America');
+        ('Amazon', 'South America'),
+        ('Amazon', 'Asia'),
+        ('Amazon', 'Europe'),
+        ('Amazon', 'Oceania'),
+        ('Amazon', 'Africa'),
+        ('Apple', 'North America')
+        ('Apple', 'Europe')
+        ('Apple', 'Asia'),
+        ('Apple', 'Oceania');
+        
         
 INSERT INTO Components(name, comp_type) VALUES
 	-- Batteries
@@ -196,13 +203,50 @@ INSERT INTO Devices(name, model_number, listed_price, mfctr_id, soft_id, release
         
        
 INSERT INTO Sales(dev_id, retailer_id, sale_price) VALUES
-        ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT retailer_id FROM Retailers WHERE name='Amazon'),          199.99),
-        ((SELECT dev_id FROM Devices WHERE dev_id=2), (SELECT retailer_id FROM Retailers WHERE name='Best Buy'),        0.0),
-        ((SELECT dev_id FROM Devices WHERE dev_id=3), (SELECT retailer_id FROM Retailers WHERE name='Best Buy'),        149.99),
-        ((SELECT dev_id FROM Devices WHERE dev_id=4), (SELECT retailer_id FROM Retailers WHERE name='Best Buy'),        49.99),
-        ((SELECT dev_id FROM Devices WHERE dev_id=5), (SELECT retailer_id FROM Retailers WHERE name='Best Buy'),        299.99),    
-	((SELECT dev_id FROM Devices WHERE dev_id=5), (SELECT retailer_id FROM Retailers WHERE name='Best Buy'),        249.99);                      
-
+        -- Galaxy S4 Prices
+        ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT retailer_id FROM Retailers WHERE name='Best Buy'), 49.99),
+        ((SELECT dev_id FROM Devices WHERE dev_id=1), (SELECT retailer_id FROM Retailers WHERE name='Amazon'), 557.99),
+        -- Galaxy S4 International Prices
+        ((SELECT dev_id FROM Devices WHERE dev_id=2), (SELECT retailer_id FROM Retailers WHERE name='Amazon'), 557.99),
+        
+        -- Nexus 5 16 GB
+        ((SELECT dev_id FROM Devices WHERE dev_id=3), (SELECT retailer_id FROM Retailers WHERE name='Amazon'), 443.99),
+        -- Nexus 5 32 GB
+        ((SELECT dev_id FROM Devices WHERE dev_id=4), (SELECT retailer_id FROM Retailers WHERE name='Amazon'), 485.00),
+        
+        -- iPhone 5s 16 GB Prices
+        ((SELECT dev_id FROM Devices WHERE dev_id=5), (SELECT retailer_id FROM Retailers WHERE name='Best Buy'), 149.99),
+        ((SELECT dev_id FROM Devices WHERE dev_id=5), (SELECT retailer_id FROM Retailers WHERE name='Apple'), 199.99),
+        ((SELECT dev_id FROM Devices WHERE dev_id=5), (SELECT retailer_id FROM Retailers WHERE name='Amazon'), 759.99),
+        -- iPhone 5s 32 GB Prices
+        ((SELECT dev_id FROM Devices WHERE dev_id=6), (SELECT retailer_id FROM Retailers WHERE name='Best Buy'), 299.99),
+        ((SELECT dev_id FROM Devices WHERE dev_id=6), (SELECT retailer_id FROM Retailers WHERE name='Apple'), 299.99),
+        ((SELECT dev_id FROM Devices WHERE dev_id=6), (SELECT retailer_id FROM Retailers WHERE name='Amazon'), 899.99),
+        -- iPhone 5s 64 GB Prices
+        ((SELECT dev_id FROM Devices WHERE dev_id=7), (SELECT retailer_id FROM Retailers WHERE name='Best Buy'), 399.99),
+        ((SELECT dev_id FROM Devices WHERE dev_id=7), (SELECT retailer_id FROM Retailers WHERE name='Apple'), 399.99),
+        ((SELECT dev_id FROM Devices WHERE dev_id=7), (SELECT retailer_id FROM Retailers WHERE name='Amazon'), 1019.99),
+        
+        -- xPeria Z1 North America
+        ((SELECT dev_id FROM Devices WHERE dev_id=8), (SELECT retailer_id FROM Retailers WHERE name='Amazon'), 600.00),
+        -- xPeria Z1 North America
+        ((SELECT dev_id FROM Devices WHERE dev_id=9), (SELECT retailer_id FROM Retailers WHERE name='Amazon'), 600.00),
+        
+        -- HTC One 32 GB Model
+        ((SELECT dev_id FROM Devices WHERE dev_id=10), (SELECT retailer_id FROM Retailers WHERE name='Amazon'), 544.00),
+        ((SELECT dev_id FROM Devices WHERE dev_id=10), (SELECT retailer_id FROM Retailers WHERE name='Best Buy'), 199.99),
+        -- HTC One 64 GB Model
+        ((SELECT dev_id FROM Devices WHERE dev_id=11), (SELECT retailer_id FROM Retailers WHERE name='Amazon'), 899.99),
+        -- HTC One 32 GB International Model
+        ((SELECT dev_id FROM Devices WHERE dev_id=12), (SELECT retailer_id FROM Retailers WHERE name='Amazon'), 544.00),
+        -- HTC One 64 GB International Model
+	((SELECT dev_id FROM Devices WHERE dev_id=13), (SELECT retailer_id FROM Retailers WHERE name='Amazon'), 899.00),
+        
+        -- Lumia 1520
+        ((SELECT dev_id FROM Devices WHERE dev_id=14), (SELECT retailer_id FROM Retailers WHERE name='Amazon'), 179.99),
+        ((SELECT dev_id FROM Devices WHERE dev_id=14), (SELECT retailer_id FROM Retailers WHERE name='Best Buy'), 199.99);
+        
+        
 INSERT INTO Users(username, first_name, last_name) VALUES
         ('George91340',        'George', 'Gutierrez'),
         ('NickColburn', 'Nick', 'Colburn'),
