@@ -91,7 +91,7 @@ public class DatabaseProject {
 		  +"NATURAL JOIN Devices d "
 		  +"LEFT OUTER JOIN Manufacturers m ON d.mfctr_id = m.mfctr_id "
 		  +"LEFT OUTER JOIN Software s ON d.soft_id = s.soft_id "
-		  +"WHERE r.rating > 4.0";
+		  +"WHERE r.rating > ?";
 
   /**
    * Query to retrieve all devices in the DB
@@ -128,6 +128,13 @@ public class DatabaseProject {
 		  "SELECT d.name, r.rating, r.username, r.review "
 		  +"FROM Reviews r INNER JOIN Devices d ON r.dev_id = d.dev_id "
 		  +"ORDER BY rating";
+  
+  /**
+   * Query to display all users in the DB
+   */
+  private final static String SQL_DISPLAY_ALL_USERS =
+		  "SELECT username " 
+		  +"FROM Users";
   
   /**
    * Scanner object attached to the user's input (via keyboard)
@@ -370,9 +377,19 @@ public class DatabaseProject {
 	      System.out.println("\n******************************************************************\n"
 					+"*                           DELETE USER                          *\n"
 					+"******************************************************************\n"
-					+" Please choose a Username to delete                               \n");
+					+" Please choose a Username to delete:                              \n");
 	      
-    	  
+	      PreparedStatement showUsers = connection.prepareStatement(SQL_DISPLAY_ALL_USERS);	 
+	      ResultSet rs = showUsers.executeQuery();
+	      try{
+	    	  while(rs.next()){
+	    		String username = rs.getString(1);
+	    	  	System.out.print(username + "\n");
+	    	  }
+	      }	catch (Throwable ignore) {
+	          LOGGER.log(Level.SEVERE, "Unable to execute DB statement due to error {0}", ignore.getMessage());
+	      }    	  
+	      
     	  System.out.print("\nSelection: ");
 		  String username = userInput.nextLine();
 		  deleteUserQuery.setString(1, username);
@@ -463,14 +480,19 @@ public class DatabaseProject {
 	    	  
 	          ResultSet returnedDevices = preparedQuery.executeQuery();
 	          try{
-		          do {
+	        	  String ratingHeader = "Rating";
+	        	  String deviceName = "Device";
+	        	  String modelNumber = "Model Number";
+	        	  String softwareName = "Software";
+		          System.out.printf("%n%-10s %-20s %-20s %-20s %n",ratingHeader,deviceName,modelNumber,softwareName);
+		          System.out.println("------     ------------         ------------         --------");
+	        	  while (returnedDevices.next()){
 		        	  float rating = returnedDevices.getFloat("Rating");
-		        	  String deviceName = returnedDevices.getString("Device_Name");
-		        	  String model = returnedDevices.getString("Model_Number");
+		        	  String device = returnedDevices.getString("Device_Name");
+		        	  String  model = returnedDevices.getString("Model_Number");
 		        	  String software = returnedDevices.getString("Software_Name");
-		        	  System.out.printf("%-2.1f %-20s %-20s %-20s %n", rating, deviceName, model, software);
-		          
-		          } while (returnedDevices.next());
+		        	  System.out.printf("%-2.1f        %-20s %-20s %-20s %n", rating, device, model, software);
+	        	  }  
 	          }finally{
 	        	  try{
 	        		  returnedDevices.close();
