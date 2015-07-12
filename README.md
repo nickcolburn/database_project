@@ -1,5 +1,5 @@
 # database_project
-*Work in Progress*<br />
+**_Work in Progress_**<br />
 
 CECS 323 Project: Tech Review Database
 
